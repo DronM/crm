@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata debug="TRUE" owner="crm" dataSchema="public">
+	<versions>
+		<version dateOpen="2016-01-20 06:21:01" dateClose="2016-06-11 08:06:36">1.001<lastBuild>2016-06-11 08:53:20</lastBuild></version>
+	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53" dateClose="2016-06-11 08:06:53">1.002?</version></versions>
+	<enums>
+		<enum id="role_types">
+			<value id="admin" descr="Администратор"/>
+			<value id="manager" descr="Менеджер"/>
+			<value id="client" descr="Клиент"/>
+		</enum>	
+		<enum id="service_periods">
+			<value id="month" descr="месяц"/>
+			<value id="quater" descr="квартал"/>
+			<value id="year" descr="год"/>
+		</enum>	
+		<enum id="sms_types">
+			<value id="reset_pwd" descr="Установка пароля"/>
+		</enum>
+		<enum id="email_types">
+			<value id="reset_pwd" descr="Установка пароля"/>
+		</enum>
+		
+	</enums>
+	<models>
+		<model id="TimeZoneLocale" parent="ModelSQL" dataTable="time_zone_locales" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE"/>
+			<field id="descr" dataType="String" required="TRUE" length="100"/>
+			<field id="name" dataType="String" required="TRUE" length="50"/>
+			<field id="hour_dif" dataType="Int" required="TRUE"/>
+		</model>
+	
+		<model id="User" parent="ModelSQL" dataTable="users" virtual="FALSE">
+			<defaultOrder>
+				<field id="name"/>
+			</defaultOrder>
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="name" dataType="String" required="TRUE" length="50"/>
+			<field id="role_id" dataType="Enum" enumId="role_types" required="TRUE"/>
+			<field id="pwd" dataType="Password" length="32"/>
+			<field id="phone_cel" dataType="String" length="10"/>
+			<field id="time_zone_locale_id" dataType="Int" refTable="time_zone_locales" refField="id"/>
+			<field id="email" dataType="String" length="50"/>
+			
+			<index id="users_name_idx">
+				<expression>lower(name)</expression>
+			</index>			
+		</model>
+		<model id="Client" parent="ModelSQL" dataTable="clients" virtual="FALSE">
+			<defaultOrder>
+				<field id="name"/>
+			</defaultOrder>
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="name" dataType="String" required="TRUE" length="50" unique="TRUE" display="TRUE"/>
+			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
+			<field id="inn" dataType="String" length="12"/>
+			<field id="ext_id" dataType="String" length="36"/>
+			<field id="order_email" dataType="String" length="50"/>
+			
+			<index id="clients_name_idx">
+				<expression>lower(name)</expression>
+			</index>			
+		</model>
+		<model id="Platform" parent="ModelSQL" dataTable="platforms" virtual="FALSE">
+			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3"/>
+		</model>
+		
+		<model id="ConfigType" parent="ModelSQL" dataTable="config_types" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="platform_id" dataType="String" length="3" refTable="platforms" refField="id"/>
+			<field id="descr" dataType="String" length="10"/>		
+			<field id="full_descr" dataType="String" length="100"/>
+			<index id="config_types_platform_id_idx">
+				<field id="platform_id"/>
+			</index>						
+		</model>
+		
+		<model id="Okei" parent="ModelSQL" dataTable="okeis" virtual="FALSE">
+			<defaultOrder>
+				<field id="name"/>
+			</defaultOrder>		
+			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3"/>
+			<field id="descr" dataType="String" length="10"/>		
+			<field id="full_descr" dataType="String" length="100"/>
+			<field id="ext_id" dataType="String" length="36"/>
+		</model>
+		
+		<model id="Service" parent="ModelSQL" dataTable="services" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>			
+			<field id="descr" dataType="String" length="10"/>		
+			<field id="full_descr" dataType="String" length="100"/>
+			<field id="deleted" dataType="Boolean" defaultValue="FALSE"/>
+			<field id="service_period_id" dataType="Enum" enumId="service_periods"/>
+			<field id="ext_id" dataType="String" length="36"/>
+		</model>
+		
+		<model id="UserService" parent="ModelSQL" dataTable="user_services" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
+			<field id="service_id" dataType="Int" refTable="services" refField="id"/>
+			<field id="dt_from" dataType="Date"/>
+			<field id="dt_to" dataType="Date"/>
+			<field id="closed" dataType="Boolean"/>
+			<field id="auto_prolongate" dataType="Boolean"/>
+			<field id="quant" dataType="Float" length="19" precision="4"/>
+		</model>
+		
+		<model id="UserMachine" parent="ModelSQL" dataTable="user_machines" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
+			<field id="machine" dataType="String" length="20"/>
+		</model>
+		
+		<model id="UpdProgram" parent="ModelSQL" dataTable="upd_programs" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="descr" dataType="String" length="20"/>
+			<field id="descr_full" dataType="Text"/>
+		</model>
+		
+		<model id="UpdRelease" parent="ModelSQL" dataTable="upd_releases" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="prog_id" dataType="Int" refTable="upd_programs" refField="id"/>
+			<field id="release" dataType="String" length="20"/>
+			<field id="descr" dataType="Text"/>
+			<field id="file_name" dataType="String" length="100"/>
+			<field id="file_hash" dataType="String" length="32"/>
+			<field id="file_size" dataType="Int"/>
+		</model>
+		
+		<model id="UpdateCommand" parent="ModelSQL" dataTable="update_commands" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="descr" dataType="String" length="50"/>
+		</model>
+		
+		<model id="UpdateFileCommand" parent="ModelSQL" dataTable="update_file_commands" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="sort" dataType="Int"/>
+			<field id="file_name" dataType="String" length="50"/>
+			<field id="command_param" dataType="String" length="255"/>
+		</model>
+		
+		<model id="Update" parent="ModelSQL" dataTable="updates" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="dt" dataType="Date"/>
+			<field id="release" dataType="String" length="20"/>
+			<field id="comment" dataType="String" length="250"/>
+			<field id="ext_reps" dataType="Boolean" defaultValue="FALSE"/>
+			<field id="config_type_id" dataType="Int" refTable="config_types" refField="id"/>
+		</model>
+		
+		<model id="UpdateArchive" parent="ModelSQL" dataTable="update_archives" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="file_name" dataType="String" length="50"/>
+			<field id="file_hash" dataType="String" length="32"/>
+			<field id="sort" dataType="Int"/>
+			<field id="file_size" dataType="Int"/>
+			<field id="update_id" dataType="Int" refTable="updates" refField="id"/>
+		</model>
+		
+		<model id="ClientConfig" parent="ModelSQL" dataTable="client_configs" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="descr" dataType="String" length="80"/>
+			<field id="path" dataType="String" length="250"/>
+			<field id="ar_path" dataType="String" length="250"/>
+			<field id="ext_reps" dataType="Boolean" defaultValue="FALSE"/>
+			<field id="user_1c" dataType="String" length="50"/>
+			<field id="password_1c" dataType="String" length="50"/>
+			<field id="untyp" dataType="Boolean"/>
+			<field id="sql" dataType="Boolean"/>
+			<field id="ar_cnt" dataType="Int"/>
+			<field id="config_type_id" dataType="Int" refTable="config_types" refField="id"/>
+			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
+		</model>
+		<model id="UpdateError" parent="ModelSQL" dataTable="update_errors" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="dt" dataType="DateTimeTZ"/>
+			<field id="update_id" dataType="Int" refTable="updates" refField="id"/>
+			<field id="config_id" dataType="Int" refTable="client_configs" refField="id"/>
+			<field id="error_str" dataType="String" length="255"/>
+		</model>
+		<model id="UpdatedConfig" parent="ModelSQL" dataTable="updated_configs" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="dt" dataType="DateTimeTZ"/>
+			<field id="update_id" dataType="Int" refTable="updates" refField="id"/>
+			<field id="config_id" dataType="Int" refTable="client_configs" refField="id"/>
+		</model>
+		
+		<!-- SMS -->
+		<model id="SMSTemplate" parent="ModelSQL" dataTable="sms_templates" virtual="FALSE">
+			<defaultOrder>
+				<field id="sms_type"/>
+			</defaultOrder>		
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="FALSE"/>
+			<field id="sms_type" dataType="Enum" primaryKey="FALSE" enumId="sms_types" autoInc="FALSE" required="TRUE" alias="Тип SMS"/>
+			<field id="template" dataType="Text" required="TRUE" alias="Шаблон"/>
+			<field id="comment_text" dataType="Text" required="TRUE" alias="Комментарий"/>
+			<field id="fields" dataType="Text" required="TRUE" alias="Поля"/>
+			<index id="sms_templates_type_index" unique="TRUE">
+				<field id="sms_type"/>
+			</index>			
+		</model>
+		<model id="SMSTemplateList" parent="ModelSQL" dataTable="sms_templates_list" virtual="TRUE">
+			<field id="id" dataType="Int" primaryKey="TRUE"/>
+			<field id="sms_type" dataType="String"/>
+			<field id="sms_type_descr" dataType="String"/>
+			<field id="template" dataType="Text"/>
+			<field id="fields" dataType="Text"/>
+		</model>		
+		
+		<model id="SMSForSending" parent="ModelSQL" dataTable="sms_for_sending" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE" autoInc="TRUE"/>
+			<field id="tel" dataType="String" length="15"/>
+			<field id="body" dataType="Text"/>
+			<field id="date_time" dataType="DateTimeTZ" defaultValue="current_timestamp"/>
+			<field id="sent" dataType="Boolean" defaultValue="false"/>
+			<field id="sent_date_time" dataType="DateTimeTZ"/>
+			<field id="delivered" dataType="Boolean" defaultValue="false"/>
+			<field id="delivered_date_time" dataType="DateTimeTZ"/>
+			<field id="sms_type" dataType="Enum" enumId="sms_types"/>
+			<field id="sms_id" dataType="Text"/>
+			<index id="sms_for_sending_sent_index" unique="FALSE">
+				<field id="sent"/>
+				<field id="delivered"/>
+			</index>													
+			<index id="sms_for_sending_date_time_idx">
+				<field id="date_time"/>
+			</index>																
+		</model>
+		
+		<model id="SMSForSendingList" parent="ModelSQL" dataTable="sms_for_sending_list" virtual="TRUE">
+			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE" autoInc="TRUE"/>
+			<field id="tel" dataType="String" length="15"/>
+			<field id="body" dataType="Text"/>
+			<field id="date_time" dataType="DateTimeTZ" defaultValue="current_timestamp"/>
+			<field id="sent" dataType="Boolean" defaultValue="false"/>
+			<field id="sent_date_time" dataType="DateTimeTZ"/>
+			<field id="delivered" dataType="Boolean" defaultValue="false"/>
+			<field id="delivered_date_time" dataType="DateTimeTZ"/>
+			<field id="sms_type" dataType="Enum" enumId="sms_types"/>
+			<field id="sms_id" dataType="Text"/>
+		</model>
+		
+		<!-- EMAIL -->
+		<model id="EmailTemplate" parent="ModelSQL" dataTable="email_templates" virtual="FALSE">
+			<defaultOrder>
+				<field id="email_type"/>
+			</defaultOrder>		
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="FALSE"/>
+			<field id="email_type" dataType="Enum" primaryKey="FALSE" enumId="email_types" autoInc="FALSE" required="TRUE" alias="Тип email"/>
+			<field id="template" dataType="Text" required="TRUE" alias="Шаблон"/>
+			<field id="comment_text" dataType="Text" required="TRUE" alias="Комментарий"/>
+			<field id="mes_subject" dataType="Text" required="TRUE" alias="Тема"/>
+			<field id="fields" dataType="Text" required="TRUE" alias="Поля"/>			
+			<index id="email_templates_type_index" unique="TRUE">
+				<field id="email_type"/>
+			</index>			
+		</model>
+		
+		<model id="EmailTemplateList" parent="ModelSQL" dataTable="email_templates_list" virtual="TRUE">
+			<field id="id" dataType="Int" primaryKey="TRUE"/>
+			<field id="email_type" dataType="String"/>
+			<field id="email_type_descr" dataType="String"/>
+			<field id="template" dataType="Text"/>
+			<field id="fields" dataType="Text"/>
+		</model>		
+		
+	</models>
+	<constants>
+	</constants>
+
+	<controllers>
+		<controller id="SMSTemplate" parentId="ControllerSQL" state="TRUE">
+			<publicMethod id="insert" modelId="SMSTemplate"/>
+			<publicMethod id="update" modelId="SMSTemplate"/>
+			<publicMethod id="delete" modelId="SMSTemplate"/>
+			<publicMethod id="get_list" modelId="SMSTemplateList"/>
+			<publicMethod id="get_object" modelId="SMSTemplateList"/>
+		</controller>												
+	
+		<controller id="User" parentId="ControllerSQL" state="TRUE" noState="FALSE">
+			<publicMethod id="insert" modelId="User"/>
+			<publicMethod id="update" modelId="User"/>
+			<publicMethod id="delete" modelId="User"/>
+			<publicMethod id="get_list" modelId="User"/>
+			<publicMethod id="get_object" modelId="User"/>
+			<publicMethod id="reset_pwd">
+				<field id="user_id" dataType="Int" required="TRUE"/>
+			</publicMethod>
+			<publicMethod id="login">
+				<field id="name" dataType="String" alias="Имя пользователя" length="50"/>
+				<field id="pwd" dataType="Password" alias="Пароль" length="20"/>
+			</publicMethod>
+			<publicMethod id="login_refresh">
+				<field id="refresh_token" dataType="String" required="true" length="50"/>
+			</publicMethod>						
+			<publicMethod id="logout"/>
+		</controller>		
+		
+	</controllers>
+	
+	<permissions>
+		<allow controllerId="all" methodId="all" roleId="admin"/>
+		<allow controllerId="all" methodId="all" roleId="cashier"/>
+		<allow controllerId="all" methodId="all" roleId="store_manager"/>
+	</permissions>
+	
+	<mainMenu roleId="admin">
+	</mainMenu>
+
+	<mainMenu roleId="manager">
+	</mainMenu>
+
+	<mainMenu roleId="client">
+	</mainMenu>
+	
+	<jsScripts>
+		<!-- jquery,bootsrtap && plugins -->
+		<jsScript file="jquery.min.js" compressed="TRUE" standalone="TRUE"/>
+		<jsScript file="bootstrap.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="bootstrap-datepicker.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="bootstrap-datepicker.ru.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="jquery.maskedinput.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="metisMenu.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="sb-admin-2.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+
+		<!-- core -->
+		<jsScript file="core/extend.js"/>
+		<jsScript file="core/CommonHelper.js"/>
+		<jsScript file="core/DOMHelper.js"/>
+		<jsScript file="core/DateHelper.js"/>
+		<jsScript file="core/EventHelper.js"/>
+		
+		<jsScript file="core/ServConnector.js"/>
+		<jsScript file="core/ServResp.js"/>
+		<jsScript file="core/ServRespXML.js"/>
+		
+		<jsScript file="core/PublicMethod.js"/>		
+		<jsScript file="core/Controller.js"/>		
+		<jsScript file="core/ControllerDb.js"/>		
+				
+		<jsScript file="core/Model.js"/>
+		<jsScript file="core/ModelXML.js"/>
+		<jsScript file="core/ModeObjectXML.js"/>
+		<jsScript file="core/ModelSingleRowXML.js"/>
+		<jsScript file="core/ModelServRespXML.js"/>
+		
+		<jsScript file="core/Field.js"/>		
+		<jsScript file="core/FieldBool.js"/>
+		<jsScript file="core/FieldDate.js"/>
+		<jsScript file="core/FieldDateTime.js"/>
+		<jsScript file="core/FieldTime.js"/>
+		<jsScript file="core/FieldInt.js"/>
+		<jsScript file="core/FieldFloat.js"/>
+		<jsScript file="core/FieldPassword.js"/>
+		<jsScript file="core/FieldText.js"/>
+		<!--<jsScript file="core/FieldObject.js"/>-->
+		
+		<jsScript file="core/res_rus.js"/>
+		
+		<!-- **** controls *** -->
+		<jsScript file="controls/bsCol.js"/>
+		<jsScript file="controls/Control.js"/>
+		<jsScript file="controls/ControlContainer.js"/>
+		
+		<jsScript file="controls/Calculator.js"/>
+		<jsScript file="controls/Button.js"/>
+		<jsScript file="controls/ButtonCtrl.js"/>
+		<jsScript file="controls/ButtonCalc.js"/>
+		<jsScript file="controls/res_rus/ButtonCalc.rs_rus.js"/>
+		<jsScript file="controls/ButtonCalendar.js"/>
+		<jsScript file="controls/res_rus/ButtonCalendar.rs_rus.js"/>
+		<jsScript file="controls/ButtonClear.js"/>
+		<jsScript file="controls/res_rus/ButtonClear.rs_rus.js"/>
+		<jsScript file="controls/ButtonClearObject.js"/>
+		<jsScript file="controls/res_rus/ButtonClearObject.rs_rus.js"/>
+		<jsScript file="controls/ButtonCmd.js"/>
+		
+		<jsScript file="controls/ButtonOpen.js"/>
+		<jsScript file="controls/res_rus/ButtonOpen.rs_rus.js"/>
+		<jsScript file="controls/ButtonOpenObject.js"/>
+		<jsScript file="controls/ButtonPrint.js"/>
+		<jsScript file="controls/res_rus/ButtonPrint.rs_rus.js"/>
+		<jsScript file="controls/ButtonSelect.js"/>
+		<jsScript file="controls/res_rus/ButtonSelect.rs_rus.js"/>
+		<jsScript file="controls/ButtonSelectObject.js"/>
+		<jsScript file="controls/res_rus/ButtonSelectObject.rs_rus.js"/>		
+		<jsScript file="controls/ButtonToggle.js"/>		
+		
+		<jsScript file="controls/Label.js"/>
+		
+		<jsScript file="controls/Edit.js"/>
+
+		<jsScript file="controls/res_rus.js"/>				
+		
+		<!-- **** Views *** 
+		<jsScript file="views/SaleList_View.js"/>
+		-->
+		
+		<!-- **** Controllers *** -->
+		<jsScript file="controllers/User_Controller.js"/>
+	<jsScript file="controllers/SMSTemplate_Controller.js"/></jsScripts>
+	
+	<cssScripts>
+		<cssScript file="bootstrap.min.css" compressed="TRUE" standalone="TRUE"/>
+		<cssScript file="bootstrap-theme.min.css" compressed="TRUE" standalone="TRUE"/>
+		<cssScript file="bootstrap-datepicker.standalone.min.css" compressed="TRUE" standalone="TRUE"/>
+		<cssScript file="style.css" standalone="TRUE"/>
+		<cssScript file="dhtmlwindow.css" standalone="TRUE"/>
+		<cssScript file="metisMenu.min.css" standalone="TRUE"/>
+		<cssScript file="font-awesome.min.css" standalone="TRUE"/>						
+		<!--				
+		<cssScript file="modal.css"/>
+		<cssScript file="tooltip.css"/>
+		-->
+	</cssScripts>	
+</metadata>

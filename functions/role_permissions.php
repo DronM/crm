@@ -1,0 +1,49 @@
+<?php
+function method_allowed_for_role($contrId,$methId,$roleId){
+$permissions = array();
+$permissions['SMSTemplate_Controller_insert_admin']=TRUE;
+					$permissions['SMSTemplate_Controller_update_admin']=TRUE;
+					$permissions['SMSTemplate_Controller_delete_admin']=TRUE;
+					$permissions['SMSTemplate_Controller_get_list_admin']=TRUE;
+					$permissions['SMSTemplate_Controller_get_object_admin']=TRUE;
+					$permissions['SMSTemplate_Controller_insert_cashier']=TRUE;
+					$permissions['SMSTemplate_Controller_update_cashier']=TRUE;
+					$permissions['SMSTemplate_Controller_delete_cashier']=TRUE;
+					$permissions['SMSTemplate_Controller_get_list_cashier']=TRUE;
+					$permissions['SMSTemplate_Controller_get_object_cashier']=TRUE;
+					$permissions['SMSTemplate_Controller_insert_store_manager']=TRUE;
+					$permissions['SMSTemplate_Controller_update_store_manager']=TRUE;
+					$permissions['SMSTemplate_Controller_delete_store_manager']=TRUE;
+					$permissions['SMSTemplate_Controller_get_list_store_manager']=TRUE;
+					$permissions['SMSTemplate_Controller_get_object_store_manager']=TRUE;
+					$permissions['User_Controller_insert_admin']=TRUE;
+					$permissions['User_Controller_update_admin']=TRUE;
+					$permissions['User_Controller_delete_admin']=TRUE;
+					$permissions['User_Controller_get_list_admin']=TRUE;
+					$permissions['User_Controller_get_object_admin']=TRUE;
+					$permissions['User_Controller_reset_pwd_admin']=TRUE;
+					$permissions['User_Controller_login_admin']=TRUE;
+					$permissions['User_Controller_login_refresh_admin']=TRUE;
+					$permissions['User_Controller_logout_admin']=TRUE;
+					$permissions['User_Controller_insert_cashier']=TRUE;
+					$permissions['User_Controller_update_cashier']=TRUE;
+					$permissions['User_Controller_delete_cashier']=TRUE;
+					$permissions['User_Controller_get_list_cashier']=TRUE;
+					$permissions['User_Controller_get_object_cashier']=TRUE;
+					$permissions['User_Controller_reset_pwd_cashier']=TRUE;
+					$permissions['User_Controller_login_cashier']=TRUE;
+					$permissions['User_Controller_login_refresh_cashier']=TRUE;
+					$permissions['User_Controller_logout_cashier']=TRUE;
+					$permissions['User_Controller_insert_store_manager']=TRUE;
+					$permissions['User_Controller_update_store_manager']=TRUE;
+					$permissions['User_Controller_delete_store_manager']=TRUE;
+					$permissions['User_Controller_get_list_store_manager']=TRUE;
+					$permissions['User_Controller_get_object_store_manager']=TRUE;
+					$permissions['User_Controller_reset_pwd_store_manager']=TRUE;
+					$permissions['User_Controller_login_store_manager']=TRUE;
+					$permissions['User_Controller_login_refresh_store_manager']=TRUE;
+					$permissions['User_Controller_logout_store_manager']=TRUE;
+					
+return array_key_exists($contrId.'_'.$methId.'_'.$roleId,$permissions);
+}
+?>
