@@ -74,6 +74,12 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ModelSingleRowXML.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ModelServRespXML.js'));
 		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/Validator.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorBool.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorDate.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorFloat.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorInt.js'));
+		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/Field.js'));		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldBool.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldDate.js'));
@@ -82,8 +88,9 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldInt.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldFloat.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldPassword.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldText.js'));
 		
+		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ControlHolder.js'));
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/res_rus.js'));
 		

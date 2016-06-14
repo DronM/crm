@@ -72,6 +72,7 @@
 		</div>
 		<div id="footer">
 		</div>
+		
 		<!-- bootstrap resolution-->
 		<div id="users-device-size">
 		  <div id="xs" class="visible-xs"></div>
@@ -79,56 +80,30 @@
 		  <div id="md" class="visible-md"></div>
 		  <div id="lg" class="visible-lg"></div>
 		</div>
-		<!--waiting  -->
-		<div id="waiting">
-			<div>Ждите</div>
-			<img src="{$BASE_PATH}img/loading.gif"/>
-		</div>
 		
-		<!--ALL js modules -->
-		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']/row"/>
-		<script>
-			var dv = document.getElementById("waiting");
-			if (dv!==null){
-				//dv.parentNode.removeChild(dv);
-				DOMHelper.addClass(dv,"invisible");
-			}
-		</script>
-	
+		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']"/>
 	</body>
 </html>		
 </xsl:template>
 
-<xsl:template match="model[@id='MainMenu_Model']">	
-	var onItemClick = function(viewClassId){		
-		onViewClose();
-		MainView = new viewClassId("MainView",
-		{"onClose":onViewClose,
-		"connect":new ServConnector(HOST_NAME)
-		});	
-		MainView.toDOM(nd("content"));
-	};
-<xsl:apply-templates select="item"/>
-var item = new TabMenuItem('it_exit',{
-	caption:"Выход",
-	onClick:function(){
-		window.location="<xsl:value-of select="$BASE_PATH"/>index.php?c=User_Controller&amp;f=logout&amp;v=Login";
-	}
-});
-item.toDOM(nd("mainMenu"));
+<xsl:template match="model[@id='ModelJavaScript']">
+	<!--waiting  -->
+	<div id="waiting">
+		<div>Ждите</div>
+		<img src="{$BASE_PATH}img/loading.gif"/>
+	</div>
+	
+	<!--ALL js modules -->
+	<xsl:apply-templates select="row"/>
+	
+	<script>
+		var dv = document.getElementById("waiting");
+		if (dv!==null){
+			dv.parentNode.removeChild(dv);
+		}
+	</script>
+	 
 
-</xsl:template>
-
-<xsl:template match="model[@id='MainMenu_Model']/item">
-var opts={"caption":"<xsl:value-of select="@descr"/>",
-	"viewClassId":<xsl:value-of select="@viewId"/>,
-	<xsl:if test="@default='TRUE'">
-	"defItem":true,
-	</xsl:if>
-	"onClick":onItemClick,
-	"onClickContext":this};
-var item = new TabMenuItem('it'+<xsl:value-of select="position()"/>,opts);
-item.toDOM(nd("mainMenu"));
 </xsl:template>
 
 

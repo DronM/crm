@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<version dateOpen="2016-01-20 06:21:01" dateClose="2016-06-11 08:06:36">1.001<lastBuild>2016-06-11 08:53:20</lastBuild></version>
-	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53" dateClose="2016-06-11 08:06:53">1.002?</version></versions>
+		<lastBuild>2016-06-14 17:31:29</lastBuild>
+	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types">
 			<value id="admin" descr="Администратор"/>
@@ -344,6 +344,12 @@
 		<jsScript file="core/ModelSingleRowXML.js"/>
 		<jsScript file="core/ModelServRespXML.js"/>
 		
+		<jsScript file="core/Validator.js"/>
+		<jsScript file="core/ValidatorBool.js"/>
+		<jsScript file="core/ValidatorDate.js"/>
+		<jsScript file="core/ValidatorFloat.js"/>
+		<jsScript file="core/ValidatorInt.js"/>
+		
 		<jsScript file="core/Field.js"/>		
 		<jsScript file="core/FieldBool.js"/>
 		<jsScript file="core/FieldDate.js"/>
@@ -352,13 +358,16 @@
 		<jsScript file="core/FieldInt.js"/>
 		<jsScript file="core/FieldFloat.js"/>
 		<jsScript file="core/FieldPassword.js"/>
-		<jsScript file="core/FieldText.js"/>
-		<!--<jsScript file="core/FieldObject.js"/>-->
+		<jsScript file="core/FieldRef.js"/>
+		
+		<jsScript file="core/ControlHolder.js"/>
 		
 		<jsScript file="core/res_rus.js"/>
 		
-		<!-- **** controls *** -->
-		<jsScript file="controls/bsCol.js"/>
+		<!-- **** controls *** -->		
+		<!--<jsScript file="controls/bsCol.js"/>-->
+		<jsScript file="controls/ErrorControl.js"/>
+		
 		<jsScript file="controls/Control.js"/>
 		<jsScript file="controls/ControlContainer.js"/>
 		

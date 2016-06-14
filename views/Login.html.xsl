@@ -13,55 +13,14 @@
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 		<script>
 			var HOST_NAME = '<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>';
-			
-			function setError(errStr){
-				var n = nd("errorReporter");
-				n.innerHTML=errStr;
-				DOMHandler.addClass(n,"alert alert-danger");
-				
-				DOMHandler.removeClass(nd("submit_login"),"disabled");
-			}
+			var BS_COL = ("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-");
 			
 			//<![CDATA[
 			function pageLoad(){
-				DOMHandler.removeClass(nd("submit_login"),"disabled");
-				nd("submit_login").onclick = function(e){
-					var er_ctrl = nd("errorReporter");
-					DOMHandler.removeClass(er_ctrl,"alert alert-danger");
-					er_ctrl.innerHTML = "";
-				
-					e = EventHandler.fixMouseEvent(e);
-					DOMHandler.addClass(e.target,"disabled");
-					
-					var user = nd("Logger_user").value;
-					var pwd = nd("Logger_pwd").value;
-
-					if (!user&&!pwd){
-						setError("Не задано имя пользователя и пароль!");
-						return false;
-					}
-					else if (!user){
-						setError("Не задано имя пользователя!");
-						return false;
-					}
-					else if (!pwd){
-						setError("Не задан пароль!");
-						return false;
-					}										
-					
-					var contr = new User_Controller(new ServConnector(HOST_NAME));
-					contr.run("login",{
-						params:{"name":user,"pwd":pwd},
-						func:function(){
-							document.location.href=HOST_NAME;
-						},
-						err:function(resp,errCode,errStr){
-							setError(errStr);
-						}
-					});
-					
-					return false;
-				}
+				var view = new Login_View("Login",{
+					host:HOST_NAME,
+					bsCol:BS_COL
+				});
 			}
 			//]]>
 		</script>		
@@ -78,17 +37,13 @@
 				        <h3 class="panel-title">Личный кабинет</h3>
 				    </div>
 				    <div class="panel-body">
+				    	<div id="error"></div>
 				        <form role="form">
-				            <fieldset>
-				                <div class="form-group">
-				                    <input id="Logger_user" class="form-control" placeholder="Пользователь (email)" name="email" type="email" autofocus="autofocus"></input>
-				                </div>
-				                <div class="form-group">
-				                    <input id="Logger_pwd" class="form-control" placeholder="Пароль" name="password" type="password" value=""></input>
-				                </div>
-				                <!-- Change this to a button or input when using this as a form -->
-				                <a id="submit_login" href="#" class="btn btn-lg btn-success btn-block">Войти</a>
-				            </fieldset>
+						<fieldset>
+							<div id="user"/>
+							<div id="pwd"/>
+					                <div id="submit_login" class="btn btn-lg btn-success btn-block"/>
+						</fieldset>
 				        </form>
 				    </div>
 				</div>
@@ -96,28 +51,16 @@
 			</div>
 		    </div>
 		
-		<!--waiting  -->
-		<div id="waiting">
-			<div>Ждите</div>
-			<img src="{$BASE_PATH}img/loading.gif"/>
-		</div>
-		<script>
-				var n = document.getElementById("Logger_user");
-				if (n){
-					if (document.activeElement.id!="Logger_pwd"){
-						n.focus();
-					}
+	<script>
+			var n = document.getElementById("user");
+			if (n){
+				if (document.activeElement.id!="pwd"){
+					n.focus();
 				}
-		</script>
-		<!--ALL js modules -->
-		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']/row"/>
-		<script>
-			var dv = document.getElementById("waiting");
-			if (dv!==null){
-				dv.parentNode.removeChild(dv);
 			}
-		</script>
-		 
+	</script>
+		
+		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']"/>		
 	</body>
 </html>		
 </xsl:template>
