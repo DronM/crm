@@ -11,54 +11,18 @@
 		<xsl:apply-templates select="/document/model[@id='ModelVars']"/>
 		<xsl:apply-templates select="/document/model[@id='ModelStyleSheet']/row"/>
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
-		<title>Полимерпласт</title>
+		<title>Катрэн+, личный кабинет</title>
 		<script>
-			var HOST_NAME = '<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>';
-			var MainView;//current opened view
-			var onViewClose;//			
-			var WIN_CLASS;
-			var BS_COL;
-			var CONSTANTS;			
-			var CONSTANT_VALS;
-			var SERV_VARS={
-				"VERSION":'<xsl:value-of select="/document/model[@id='ModelVars']/row/scriptId"/>',
-				"ROLE_ID":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_id"/>',
-				"ROLE_DESCR":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_descr"/>',
-				"USER_ID":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_id"/>',
-				"USER_NAME":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_name"/>'
-				};
-			var CONST_CONTROLS ={};
+			var App;
 			
 			function pageLoad(){				
-				window.onerror = function(msg,url,line,col,error) {
-					   var extra = !col ? "" : "\ncolumn: " + col;
-					   extra += !error ? "" : "\nerror: " + error;
-					   console.log("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
-					   console.trace();
-					   WindowMessage.show({
-						"type":WindowMessage.TP_ER,
-						"text":msg+extra
-						});
-					   return false;
-				};
+				<xsl:call-template name="initApp"/>
 				
-				BS_COL = ("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-");
+				App.setBsCol(("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"));
+				App.setWinClass(WindowFormDD);//ChildForm
+				App.readConstants();
 				
-				WIN_CLASS = WindowFormDD;//ChildForm;
-				CONSTANTS = new Constant_Controller(new ServConnector(HOST_NAME));
-				CONSTANT_VALS = {
-					};
-				CONSTANTS.readValues(CONSTANT_VALS);
-				
-				var self = this;
-				onViewClose = function(res){					
-					if (MainView!=undefined){
-						MainView.removeDOM();
-						delete MainView;
-					}
-				};
-				
-			<xsl:apply-templates select="/document/model[@id='MainMenu_Model']"/>					
+				<xsl:call-template name="initMainMenu"/>
 			}
 		</script>
 	</head>
@@ -73,20 +37,20 @@
 		<div id="footer">
 		</div>
 		
-		<!-- bootstrap resolution-->
-		<div id="users-device-size">
-		  <div id="xs" class="visible-xs"></div>
-		  <div id="sm" class="visible-sm"></div>
-		  <div id="md" class="visible-md"></div>
-		  <div id="lg" class="visible-lg"></div>
-		</div>
-		
-		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']"/>
+		<xsl:call-template name="initJS"/>
 	</body>
 </html>		
 </xsl:template>
 
-<xsl:template match="model[@id='ModelJavaScript']">
+<xsl:template name="initJS">
+	<!-- bootstrap resolution-->
+	<div id="users-device-size">
+	  <div id="xs" class="visible-xs"></div>
+	  <div id="sm" class="visible-sm"></div>
+	  <div id="md" class="visible-md"></div>
+	  <div id="lg" class="visible-lg"></div>
+	</div>
+
 	<!--waiting  -->
 	<div id="waiting">
 		<div>Ждите</div>
@@ -94,7 +58,7 @@
 	</div>
 	
 	<!--ALL js modules -->
-	<xsl:apply-templates select="row"/>
+	<xsl:apply-templates select="/document/model[@id='ModelJavaScript']/row"/>
 	
 	<script>
 		var dv = document.getElementById("waiting");
@@ -102,9 +66,31 @@
 			dv.parentNode.removeChild(dv);
 		}
 	</script>
-	 
-
 </xsl:template>
 
+
+<xsl:template name="initApp">
+	var App = new AppCRM({
+		host:'<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>',
+		servVars:{
+			"version":'<xsl:value-of select="/document/model[@id='ModelVars']/row/scriptId"/>',
+			"roleId":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_id"/>',
+			"roleDescr":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_descr"/>',
+			"userId":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_id"/>',
+			"userName":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_name"/>'				
+		}				
+	});
+</xsl:template>
+
+<xsl:template name="initMainMenu">
+	App.setOnViewClose(function(res){					
+		if (MainView!=undefined){
+			MainView.removeDOM();
+			delete MainView;
+		}
+	});
+	
+	<xsl:apply-templates select="/document/model[@id='MainMenu_Model']"/>					
+</xsl:template>
 
 </xsl:stylesheet>

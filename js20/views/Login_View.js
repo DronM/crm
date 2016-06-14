@@ -47,7 +47,7 @@ function Login(id,options){
 		"bindings":[
 			{"field":pm.getField("user"),"control":this.getControl("user")},
 			{"field":pm.getField("pwd"),"control":this.getControl("pwd")}
-		]
+		],
 		"control":this.getControl("submit_login"),
 		"async":true
 	});

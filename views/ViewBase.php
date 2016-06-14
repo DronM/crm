@@ -55,6 +55,7 @@ class ViewBase extends ViewHTMLXSLT {
 
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/extend.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/App.js'));		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/CommonHelper.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/DOMHelper.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/DateHelper.js'));
@@ -89,16 +90,13 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldFloat.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldPassword.js'));
 		
-		
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ControlHolder.js'));
-		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/res_rus.js'));
 		
-		
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/bsCol.js'));
+				
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ControlHolder.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Control.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ControlContainer.js'));
-		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ErrorControl.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Calculator.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Button.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonCtrl.js'));
@@ -130,6 +128,10 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus.js'));				
 		
 		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'views/Login_View.js'));
+		
+		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'custom/AppCRM.js'));
 		
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controllers/User_Controller.js'));

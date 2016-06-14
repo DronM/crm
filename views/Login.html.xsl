@@ -12,17 +12,18 @@
 		<xsl:apply-templates select="/document/model[@id='ModelStyleSheet']/row"/>
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 		<script>
-			var HOST_NAME = '<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>';
-			var BS_COL = ("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-");
+		
+			var App;
 			
-			//<![CDATA[
 			function pageLoad(){
+			
+				<xsl:call-template name="initApp"/>
+				
 				var view = new Login_View("Login",{
-					host:HOST_NAME,
-					bsCol:BS_COL
+					host:App.getHost(),
+					bsCol:App.getBsCol()
 				});
 			}
-			//]]>
 		</script>		
 		<title>Катрэн+ CRM,авторизация</title>
 	</head>
@@ -60,7 +61,7 @@
 			}
 	</script>
 		
-		<xsl:apply-templates select="/document/model[@id='ModelJavaScript']"/>		
+		<xsl:call-template name="initJS"/>
 	</body>
 </html>		
 </xsl:template>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-06-14 17:31:29</lastBuild>
+		<lastBuild>2016-06-14 23:19:30</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types">
@@ -325,6 +325,7 @@
 
 		<!-- core -->
 		<jsScript file="core/extend.js"/>
+		<jsScript file="core/App.js"/>		
 		<jsScript file="core/CommonHelper.js"/>
 		<jsScript file="core/DOMHelper.js"/>
 		<jsScript file="core/DateHelper.js"/>
@@ -358,19 +359,14 @@
 		<jsScript file="core/FieldInt.js"/>
 		<jsScript file="core/FieldFloat.js"/>
 		<jsScript file="core/FieldPassword.js"/>
-		<jsScript file="core/FieldRef.js"/>
-		
-		<jsScript file="core/ControlHolder.js"/>
 		
 		<jsScript file="core/res_rus.js"/>
 		
 		<!-- **** controls *** -->		
-		<!--<jsScript file="controls/bsCol.js"/>-->
-		<jsScript file="controls/ErrorControl.js"/>
-		
+		<jsScript file="controls/ControlHolder.js"/>
 		<jsScript file="controls/Control.js"/>
 		<jsScript file="controls/ControlContainer.js"/>
-		
+		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
 		<jsScript file="controls/Button.js"/>
 		<jsScript file="controls/ButtonCtrl.js"/>
@@ -401,9 +397,11 @@
 
 		<jsScript file="controls/res_rus.js"/>				
 		
-		<!-- **** Views *** 
-		<jsScript file="views/SaleList_View.js"/>
-		-->
+		<!-- **** Views *** -->
+		<jsScript file="views/Login_View.js"/>
+		
+		
+		<jsScript file="custom/AppCRM.js"/>
 		
 		<!-- **** Controllers *** -->
 		<jsScript file="controllers/User_Controller.js"/>
