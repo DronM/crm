@@ -76,12 +76,16 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ModelServRespXML.js'));
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/Validator.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorString.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorBool.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorDate.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorFloat.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorDateTime.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorTime.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorInt.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/ValidatorFloat.js'));				
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/Field.js'));		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldString.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldBool.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldDate.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldDateTime.js'));
@@ -89,46 +93,65 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldInt.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldFloat.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldPassword.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/FieldText.js'));
 		
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/res_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/rs_rus.js'));
 		
 				
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ControlHolder.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ControlHolder.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Control.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/Control.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ControlContainer.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ControlContainer.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ErrorControl.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Calculator.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/Calculator.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Button.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonCtrl.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonCalc.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonCalc.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonCalc.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonCalendar.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonCalendar.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonCalendar.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonClear.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonClear.rs_rus.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonClearObject.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonClearObject.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonClear.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonClearRef.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonCmd.js'));
-		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonExpToExcel.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonExpToExcel.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonExpToPDF.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonExpToPDF.rs_rus.js'));		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonOpen.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonOpen.rs_rus.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonOpenObject.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonOpen.rs_rus.js'));				
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonOpenRef.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonOpenRef.rs_rus.js'));				
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonPrint.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonPrint.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonPrint.rs_rus.js'));		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonSelect.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonSelect.rs_rus.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonSelectObject.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus/ButtonSelectObject.rs_rus.js'));		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonSelect.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonSelectRef.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs_rus/ButtonSelectRef.rs_rus.js'));
+		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ButtonToggle.js'));		
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Label.js'));
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Edit.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditString.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditInt.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditFloat.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditPhone.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditDate.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditDateTime.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditTime.js'));		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/EditPassword.js'));
 
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/res_rus.js'));				
-		
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/WindowFormModalBS.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/WindowMessage.js'));
+
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'views/Login_View.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'views/Prototype_View.js'));
 		
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'custom/AppCRM.js'));

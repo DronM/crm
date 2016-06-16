@@ -13,15 +13,15 @@
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 		<script>
 		
-			var App;
+			var application;
 			
 			function pageLoad(){
 			
 				<xsl:call-template name="initApp"/>
 				
 				var view = new Login_View("Login",{
-					host:App.getHost(),
-					bsCol:App.getBsCol()
+					host:application.getHost(),
+					bsCol:application.getBsCol()
 				});
 			}
 		</script>		

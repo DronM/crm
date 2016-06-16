@@ -11,11 +11,11 @@
 //ф
 /* constructor */
 
-function SMSTemplate_Controller(servConnector){
+function SMSTemplate_Controller(app){
 	options = {};
 	options["listModelId"] = "SMSTemplateList_Model";
 	options["objModelId"] = "SMSTemplateList_Model";
-	SMSTemplate_Controller.superclass.constructor.call(this,"SMSTemplate_Controller",servConnector,options);	
+	SMSTemplate_Controller.superclass.constructor.call(this,app,options);	
 	
 	//methods
 	this.addInsert();

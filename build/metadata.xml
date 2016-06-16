@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-06-14 23:19:30</lastBuild>
+		<lastBuild>2016-06-16 17:27:27</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types">
@@ -346,12 +346,16 @@
 		<jsScript file="core/ModelServRespXML.js"/>
 		
 		<jsScript file="core/Validator.js"/>
+		<jsScript file="core/ValidatorString.js"/>
 		<jsScript file="core/ValidatorBool.js"/>
 		<jsScript file="core/ValidatorDate.js"/>
-		<jsScript file="core/ValidatorFloat.js"/>
+		<jsScript file="core/ValidatorDateTime.js"/>
+		<jsScript file="core/ValidatorTime.js"/>
 		<jsScript file="core/ValidatorInt.js"/>
+		<jsScript file="core/ValidatorFloat.js"/>				
 		
 		<jsScript file="core/Field.js"/>		
+		<jsScript file="core/FieldString.js"/>
 		<jsScript file="core/FieldBool.js"/>
 		<jsScript file="core/FieldDate.js"/>
 		<jsScript file="core/FieldDateTime.js"/>
@@ -359,46 +363,65 @@
 		<jsScript file="core/FieldInt.js"/>
 		<jsScript file="core/FieldFloat.js"/>
 		<jsScript file="core/FieldPassword.js"/>
+		<jsScript file="core/FieldText.js"/>
 		
-		<jsScript file="core/res_rus.js"/>
+		<jsScript file="core/rs_rus.js"/>
 		
 		<!-- **** controls *** -->		
 		<jsScript file="controls/ControlHolder.js"/>
+		<jsScript file="controls/rs_rus/ControlHolder.rs_rus.js"/>
 		<jsScript file="controls/Control.js"/>
+		<jsScript file="controls/rs_rus/Control.rs_rus.js"/>
 		<jsScript file="controls/ControlContainer.js"/>
+		<jsScript file="controls/rs_rus/ControlContainer.rs_rus.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
+		<jsScript file="controls/rs_rus/Calculator.rs_rus.js"/>
 		<jsScript file="controls/Button.js"/>
 		<jsScript file="controls/ButtonCtrl.js"/>
 		<jsScript file="controls/ButtonCalc.js"/>
-		<jsScript file="controls/res_rus/ButtonCalc.rs_rus.js"/>
+		<jsScript file="controls/rs_rus/ButtonCalc.rs_rus.js"/>
 		<jsScript file="controls/ButtonCalendar.js"/>
-		<jsScript file="controls/res_rus/ButtonCalendar.rs_rus.js"/>
+		<jsScript file="controls/rs_rus/ButtonCalendar.rs_rus.js"/>
 		<jsScript file="controls/ButtonClear.js"/>
-		<jsScript file="controls/res_rus/ButtonClear.rs_rus.js"/>
-		<jsScript file="controls/ButtonClearObject.js"/>
-		<jsScript file="controls/res_rus/ButtonClearObject.rs_rus.js"/>
+		<jsScript file="controls/rs_rus/ButtonClear.rs_rus.js"/>
+		<jsScript file="controls/ButtonClearRef.js"/>
 		<jsScript file="controls/ButtonCmd.js"/>
-		
+		<jsScript file="controls/ButtonExpToExcel.js"/>
+		<jsScript file="controls/rs_rus/ButtonExpToExcel.rs_rus.js"/>
+		<jsScript file="controls/ButtonExpToPDF.js"/>
+		<jsScript file="controls/rs_rus/ButtonExpToPDF.rs_rus.js"/>		
 		<jsScript file="controls/ButtonOpen.js"/>
-		<jsScript file="controls/res_rus/ButtonOpen.rs_rus.js"/>
-		<jsScript file="controls/ButtonOpenObject.js"/>
+		<jsScript file="controls/rs_rus/ButtonOpen.rs_rus.js"/>				
+		<jsScript file="controls/ButtonOpenRef.js"/>
+		<jsScript file="controls/rs_rus/ButtonOpenRef.rs_rus.js"/>				
 		<jsScript file="controls/ButtonPrint.js"/>
-		<jsScript file="controls/res_rus/ButtonPrint.rs_rus.js"/>
+		<jsScript file="controls/rs_rus/ButtonPrint.rs_rus.js"/>		
 		<jsScript file="controls/ButtonSelect.js"/>
-		<jsScript file="controls/res_rus/ButtonSelect.rs_rus.js"/>
-		<jsScript file="controls/ButtonSelectObject.js"/>
-		<jsScript file="controls/res_rus/ButtonSelectObject.rs_rus.js"/>		
+		<jsScript file="controls/rs_rus/ButtonSelect.rs_rus.js"/>
+		<jsScript file="controls/ButtonSelectRef.js"/>
+		<jsScript file="controls/rs_rus/ButtonSelectRef.rs_rus.js"/>
+		
 		<jsScript file="controls/ButtonToggle.js"/>		
 		
 		<jsScript file="controls/Label.js"/>
 		
 		<jsScript file="controls/Edit.js"/>
+		<jsScript file="controls/EditString.js"/>
+		<jsScript file="controls/EditInt.js"/>
+		<jsScript file="controls/EditFloat.js"/>
+		<jsScript file="controls/EditPhone.js"/>
+		<jsScript file="controls/EditDate.js"/>
+		<jsScript file="controls/EditDateTime.js"/>
+		<jsScript file="controls/EditTime.js"/>		
+		<jsScript file="controls/EditPassword.js"/>
 
-		<jsScript file="controls/res_rus.js"/>				
-		
+		<jsScript file="controls/WindowFormModalBS.js"/>
+		<jsScript file="controls/WindowMessage.js"/>
+
 		<!-- **** Views *** -->
 		<jsScript file="views/Login_View.js"/>
+		<jsScript file="views/Prototype_View.js"/>
 		
 		
 		<jsScript file="custom/AppCRM.js"/>

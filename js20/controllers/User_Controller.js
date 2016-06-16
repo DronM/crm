@@ -11,11 +11,11 @@
 //ф
 /* constructor */
 
-function User_Controller(servConnector){
+function User_Controller(app){
 	options = {};
 	options["listModelId"] = "User_Model";
 	options["objModelId"] = "User_Model";
-	User_Controller.superclass.constructor.call(this,"User_Controller",servConnector,options);	
+	User_Controller.superclass.constructor.call(this,app,options);	
 	
 	//methods
 	this.addInsert();

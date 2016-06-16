@@ -13,14 +13,14 @@
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 		<title>Катрэн+, личный кабинет</title>
 		<script>
-			var App;
+			var application;
 			
 			function pageLoad(){				
 				<xsl:call-template name="initApp"/>
 				
-				App.setBsCol(("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"));
-				App.setWinClass(WindowFormDD);//ChildForm
-				App.readConstants();
+				application.setBsCol(("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"));
+				application.setWinClass(WindowFormDD);//ChildForm
+				application.readConstants();
 				
 				<xsl:call-template name="initMainMenu"/>
 			}
@@ -70,7 +70,7 @@
 
 
 <xsl:template name="initApp">
-	var App = new AppCRM({
+	var application = new AppCRM({
 		host:'<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>',
 		servVars:{
 			"version":'<xsl:value-of select="/document/model[@id='ModelVars']/row/scriptId"/>',
@@ -83,7 +83,7 @@
 </xsl:template>
 
 <xsl:template name="initMainMenu">
-	App.setOnViewClose(function(res){					
+	application.setOnViewClose(function(res){					
 		if (MainView!=undefined){
 			MainView.removeDOM();
 			delete MainView;
