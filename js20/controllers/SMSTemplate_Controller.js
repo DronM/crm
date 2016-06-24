@@ -1,20 +1,25 @@
-/* Copyright (c) 2012 
+/* Copyright (c) 2016
 	Andrey Mikhalevich, Katren ltd.
 */
 /*	
 	Description
 */
 /** Requirements
- * @requires common/functions.js
+ * @requires core/extend.js
  * @requires core/ControllerDb.js
 */
-//ф
-/* constructor */
 
-function SMSTemplate_Controller(app){
-	options = {};
-	options["listModelId"] = "SMSTemplateList_Model";
-	options["objModelId"] = "SMSTemplateList_Model";
+/* constructor
+@param string id
+@param object options{
+
+}
+*/
+
+function SMSTemplate_Controller(app,options){
+	options = options || {};
+	options.listModelId = "SMSTemplateList_Model";
+	options.objModelId = "SMSTemplateList_Model";
 	SMSTemplate_Controller.superclass.constructor.call(this,app,options);	
 	
 	//methods
@@ -23,87 +28,87 @@ function SMSTemplate_Controller(app){
 	this.addDelete();
 	this.addGetList();
 	this.addGetObject();
-	
+		
 }
 extend(SMSTemplate_Controller,ControllerDb);
 
 			SMSTemplate_Controller.prototype.addInsert = function(){
 	SMSTemplate_Controller.superclass.addInsert.call(this);
-	var param;
+	var field;
 	var options;
 	var pm = this.getInsert();
 	options = {};
-	options["alias"]="Тип SMS";
-	param = new FieldEnum("sms_type",options);
-	options["values"] = 'reset_pwd';
+	options.alias = "Тип SMS";
+	field = new FieldEnum("sms_type",options);
+	options.enumValues = 'reset_pwd';
 	
-	pm.addParam(param);
-	
-	options = {};
-	options["alias"]="Шаблон";
-	var param = new FieldText("template",options);
-	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	options = {};
-	options["alias"]="Комментарий";
-	var param = new FieldText("comment_text",options);
+	options.alias = "Шаблон";
+	var field = new FieldText("template",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	options = {};
-	options["alias"]="Поля";
-	var param = new FieldText("fields",options);
+	options.alias = "Комментарий";
+	var field = new FieldText("comment_text",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
-	pm.addParam(new FieldInt("ret_id",{}));
+	options = {};
+	options.alias = "Поля";
+	var field = new FieldText("fields",options);
+	
+	pm.addField(field);
+	
+	pm.addField(new FieldInt("ret_id",{}));
 	
 	
 }
 
 			SMSTemplate_Controller.prototype.addUpdate = function(){
 	SMSTemplate_Controller.superclass.addUpdate.call(this);
-	var param;
+	var field;
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
 	
-	var param = new FieldInt("id",options);
+	var field = new FieldInt("id",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
-	param = new FieldInt("old_id",{});
-	pm.addParam(param);
-	
-	options = {};
-	options["alias"]="Тип SMS";
-	param = new FieldEnum("sms_type",options);
-	options["values"] = 'reset_pwd';
-	
-	pm.addParam(param);
-	
+	field = new FieldInt("old_id",{});
+	pm.addField(field);
 	
 	options = {};
-	options["alias"]="Шаблон";
-	var param = new FieldText("template",options);
+	options.alias = "Тип SMS";
+	field = new FieldEnum("sms_type",options);
+	options.enumValues = 'reset_pwd';
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
 	options = {};
-	options["alias"]="Комментарий";
-	var param = new FieldText("comment_text",options);
+	options.alias = "Шаблон";
+	var field = new FieldText("template",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
 	options = {};
-	options["alias"]="Поля";
-	var param = new FieldText("fields",options);
+	options.alias = "Комментарий";
+	var field = new FieldText("comment_text",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
+	
+	
+	options = {};
+	options.alias = "Поля";
+	var field = new FieldText("fields",options);
+	
+	pm.addField(field);
 	
 	
 	
@@ -114,7 +119,7 @@ extend(SMSTemplate_Controller,ControllerDb);
 	var options = {"required":true};
 	
 	var pm = this.getDelete();
-	pm.addParam(new FieldInt("id",options));
+	pm.addField(new FieldInt("id",options));
 }
 
 			SMSTemplate_Controller.prototype.addGetList = function(){
@@ -122,11 +127,11 @@ extend(SMSTemplate_Controller,ControllerDb);
 	var options = {};
 	
 	var pm = this.getGetList();
-	pm.addParam(new FieldInt("id",options));
-	pm.addParam(new FieldString("sms_type",options));
-	pm.addParam(new FieldString("sms_type_descr",options));
-	pm.addParam(new FieldText("template",options));
-	pm.addParam(new FieldText("fields",options));
+	pm.addField(new FieldInt("id",options));
+	pm.addField(new FieldString("sms_type",options));
+	pm.addField(new FieldString("sms_type_descr",options));
+	pm.addField(new FieldText("template",options));
+	pm.addField(new FieldText("fields",options));
 }
 
 			SMSTemplate_Controller.prototype.addGetObject = function(){
@@ -134,7 +139,7 @@ extend(SMSTemplate_Controller,ControllerDb);
 	var options = {};
 	
 	var pm = this.getGetObject();
-	pm.addParam(new FieldInt("id",options));
+	pm.addField(new FieldInt("id",options));
 }
 
 		

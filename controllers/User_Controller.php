@@ -163,14 +163,16 @@ class User_Controller extends ControllerSQL{
 	$opts=array();
 	
 		$opts['alias']='Имя пользователя';
-		$opts['length']=50;				
+		$opts['length']=50;
+		$opts['required']=TRUE;				
 		$pm->addParam(new FieldExtString('name',$opts));
 	
 				
 	$opts=array();
 	
 		$opts['alias']='Пароль';
-		$opts['length']=20;				
+		$opts['length']=20;
+		$opts['required']=TRUE;				
 		$pm->addParam(new FieldExtPassword('pwd',$opts));
 	
 			
@@ -190,6 +192,11 @@ class User_Controller extends ControllerSQL{
 						
 			
 		$pm = new PublicMethod('logout');
+		
+		$this->addPublicMethod($pm);
+
+			
+		$pm = new PublicMethod('logout_html');
 		
 		$this->addPublicMethod($pm);
 
@@ -233,6 +240,12 @@ class User_Controller extends ControllerSQL{
 	public function logout(){
 		$this->setLogged(FALSE);
 	}
+	
+	public function logout_html(){
+		$this->logout();
+		header("Location: index.php");
+	}
+	
 	/* array with user inf*/
 	private function set_logged($ar){
 		$this->setLogged(TRUE);

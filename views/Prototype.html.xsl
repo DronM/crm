@@ -19,7 +19,6 @@
 			
 				<xsl:call-template name="initApp"/>
 				
-				//application.showError("Ошибка!");
 				var view = new Prototype_View("unique-id",{app:application});				
 				view.toDOM();
 			}
@@ -29,10 +28,9 @@
 	<body onload="pageLoad();">
 		<xsl:apply-templates select="/document/model[@id='ModelServResponse']/row"/>		
 
-		    <div class="container">
+		    <div id="unique-id" class="container">
 		    	<div class="panel col-lg-4">
 		    		<div class="panel panel-header">Simple controls</div>
-			    	<div id="unique-id:error"/>
 			    	<div id="unique-id:string"/>
 			    	<div id="unique-id:pwd"/>		    	
 			    	<div id="unique-id:int_constr"/>
@@ -41,6 +39,9 @@
 			    	<div id="unique-id:date-time"/>
 			    	<div id="unique-id:time"/>
 			    	<div id="unique-id:phone"/>
+			    	<div id="unique-id:checkbox"/>
+			    	<div id="unique-id:select"/>
+			    	<div id="unique-id:radio"/>
 			</div>		    	
 		    	<div class="panel col-lg-4">
 		    		<div class="panel-header">Modal dialogs</div>
@@ -50,15 +51,6 @@
 			    	<div id="unique-id:btn-modal-note" caption="Note"/>
 		    	</div>
 		    </div>
-		
-	<script>
-			var n = document.getElementById("user");
-			if (n){
-				if (document.activeElement.id!="pwd"){
-					n.focus();
-				}
-			}
-	</script>
 		
 		<xsl:call-template name="initJS"/>
 	</body>

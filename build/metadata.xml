@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-06-16 17:27:27</lastBuild>
+		<lastBuild>2016-06-24 17:10:52</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types">
@@ -62,7 +62,7 @@
 			</index>			
 		</model>
 		<model id="Platform" parent="ModelSQL" dataTable="platforms" virtual="FALSE">
-			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3"/>
+			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3" alias="Идентификатор"/>
 		</model>
 		
 		<model id="ConfigType" parent="ModelSQL" dataTable="config_types" virtual="FALSE">
@@ -269,12 +269,28 @@
 	</constants>
 
 	<controllers>
-		<controller id="SMSTemplate" parentId="ControllerSQL" state="TRUE">
+		<controller id="SMSTemplate" parentId="ControllerSQL">
 			<publicMethod id="insert" modelId="SMSTemplate"/>
 			<publicMethod id="update" modelId="SMSTemplate"/>
 			<publicMethod id="delete" modelId="SMSTemplate"/>
 			<publicMethod id="get_list" modelId="SMSTemplateList"/>
 			<publicMethod id="get_object" modelId="SMSTemplateList"/>
+		</controller>												
+
+		<controller id="Platform" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="Platform"/>
+			<publicMethod id="update" modelId="Platform"/>
+			<publicMethod id="delete" modelId="Platform"/>
+			<publicMethod id="get_list" modelId="Platform"/>
+			<publicMethod id="get_object" modelId="Platform"/>
+		</controller>												
+
+		<controller id="ConfigType" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="ConfigType"/>
+			<publicMethod id="update" modelId="ConfigType"/>
+			<publicMethod id="delete" modelId="ConfigType"/>
+			<publicMethod id="get_list" modelId="ConfigType"/>
+			<publicMethod id="get_object" modelId="ConfigType"/>
 		</controller>												
 	
 		<controller id="User" parentId="ControllerSQL" state="TRUE" noState="FALSE">
@@ -287,13 +303,14 @@
 				<field id="user_id" dataType="Int" required="TRUE"/>
 			</publicMethod>
 			<publicMethod id="login">
-				<field id="name" dataType="String" alias="Имя пользователя" length="50"/>
-				<field id="pwd" dataType="Password" alias="Пароль" length="20"/>
+				<field id="name" dataType="String" alias="Имя пользователя" length="50" required="TRUE"/>
+				<field id="pwd" dataType="Password" alias="Пароль" length="20" required="TRUE"/>
 			</publicMethod>
 			<publicMethod id="login_refresh">
 				<field id="refresh_token" dataType="String" required="true" length="50"/>
 			</publicMethod>						
 			<publicMethod id="logout"/>
+			<publicMethod id="logout_html"/>
 		</controller>		
 		
 	</controllers>
@@ -302,9 +319,14 @@
 		<allow controllerId="all" methodId="all" roleId="admin"/>
 		<allow controllerId="all" methodId="all" roleId="cashier"/>
 		<allow controllerId="all" methodId="all" roleId="store_manager"/>
+		<allow controllerId="User" methodId="login" roleId="guest"/>
 	</permissions>
 	
 	<mainMenu roleId="admin">
+		<menuItem descr="Обновления">
+			<menuItem c="Platform_Controller" v="PlatformList" f="get_list" descr="Платформы" default="FALSE"/>
+			<menuItem c="ConfigType_Controller" v="ConfigTypeList" f="get_list" descr="Типы конфигураций" default="FALSE"/>
+		</menuItem>
 	</mainMenu>
 
 	<mainMenu roleId="manager">
@@ -321,6 +343,8 @@
 		<jsScript file="bootstrap-datepicker.ru.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
 		<jsScript file="jquery.maskedinput.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
 		<jsScript file="metisMenu.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="raphael-min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
+		<jsScript file="morris.min.js" compressed="TRUE" standalone="TRUE" version="1.0"/>		
 		<jsScript file="sb-admin-2.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
 
 		<!-- core -->
@@ -356,6 +380,7 @@
 		
 		<jsScript file="core/Field.js"/>		
 		<jsScript file="core/FieldString.js"/>
+		<jsScript file="core/FieldEnum.js"/>
 		<jsScript file="core/FieldBool.js"/>
 		<jsScript file="core/FieldDate.js"/>
 		<jsScript file="core/FieldDateTime.js"/>
@@ -368,46 +393,49 @@
 		<jsScript file="core/rs_rus.js"/>
 		
 		<!-- **** controls *** -->		
-		<jsScript file="controls/ControlHolder.js"/>
-		<jsScript file="controls/rs_rus/ControlHolder.rs_rus.js"/>
 		<jsScript file="controls/Control.js"/>
-		<jsScript file="controls/rs_rus/Control.rs_rus.js"/>
+		<jsScript file="controls/rs/Control.rs_rus.js"/>
 		<jsScript file="controls/ControlContainer.js"/>
-		<jsScript file="controls/rs_rus/ControlContainer.rs_rus.js"/>
+		<jsScript file="controls/rs/ControlContainer.rs.js"/>
+		
+		<jsScript file="controls/View.js"/>
+		<jsScript file="controls/rs/View.rs_rus.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
-		<jsScript file="controls/rs_rus/Calculator.rs_rus.js"/>
+		<jsScript file="controls/rs/Calculator.rs_rus.js"/>
 		<jsScript file="controls/Button.js"/>
 		<jsScript file="controls/ButtonCtrl.js"/>
 		<jsScript file="controls/ButtonCalc.js"/>
-		<jsScript file="controls/rs_rus/ButtonCalc.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonCalc.rs_rus.js"/>
 		<jsScript file="controls/ButtonCalendar.js"/>
-		<jsScript file="controls/rs_rus/ButtonCalendar.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonCalendar.rs_rus.js"/>
 		<jsScript file="controls/ButtonClear.js"/>
-		<jsScript file="controls/rs_rus/ButtonClear.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonClear.rs_rus.js"/>
 		<jsScript file="controls/ButtonClearRef.js"/>
 		<jsScript file="controls/ButtonCmd.js"/>
 		<jsScript file="controls/ButtonExpToExcel.js"/>
-		<jsScript file="controls/rs_rus/ButtonExpToExcel.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonExpToExcel.rs_rus.js"/>
 		<jsScript file="controls/ButtonExpToPDF.js"/>
-		<jsScript file="controls/rs_rus/ButtonExpToPDF.rs_rus.js"/>		
+		<jsScript file="controls/rs/ButtonExpToPDF.rs_rus.js"/>		
 		<jsScript file="controls/ButtonOpen.js"/>
-		<jsScript file="controls/rs_rus/ButtonOpen.rs_rus.js"/>				
+		<jsScript file="controls/rs/ButtonOpen.rs_rus.js"/>				
 		<jsScript file="controls/ButtonOpenRef.js"/>
-		<jsScript file="controls/rs_rus/ButtonOpenRef.rs_rus.js"/>				
+		<jsScript file="controls/rs/ButtonOpenRef.rs_rus.js"/>				
 		<jsScript file="controls/ButtonPrint.js"/>
-		<jsScript file="controls/rs_rus/ButtonPrint.rs_rus.js"/>		
+		<jsScript file="controls/rs/ButtonPrint.rs_rus.js"/>		
 		<jsScript file="controls/ButtonSelect.js"/>
-		<jsScript file="controls/rs_rus/ButtonSelect.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonSelect.rs_rus.js"/>
 		<jsScript file="controls/ButtonSelectRef.js"/>
-		<jsScript file="controls/rs_rus/ButtonSelectRef.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonSelectRef.rs_rus.js"/>
 		
 		<jsScript file="controls/ButtonToggle.js"/>		
 		
 		<jsScript file="controls/Label.js"/>
 		
 		<jsScript file="controls/Edit.js"/>
+		<jsScript file="controls/rs/Edit.rs_rus.js"/>
 		<jsScript file="controls/EditString.js"/>
+		<jsScript file="controls/EditText.js"/>
 		<jsScript file="controls/EditInt.js"/>
 		<jsScript file="controls/EditFloat.js"/>
 		<jsScript file="controls/EditPhone.js"/>
@@ -415,29 +443,73 @@
 		<jsScript file="controls/EditDateTime.js"/>
 		<jsScript file="controls/EditTime.js"/>		
 		<jsScript file="controls/EditPassword.js"/>
+		<jsScript file="controls/EditCheckBox.js"/>
+		<jsScript file="controls/EditContainer.js"/>
+		<jsScript file="controls/rs/EditContainer.rs_rus.js"/>
+		<jsScript file="controls/EditRadioGroup.js"/>
+		<jsScript file="controls/EditRadio.js"/>		
+		<jsScript file="controls/EditSelect.js"/>
+		<jsScript file="controls/EditSelectOption.js"/>
+		<jsScript file="controls/rs/EditSelect.rs_rus.js"/>
+		
+		<jsScript file="controls/GridCell.js"/>
+		<jsScript file="controls/GridCellHead.js"/>
+		<jsScript file="controls/GridCellFoot.js"/>
+		<jsScript file="controls/GridHead.js"/>
+		<jsScript file="controls/GridRow.js"/>
+		<jsScript file="controls/GridFoot.js"/>
+		<jsScript file="controls/GridBody.js"/>
+		<jsScript file="controls/Grid.js"/>
+		<jsScript file="controls/rs/Grid.rs.js"/>
+		<jsScript file="controls/GridCommands.js"/>
+		<jsScript file="controls/rs/GridCommands.rs_rus.js"/>
+		<jsScript file="controls/GridAjx.js"/>		
+		<jsScript file="controls/GridCommandsAjx.js"/>
+		<jsScript file="controls/rs/GridCommandsAjx.rs_rus.js"/>
+		
+		<jsScript file="controls/ButtonOK.js"/>
+		<jsScript file="controls/rs/ButtonOK.rs.js"/>
+		<jsScript file="controls/ButtonCancel.js"/>
+		<jsScript file="controls/rs/ButtonCancel.rs.js"/>
+		<jsScript file="controls/ViewGridEditInline.js"/>
+		<jsScript file="controls/rs/ViewGridEditInline.rs.js"/>
 
+		<jsScript file="controls/WindowPrint.js"/>
+		<jsScript file="controls/rs/WindowPrint.rs_rus.js"/>
+		<jsScript file="controls/WindowQuestion.js"/>
+		<jsScript file="controls/rs/WindowQuestion.rs_rus.js"/>		
+		<jsScript file="controls/WindowForm.js"/>
+		<jsScript file="controls/WindowFormDD.js"/>
 		<jsScript file="controls/WindowFormModalBS.js"/>
 		<jsScript file="controls/WindowMessage.js"/>
 
+		<!-- **** Controllers && Models *** -->
+		<jsScript file="controllers/User_Controller.js"/>
+		<jsScript file="controllers/SMSTemplate_Controller.js"/><jsScript file="controllers/Platform_Controller.js"/><jsScript file="controllers/ConfigType_Controller.js"/>
+		<jsScript file="models/TimeZoneLocale_Model.js"/><jsScript file="models/User_Model.js"/><jsScript file="models/Client_Model.js"/><jsScript file="models/Platform_Model.js"/><jsScript file="models/ConfigType_Model.js"/><jsScript file="models/Okei_Model.js"/><jsScript file="models/Service_Model.js"/><jsScript file="models/UserService_Model.js"/><jsScript file="models/UserMachine_Model.js"/><jsScript file="models/UpdProgram_Model.js"/><jsScript file="models/UpdRelease_Model.js"/><jsScript file="models/UpdateCommand_Model.js"/><jsScript file="models/UpdateFileCommand_Model.js"/><jsScript file="models/Update_Model.js"/><jsScript file="models/UpdateArchive_Model.js"/><jsScript file="models/ClientConfig_Model.js"/><jsScript file="models/UpdateError_Model.js"/><jsScript file="models/UpdatedConfig_Model.js"/><jsScript file="models/SMSTemplate_Model.js"/><jsScript file="models/SMSTemplateList_Model.js"/><jsScript file="models/SMSForSending_Model.js"/><jsScript file="models/SMSForSendingList_Model.js"/><jsScript file="models/EmailTemplate_Model.js"/><jsScript file="models/EmailTemplateList_Model.js"/>
+		
 		<!-- **** Views *** -->
-		<jsScript file="views/Login_View.js"/>
+		<jsScript file="views/Login.js"/>
+		<jsScript file="views/PlatformList.js"/>
+		<jsScript file="views/ConfigTypeList.js"/>
 		<jsScript file="views/Prototype_View.js"/>
 		
 		
 		<jsScript file="custom/AppCRM.js"/>
 		
-		<!-- **** Controllers *** -->
-		<jsScript file="controllers/User_Controller.js"/>
-	<jsScript file="controllers/SMSTemplate_Controller.js"/></jsScripts>
+	</jsScripts>
 	
 	<cssScripts>
 		<cssScript file="bootstrap.min.css" compressed="TRUE" standalone="TRUE"/>
-		<cssScript file="bootstrap-theme.min.css" compressed="TRUE" standalone="TRUE"/>
 		<cssScript file="bootstrap-datepicker.standalone.min.css" compressed="TRUE" standalone="TRUE"/>
+		<cssScript file="metisMenu.min.css" standalone="TRUE"/>
+		<cssScript file="timeline.css" standalone="TRUE"/>
+		<cssScript file="sb-admin-2.css" standalone="TRUE"/>
+		<cssScript file="morris.css" standalone="TRUE"/>		
+		<cssScript file="font-awesome.min.css" standalone="TRUE"/>						
 		<cssScript file="style.css" standalone="TRUE"/>
 		<cssScript file="dhtmlwindow.css" standalone="TRUE"/>
-		<cssScript file="metisMenu.min.css" standalone="TRUE"/>
-		<cssScript file="font-awesome.min.css" standalone="TRUE"/>						
+		
 		<!--				
 		<cssScript file="modal.css"/>
 		<cssScript file="tooltip.css"/>

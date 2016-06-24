@@ -18,6 +18,8 @@ class Platform_Model extends ModelSQL{
 		'required'=>TRUE,
 			'primaryKey'=>TRUE,
 			'autoInc'=>FALSE,
+			'alias'=>"Идентификатор"
+		,
 			'length'=>3,
 			'id'=>"id"
 				

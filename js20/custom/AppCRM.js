@@ -11,6 +11,8 @@
 
 /* constructor */
 function AppCRM(options){
+	options = options || {};
+	options.lang = "rus";
 	AppCRM.superclass.constructor.call(this,"CRM",options);
 }
 extend(AppCRM,App);

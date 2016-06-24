@@ -80,6 +80,12 @@ class <xsl:value-of select="@id"/>_Controller extends ControllerSQL{
 	public function logout(){
 		$this->setLogged(FALSE);
 	}
+	
+	public function logout_html(){
+		$this->logout();
+		header("Location: index.php");
+	}
+	
 	/* array with user inf*/
 	private function set_logged($ar){
 		$this->setLogged(TRUE);

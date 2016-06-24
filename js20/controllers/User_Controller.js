@@ -1,20 +1,25 @@
-/* Copyright (c) 2012 
+/* Copyright (c) 2016
 	Andrey Mikhalevich, Katren ltd.
 */
 /*	
 	Description
 */
 /** Requirements
- * @requires common/functions.js
+ * @requires core/extend.js
  * @requires core/ControllerDb.js
 */
-//ф
-/* constructor */
 
-function User_Controller(app){
-	options = {};
-	options["listModelId"] = "User_Model";
-	options["objModelId"] = "User_Model";
+/* constructor
+@param string id
+@param object options{
+
+}
+*/
+
+function User_Controller(app,options){
+	options = options || {};
+	options.listModelId = "User_Model";
+	options.objModelId = "User_Model";
 	User_Controller.superclass.constructor.call(this,app,options);	
 	
 	//methods
@@ -27,113 +32,114 @@ function User_Controller(app){
 	this.add_login();
 	this.add_login_refresh();
 	this.add_logout();
-	
+	this.add_logout_html();
+		
 }
 extend(User_Controller,ControllerDb);
 
 			User_Controller.prototype.addInsert = function(){
 	User_Controller.superclass.addInsert.call(this);
-	var param;
+	var field;
 	var options;
 	var pm = this.getInsert();
 	options = {};
 	
-	var param = new FieldString("name",options);
+	var field = new FieldString("name",options);
 	
-	pm.addParam(param);
-	
-	options = {};
-	
-	param = new FieldEnum("role_id",options);
-	options["values"] = 'admin,manager,client';
-	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	options = {};
 	
-	var param = new FieldPassword("pwd",options);
+	field = new FieldEnum("role_id",options);
+	options.enumValues = 'admin,manager,client';
 	
-	pm.addParam(param);
-	
-	options = {};
-	
-	var param = new FieldString("phone_cel",options);
-	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	options = {};
 	
-	var param = new FieldInt("time_zone_locale_id",options);
+	var field = new FieldPassword("pwd",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	options = {};
 	
-	var param = new FieldString("email",options);
+	var field = new FieldString("phone_cel",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
-	pm.addParam(new FieldInt("ret_id",{}));
+	options = {};
+	
+	var field = new FieldInt("time_zone_locale_id",options);
+	
+	pm.addField(field);
+	
+	options = {};
+	
+	var field = new FieldString("email",options);
+	
+	pm.addField(field);
+	
+	pm.addField(new FieldInt("ret_id",{}));
 	
 	
 }
 
 			User_Controller.prototype.addUpdate = function(){
 	User_Controller.superclass.addUpdate.call(this);
-	var param;
+	var field;
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
 	
-	var param = new FieldInt("id",options);
+	var field = new FieldInt("id",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
-	param = new FieldInt("old_id",{});
-	pm.addParam(param);
-	
-	options = {};
-	
-	var param = new FieldString("name",options);
-	
-	pm.addParam(param);
-	
+	field = new FieldInt("old_id",{});
+	pm.addField(field);
 	
 	options = {};
 	
-	param = new FieldEnum("role_id",options);
-	options["values"] = 'admin,manager,client';
+	var field = new FieldString("name",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
 	options = {};
 	
-	var param = new FieldPassword("pwd",options);
+	field = new FieldEnum("role_id",options);
+	options.enumValues = 'admin,manager,client';
 	
-	pm.addParam(param);
-	
-	
-	options = {};
-	
-	var param = new FieldString("phone_cel",options);
-	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
 	options = {};
 	
-	var param = new FieldInt("time_zone_locale_id",options);
+	var field = new FieldPassword("pwd",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
 	
 	
 	options = {};
 	
-	var param = new FieldString("email",options);
+	var field = new FieldString("phone_cel",options);
 	
-	pm.addParam(param);
+	pm.addField(field);
+	
+	
+	options = {};
+	
+	var field = new FieldInt("time_zone_locale_id",options);
+	
+	pm.addField(field);
+	
+	
+	options = {};
+	
+	var field = new FieldString("email",options);
+	
+	pm.addField(field);
 	
 	
 	
@@ -144,7 +150,7 @@ extend(User_Controller,ControllerDb);
 	var options = {"required":true};
 	
 	var pm = this.getDelete();
-	pm.addParam(new FieldInt("id",options));
+	pm.addField(new FieldInt("id",options));
 }
 
 			User_Controller.prototype.addGetList = function(){
@@ -152,14 +158,14 @@ extend(User_Controller,ControllerDb);
 	var options = {};
 	
 	var pm = this.getGetList();
-	pm.addParam(new FieldInt("id",options));
-	pm.addParam(new FieldString("name",options));
-	pm.addParam(new FieldEnum("role_id",options));
-	pm.addParam(new FieldPassword("pwd",options));
-	pm.addParam(new FieldString("phone_cel",options));
-	pm.addParam(new FieldInt("time_zone_locale_id",options));
-	pm.addParam(new FieldString("email",options));
-	pm.getParamById(this.PARAM_ORD_FIELDS).setValue("name");
+	pm.addField(new FieldInt("id",options));
+	pm.addField(new FieldString("name",options));
+	pm.addField(new FieldEnum("role_id",options));
+	pm.addField(new FieldPassword("pwd",options));
+	pm.addField(new FieldString("phone_cel",options));
+	pm.addField(new FieldInt("time_zone_locale_id",options));
+	pm.addField(new FieldString("email",options));
+	pm.getField(this.PARAM_ORD_FIELDS).setValue("name");
 	
 }
 
@@ -168,41 +174,81 @@ extend(User_Controller,ControllerDb);
 	var options = {};
 	
 	var pm = this.getGetObject();
-	pm.addParam(new FieldInt("id",options));
+	pm.addField(new FieldInt("id",options));
 }
 
 			User_Controller.prototype.add_reset_pwd = function(){
-	var pm = this.addMethodById('reset_pwd');
+	var pm = new PublicMethod('reset_pwd',{controller:this});
+	this.addPublicMethod(pm);
 	
 				
-		pm.addParam(new FieldInt("user_id"));
+	
+	var options = {};
+	
+		options.required = true;
+	
+		pm.addField(new FieldInt("user_id",options));
 	
 			
 }
 
 			User_Controller.prototype.add_login = function(){
-	var pm = this.addMethodById('login');
+	var pm = new PublicMethod('login',{controller:this});
+	this.addPublicMethod(pm);
 	
 				
-		pm.addParam(new FieldString("name"));
+	
+	var options = {};
+	
+		options.alias = "Имя пользователя";
+	
+		options.required = true;
+	
+		options.maxlength = "50";
+	
+		pm.addField(new FieldString("name",options));
 	
 				
-		pm.addParam(new FieldPassword("pwd"));
+	
+	var options = {};
+	
+		options.alias = "Пароль";
+	
+		options.required = true;
+	
+		options.maxlength = "20";
+	
+		pm.addField(new FieldPassword("pwd",options));
 	
 			
 }
 
 			User_Controller.prototype.add_login_refresh = function(){
-	var pm = this.addMethodById('login_refresh');
+	var pm = new PublicMethod('login_refresh',{controller:this});
+	this.addPublicMethod(pm);
 	
 				
-		pm.addParam(new FieldString("refresh_token"));
+	
+	var options = {};
+	
+		options.required = true;
+	
+		options.maxlength = "50";
+	
+		pm.addField(new FieldString("refresh_token",options));
 	
 			
 }
 						
 			User_Controller.prototype.add_logout = function(){
-	var pm = this.addMethodById('logout');
+	var pm = new PublicMethod('logout',{controller:this});
+	this.addPublicMethod(pm);
+	
+}
+
+			User_Controller.prototype.add_logout_html = function(){
+	var pm = new PublicMethod('logout_html',{controller:this});
+	this.addPublicMethod(pm);
 	
 }
 
