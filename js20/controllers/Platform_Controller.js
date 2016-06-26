@@ -78,6 +78,8 @@ extend(Platform_Controller,ControllerDb);
 	
 	var pm = this.getGetList();
 	pm.addField(new FieldString("id",options));
+	pm.getField(this.PARAM_ORD_FIELDS).setValue("id");
+	
 }
 
 			Platform_Controller.prototype.addGetObject = function(){

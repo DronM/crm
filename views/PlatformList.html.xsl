@@ -17,7 +17,13 @@
 			function pageLoad(){
 			
 				<xsl:call-template name="initApp"/>
-				var view = new PlatformList("PlatformList",{app:application});				
+				
+				var view = new PlatformList("PlatformList",{
+					app:application,
+					gridDataStr:CommonHelper.longString(function () {/*
+					<xsl:copy-of select="/document/model[@id='Platform_Model']"/>
+					*/})
+					});
 				view.toDOM();
 			}
 		</script>		

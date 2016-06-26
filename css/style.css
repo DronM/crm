@@ -6,3 +6,15 @@
 	z-index=99999;
 }
 
+span.grid-sort{
+	margin-left:5px;
+}
+
+tr.for_select{
+	cursor:pointer;
+}
+
+th.sortable{
+	cursor:pointer;
+}
+

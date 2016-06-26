@@ -2,6 +2,7 @@
 
 require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
+require_once(FRAME_WORK_PATH.'basic_classes/ModelOrderSQL.php');
 
 class Platform_Model extends ModelSQL{
 	
@@ -26,6 +27,11 @@ class Platform_Model extends ModelSQL{
 		
 		));
 		$this->addField($f_id);
+
+		$order = new ModelOrderSQL();		
+		$this->setDefaultModelOrder($order);		
+		
+		$order->addField($f_id);
 
 		
 		

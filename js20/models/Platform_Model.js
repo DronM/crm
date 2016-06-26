@@ -23,6 +23,9 @@ function Platform_Model(options){
 	options.fields = {};
 	
 			
+				
+					
+			
 	var filed_options = {};
 	filed_options.primaryKey = true;
 	

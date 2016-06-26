@@ -12,7 +12,7 @@ function PlatformList(id,options){
 
 	PlatformList.superclass.constructor.call(this,id,options);
 	
-	var model = new Platform_Model();
+	var model = new Platform_Model({"data":options.gridDataStr});
 	
 	this.addElement(new GridAjx(id+":grid",{
 		"model":model,
@@ -28,12 +28,15 @@ function PlatformList(id,options){
 								{"field":model.getField("id"),
 								"format":null
 								}
-							]
+							],
+							"sortable":true,
+							"sort":"asc"							
 						})					
 					]
 				})
 			]
 		}),
+		"autoRefresh":false,
 		"focus":true,
 		"app":options.app
 	}));	

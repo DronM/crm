@@ -113,7 +113,7 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs/ControlContainer.rs.js'));
 		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/View.js'));
-		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs/View.rs_rus.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs/View.rs.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ErrorControl.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Calculator.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs/Calculator.rs_rus.js'));

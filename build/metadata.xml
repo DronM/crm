@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-06-24 17:10:52</lastBuild>
+		<lastBuild>2016-06-26 08:40:31</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types">
@@ -62,6 +62,9 @@
 			</index>			
 		</model>
 		<model id="Platform" parent="ModelSQL" dataTable="platforms" virtual="FALSE">
+			<defaultOrder>
+				<field id="id"/>
+			</defaultOrder>		
 			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3" alias="Идентификатор"/>
 		</model>
 		
@@ -399,7 +402,7 @@
 		<jsScript file="controls/rs/ControlContainer.rs.js"/>
 		
 		<jsScript file="controls/View.js"/>
-		<jsScript file="controls/rs/View.rs_rus.js"/>
+		<jsScript file="controls/rs/View.rs.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
 		<jsScript file="controls/rs/Calculator.rs_rus.js"/>
