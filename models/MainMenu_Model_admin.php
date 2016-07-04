@@ -7,6 +7,26 @@ class MainMenu_Model_admin extends Model{
 		
 <menuItem
 
+descr="Контрагенты"
+
+>
+<menuItem
+
+descr="Контрагенты"
+
+default="FALSE"
+
+c="Client_Controller"
+
+f="get_list"
+
+t="ClientList"
+
+></menuItem>
+</menuItem>
+
+<menuItem
+
 descr="Обновления"
 
 >
@@ -20,7 +40,7 @@ c="Platform_Controller"
 
 f="get_list"
 
-v="PlatformList"
+t="Platform"
 
 ></menuItem>
 
@@ -34,7 +54,7 @@ c="ConfigType_Controller"
 
 f="get_list"
 
-v="ConfigTypeList"
+t="ConfigTypeList"
 
 ></menuItem>
 </menuItem>

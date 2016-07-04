@@ -16,19 +16,17 @@
 }
 */
 
-function Client_Model(options){
-	var id = 'Client_Model';
+function ClientList_Model(options){
+	var id = 'ClientList_Model';
 	options = options || {};
 	
 	options.fields = {};
 	
 			
-				
-			
-			
 	var filed_options = {};
 	filed_options.primaryKey = true;
 	
+	filed_options.alias = 'Код';
 	
 	var field = new FieldInt("id",filed_options);
 	
@@ -41,6 +39,7 @@ function Client_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Наименование';
 	
 	var field = new FieldString("name",filed_options);
 	
@@ -55,16 +54,7 @@ function Client_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
-	
-	var field = new FieldInt("user_id",filed_options);
-	
-
-	options.fields.user_id = field;
-
-			
-	var filed_options = {};
-	filed_options.primaryKey = false;
-	
+	filed_options.alias = 'ИНН';
 	
 	var field = new FieldString("inn",filed_options);
 	
@@ -77,18 +67,7 @@ function Client_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
-	
-	var field = new FieldString("ext_id",filed_options);
-	
-		field.getValidator().setMaxLength('36');
-	
-
-	options.fields.ext_id = field;
-
-			
-	var filed_options = {};
-	filed_options.primaryKey = false;
-	
+	filed_options.alias = 'Эл.почта';
 	
 	var field = new FieldString("order_email",filed_options);
 	
@@ -97,9 +76,7 @@ function Client_Model(options){
 
 	options.fields.order_email = field;
 
-			
-						
-		Client_Model.superclass.constructor.call(this,id,options);
+		ClientList_Model.superclass.constructor.call(this,id,options);
 }
-extend(Client_Model,ModelXML);
+extend(ClientList_Model,ModelXML);
 

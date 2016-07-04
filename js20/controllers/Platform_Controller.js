@@ -36,9 +36,10 @@ extend(Platform_Controller,ControllerDb);
 	Platform_Controller.superclass.addInsert.call(this);
 	var field;
 	var options;
+	
 	var pm = this.getInsert();
 	options = {};
-	options.alias = "Идентификатор";
+	options.alias = "Идентификатор";options.primaryKey = true;options.required = true;
 	var field = new FieldString("id",options);
 	
 	pm.addField(field);
@@ -52,7 +53,7 @@ extend(Platform_Controller,ControllerDb);
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
-	options.alias = "Идентификатор";
+	options.alias = "Идентификатор";options.primaryKey = true;options.required = true;
 	var field = new FieldString("id",options);
 	
 	pm.addField(field);

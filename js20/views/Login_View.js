@@ -8,9 +8,9 @@
 */
 
 /* constructor */
-function Login(id,options){	
+function Login_View(id,options){	
 
-	Login.superclass.constructor.call(this,id,options);
+	Login_View.superclass.constructor.call(this,id,options);
 	
 	var self = this;
 	
@@ -64,8 +64,8 @@ function Login(id,options){
 	});
 
 }
-extend(Login,ViewAjx);
+extend(Login_View,ViewAjx);
 
-Login.prototype.setError = function(s){
+Login_View.prototype.setError = function(s){
 	this.getElement("error").setValue(s);
 }

@@ -36,7 +36,14 @@ extend(ConfigType_Controller,ControllerDb);
 	ConfigType_Controller.superclass.addInsert.call(this);
 	var field;
 	var options;
+	
 	var pm = this.getInsert();
+	options = {};
+	options.primaryKey = true;options.autoInc = true;
+	var field = new FieldInt("id",options);
+	
+	pm.addField(field);
+	
 	options = {};
 	
 	var field = new FieldString("platform_id",options);
@@ -66,7 +73,7 @@ extend(ConfigType_Controller,ControllerDb);
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
-	
+	options.primaryKey = true;options.autoInc = true;options.required = true;
 	var field = new FieldInt("id",options);
 	
 	pm.addField(field);

@@ -41,15 +41,22 @@ extend(User_Controller,ControllerDb);
 	User_Controller.superclass.addInsert.call(this);
 	var field;
 	var options;
+	
 	var pm = this.getInsert();
 	options = {};
+	options.primaryKey = true;options.autoInc = true;
+	var field = new FieldInt("id",options);
 	
+	pm.addField(field);
+	
+	options = {};
+	options.required = true;
 	var field = new FieldString("name",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	
+	options.required = true;
 	field = new FieldEnum("role_id",options);
 	options.enumValues = 'admin,manager,client';
 	
@@ -90,7 +97,7 @@ extend(User_Controller,ControllerDb);
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
-	
+	options.primaryKey = true;options.autoInc = true;options.required = true;
 	var field = new FieldInt("id",options);
 	
 	pm.addField(field);
@@ -100,14 +107,14 @@ extend(User_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	
+	options.required = true;
 	var field = new FieldString("name",options);
 	
 	pm.addField(field);
 	
 	
 	options = {};
-	
+	options.required = true;
 	field = new FieldEnum("role_id",options);
 	options.enumValues = 'admin,manager,client';
 	

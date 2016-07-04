@@ -16,7 +16,13 @@
 <div class="section-title">Контроллеры</div>
 <ul>
 <li>
+<a href="#Client_Controller">Client_Controller</a>
+</li>
+<li>
 <a href="#ConfigType_Controller">ConfigType_Controller</a>
+</li>
+<li>
+<a href="#Constant_Controller">Constant_Controller</a>
 </li>
 <li>
 <a href="#Platform_Controller">Platform_Controller</a>
@@ -31,6 +37,9 @@
 <div class="section-title">Модели</div>
 <ul>
 <li>
+<a href="#ConstantList_Model">ConstantList_Model</a>
+</li>
+<li>
 <a href="#TimeZoneLocale_Model">TimeZoneLocale_Model</a>
 </li>
 <li>
@@ -38,6 +47,9 @@
 </li>
 <li>
 <a href="#Client_Model">Client_Model</a>
+</li>
+<li>
+<a href="#ClientList_Model">ClientList_Model</a>
 </li>
 <li>
 <a href="#Platform_Model">Platform_Model</a>
@@ -120,6 +132,23 @@
 </ul>
 </div>
 <div class="content">
+<div id="Client_Controller" class="content_box">
+<h1>Client_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>insert</h2>
+<a href="#Client_Model">Модель: Client_Model</a>
+<h2>update</h2>
+<a href="#Client_Model">Модель: Client_Model</a>
+<h2>delete</h2>
+<a href="#Client_Model">Модель: Client_Model</a>
+<h2>get_list</h2>
+<a href="#ClientList_Model">Модель: ClientList_Model</a>
+<h2>get_object</h2>
+<a href="#Client_Model">Модель: Client_Model</a>
+</div>
+</div>
 <div id="ConfigType_Controller" class="content_box">
 <h1>ConfigType_Controller</h1>
 <div class="content_item">
@@ -135,6 +164,46 @@
 <a href="#ConfigType_Model">Модель: ConfigType_Model</a>
 <h2>get_object</h2>
 <a href="#ConfigType_Model">Модель: ConfigType_Model</a>
+</div>
+</div>
+<div id="Constant_Controller" class="content_box">
+<h1>Constant_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>set_value</h2>
+<p>Параметры:</p>
+<div class="content_item content_item2">
+<h3>id</h3>
+<p></p>
+<div class="content_item content_item3">
+<p>Тип:String</p>
+<p>Обязательное:
+								Да</p>
+</div>
+<h3>val</h3>
+<p></p>
+<div class="content_item content_item3">
+<p>Тип:String</p>
+<p>Обязательное:
+								Нет</p>
+</div>
+</div>
+<h2>get_list</h2>
+<a href="#ConstantList_Model">Модель: ConstantList_Model</a>
+<h2>get_object</h2>
+<a href="#ConstantList_Model">Модель: ConstantList_Model</a>
+<h2>get_values</h2>
+<p>Параметры:</p>
+<div class="content_item content_item2">
+<h3>id_list</h3>
+<p></p>
+<div class="content_item content_item3">
+<p>Тип:String</p>
+<p>Обязательное:
+								Нет</p>
+</div>
+</div>
 </div>
 </div>
 <div id="Platform_Controller" class="content_box">
@@ -357,6 +426,36 @@
 <div>Точность:</div>
 </div>
 </div>
+<div id="ClientList_Model" class="content_box">
+<h1>ClientList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>inn</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:12</div>
+<div>Точность:</div>
+<h2>order_email</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+</div>
+</div>
 <div id="ConfigType_Model" class="content_box">
 <h1>ConfigType_Model</h1>
 <div class="content_item">
@@ -384,6 +483,36 @@
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:100</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="ConstantList_Model" class="content_box">
+<h1>ConstantList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>descr</h2>
+<div>Тип:Text</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>val_descr</h2>
+<div>Тип:Text</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
 <div>Точность:</div>
 </div>
 </div>

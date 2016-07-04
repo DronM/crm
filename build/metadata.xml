@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-06-26 08:40:31</lastBuild>
+		<lastBuild>2016-07-04 18:48:40</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
-		<enum id="role_types">
+		<enum id="role_types" descr="Роли">
 			<value id="admin" descr="Администратор"/>
 			<value id="manager" descr="Менеджер"/>
 			<value id="client" descr="Клиент"/>
 		</enum>	
-		<enum id="service_periods">
+		<enum id="service_periods" descr="Периоды">
 			<value id="month" descr="месяц"/>
 			<value id="quater" descr="квартал"/>
 			<value id="year" descr="год"/>
 		</enum>	
-		<enum id="sms_types">
+		<enum id="sms_types" descr="Типы SMS">
 			<value id="reset_pwd" descr="Установка пароля"/>
 		</enum>
-		<enum id="email_types">
+		<enum id="email_types" descr="Типы email сообщений">
 			<value id="reset_pwd" descr="Установка пароля"/>
 		</enum>
 		
 	</enums>
 	<models>
+		<model id="ConstantList" parent="ModelSQL" dataTable="constants_list_view" virtual="TRUE">
+			<defaultOrder>
+				<field id="name"/>
+			</defaultOrder>
+			<field id="id" dataType="String" primaryKey="TRUE"/>
+			<field id="name" dataType="String"/>
+			<field id="descr" dataType="Text"/>
+			<field id="val_descr" dataType="Text"/>
+		</model>
+	
 		<model id="TimeZoneLocale" parent="ModelSQL" dataTable="time_zone_locales" virtual="FALSE">
 			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE"/>
 			<field id="descr" dataType="String" required="TRUE" length="100"/>
@@ -61,6 +71,13 @@
 				<expression>lower(name)</expression>
 			</index>			
 		</model>
+		<model id="ClientList" parent="ModelSQL" dataTable="client_list" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="name" dataType="String" required="TRUE" length="50" unique="TRUE" alias="Наименование"/>
+			<field id="inn" dataType="String" length="12" alias="ИНН"/>
+			<field id="order_email" dataType="String" length="50" alias="Эл.почта"/>
+		</model>
+		
 		<model id="Platform" parent="ModelSQL" dataTable="platforms" virtual="FALSE">
 			<defaultOrder>
 				<field id="id"/>
@@ -269,9 +286,22 @@
 		
 	</models>
 	<constants>
+		<constant id="grid_rows_per_page_count" name="Количество строк в таблицах на одной странице" descr="Все таблицы с большим количеством строк будут разбиты на страницы с данным количество строк." dataType="Int" defaultValue="50" autoload="TRUE"/>
 	</constants>
 
 	<controllers>
+		<controller id="Constant" parentId="ControllerSQL" state="TRUE" noState="TRUE">
+			<publicMethod id="set_value">
+				<field id="id" dataType="String" required="TRUE"/>
+				<field id="val" dataType="String"/>
+			</publicMethod>
+			<publicMethod id="get_list" modelId="ConstantList"/>
+			<publicMethod id="get_object" modelId="ConstantList"/>
+			<publicMethod id="get_values">
+				<field id="id_list" dataType="String"/>
+			</publicMethod>
+		</controller>
+	
 		<controller id="SMSTemplate" parentId="ControllerSQL">
 			<publicMethod id="insert" modelId="SMSTemplate"/>
 			<publicMethod id="update" modelId="SMSTemplate"/>
@@ -286,6 +316,14 @@
 			<publicMethod id="delete" modelId="Platform"/>
 			<publicMethod id="get_list" modelId="Platform"/>
 			<publicMethod id="get_object" modelId="Platform"/>
+		</controller>												
+
+		<controller id="Client" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="Client"/>
+			<publicMethod id="update" modelId="Client"/>
+			<publicMethod id="delete" modelId="Client"/>
+			<publicMethod id="get_list" modelId="ClientList"/>
+			<publicMethod id="get_object" modelId="Client"/>
 		</controller>												
 
 		<controller id="ConfigType" parentId="ControllerSQL">
@@ -326,9 +364,13 @@
 	</permissions>
 	
 	<mainMenu roleId="admin">
+		<menuItem descr="Контрагенты">
+			<menuItem c="Client_Controller" t="ClientList" f="get_list" descr="Контрагенты" default="FALSE"/>
+		</menuItem>
+	
 		<menuItem descr="Обновления">
-			<menuItem c="Platform_Controller" v="PlatformList" f="get_list" descr="Платформы" default="FALSE"/>
-			<menuItem c="ConfigType_Controller" v="ConfigTypeList" f="get_list" descr="Типы конфигураций" default="FALSE"/>
+			<menuItem c="Platform_Controller" t="Platform" f="get_list" descr="Платформы" default="FALSE"/>
+			<menuItem c="ConfigType_Controller" t="ConfigTypeList" f="get_list" descr="Типы конфигураций" default="FALSE"/>
 		</menuItem>
 	</mainMenu>
 
@@ -351,12 +393,13 @@
 		<jsScript file="sb-admin-2.js" compressed="TRUE" standalone="TRUE" version="1.0"/>
 
 		<!-- core -->
-		<jsScript file="core/extend.js"/>
+		<jsScript file="core/extend.js"/>		
 		<jsScript file="core/App.js"/>		
 		<jsScript file="core/CommonHelper.js"/>
 		<jsScript file="core/DOMHelper.js"/>
 		<jsScript file="core/DateHelper.js"/>
-		<jsScript file="core/EventHelper.js"/>
+		<jsScript file="core/EventHelper.js"/>		
+		<jsScript file="core/ConstantManager.js"/>
 		
 		<jsScript file="core/ServConnector.js"/>
 		<jsScript file="core/ServResp.js"/>
@@ -402,7 +445,8 @@
 		<jsScript file="controls/rs/ControlContainer.rs.js"/>
 		
 		<jsScript file="controls/View.js"/>
-		<jsScript file="controls/rs/View.rs.js"/>
+		<jsScript file="controls/ViewAjx.js"/>
+		<jsScript file="controls/rs/ViewAjx.rs.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
 		<jsScript file="controls/rs/Calculator.rs_rus.js"/>
@@ -455,6 +499,7 @@
 		<jsScript file="controls/EditSelectOption.js"/>
 		<jsScript file="controls/rs/EditSelect.rs_rus.js"/>
 		
+		<jsScript file="controls/GridColumn.js"/>
 		<jsScript file="controls/GridCell.js"/>
 		<jsScript file="controls/GridCellHead.js"/>
 		<jsScript file="controls/GridCellFoot.js"/>
@@ -466,25 +511,33 @@
 		<jsScript file="controls/rs/Grid.rs.js"/>
 		<jsScript file="controls/GridCommands.js"/>
 		<jsScript file="controls/rs/GridCommands.rs_rus.js"/>
-		<jsScript file="controls/GridAjx.js"/>		
+		<jsScript file="controls/GridAjx.js"/>
+		<jsScript file="controls/rs/GridAjx.rs.js"/>		
 		<jsScript file="controls/GridCommandsAjx.js"/>
 		<jsScript file="controls/rs/GridCommandsAjx.rs_rus.js"/>
 		
 		<jsScript file="controls/ButtonOK.js"/>
 		<jsScript file="controls/rs/ButtonOK.rs.js"/>
+		<jsScript file="controls/ButtonSave.js"/>
+		<jsScript file="controls/rs/ButtonSave.rs.js"/>		
 		<jsScript file="controls/ButtonCancel.js"/>
 		<jsScript file="controls/rs/ButtonCancel.rs.js"/>
-		<jsScript file="controls/ViewGridEditInline.js"/>
-		<jsScript file="controls/rs/ViewGridEditInline.rs.js"/>
+		<jsScript file="controls/ViewObjectAjx.js"/>
+		<jsScript file="controls/rs/ViewObjectAjx.rs.js"/>		
+		<jsScript file="controls/ViewGridEditInlineAjx.js"/>
+		<jsScript file="controls/rs/ViewGridEditInlineAjx.rs.js"/>
 
 		<jsScript file="controls/WindowPrint.js"/>
 		<jsScript file="controls/rs/WindowPrint.rs_rus.js"/>
 		<jsScript file="controls/WindowQuestion.js"/>
 		<jsScript file="controls/rs/WindowQuestion.rs_rus.js"/>		
 		<jsScript file="controls/WindowForm.js"/>
-		<jsScript file="controls/WindowFormDD.js"/>
+		<jsScript file="controls/WindowFormObject.js"/>
 		<jsScript file="controls/WindowFormModalBS.js"/>
 		<jsScript file="controls/WindowMessage.js"/>
+
+		<!-- **** Forms *** -->
+		<jsScript file="forms/Client_Form.js"/>		
 
 		<!-- **** Controllers && Models *** -->
 		<jsScript file="controllers/User_Controller.js"/>
@@ -492,15 +545,21 @@
 		<jsScript file="models/TimeZoneLocale_Model.js"/><jsScript file="models/User_Model.js"/><jsScript file="models/Client_Model.js"/><jsScript file="models/Platform_Model.js"/><jsScript file="models/ConfigType_Model.js"/><jsScript file="models/Okei_Model.js"/><jsScript file="models/Service_Model.js"/><jsScript file="models/UserService_Model.js"/><jsScript file="models/UserMachine_Model.js"/><jsScript file="models/UpdProgram_Model.js"/><jsScript file="models/UpdRelease_Model.js"/><jsScript file="models/UpdateCommand_Model.js"/><jsScript file="models/UpdateFileCommand_Model.js"/><jsScript file="models/Update_Model.js"/><jsScript file="models/UpdateArchive_Model.js"/><jsScript file="models/ClientConfig_Model.js"/><jsScript file="models/UpdateError_Model.js"/><jsScript file="models/UpdatedConfig_Model.js"/><jsScript file="models/SMSTemplate_Model.js"/><jsScript file="models/SMSTemplateList_Model.js"/><jsScript file="models/SMSForSending_Model.js"/><jsScript file="models/SMSForSendingList_Model.js"/><jsScript file="models/EmailTemplate_Model.js"/><jsScript file="models/EmailTemplateList_Model.js"/>
 		
 		<!-- **** Views *** -->
-		<jsScript file="views/Login.js"/>
-		<jsScript file="views/PlatformList.js"/>
-		<jsScript file="views/ConfigTypeList.js"/>
+		<jsScript file="views/Login_View.js"/>
+		<jsScript file="views/Platform_View.js"/>
+		<jsScript file="views/Client_View.js"/>
+		<jsScript file="views/ClientList_View.js"/>
+		<jsScript file="views/ConfigTypeList_View.js"/>
 		<jsScript file="views/Prototype_View.js"/>
 		
 		
-		<jsScript file="custom/AppCRM.js"/>
+		<jsScript file="custom_controls/AppCRM.js"/>
+		<jsScript file="custom_controls/Enum_email_types.js"/>
+		<jsScript file="custom_controls/Enum_role_types.js"/>
+		<jsScript file="custom_controls/Enum_service_periods.js"/>
+		<jsScript file="custom_controls/Enum_sms_types.js"/>
 		
-	</jsScripts>
+	<jsScript file="controllers/Client_Controller.js"/><jsScript file="models/ClientList_Model.js"/><jsScript file="models/ConstantList_Model.js"/><jsScript file="controllers/Constant_Controller.js"/></jsScripts>
 	
 	<cssScripts>
 		<cssScript file="bootstrap.min.css" compressed="TRUE" standalone="TRUE"/>

@@ -2,9 +2,13 @@
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:import href="index.html.xsl"/>
-			
-<xsl:template match="/">
+<xsl:variable name="BASE_PATH" select="/document/model[@id='ModelVars']/row[1]/basePath"/>
+<xsl:variable name="VERSION" select="/document/model[@id='ModelVars']/row[1]/scriptId"/>
+<xsl:variable name="TITLE" select="/document/model[@id='ModelVars']/row[1]/title"/>
+	
+	
+<!--************* Main template ******************** -->		
+<xsl:template match="/document">
 <html>
 	<head>
 		<xsl:call-template name="initHead"/>
@@ -12,14 +16,9 @@
 		<title>Катрэн+, личный кабинет</title>
 		
 		<script>
-			var application;
-			
 			function pageLoad(){				
 				<xsl:call-template name="initApp"/>
-				
-				application.setBsCol(("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"));
-				application.setWinClass(WindowFormDD);//ChildForm
-				application.readConstants();
+				<xsl:call-template name="modelFromTemplate"/>
 			}
 		</script>
 	</head>
@@ -32,7 +31,7 @@
 			    <div class="container-fluid">
 				<div class="row">
 				    <div class="col-lg-12">
-				        <h1 class="page-header">Blank</h1>
+				    	<xsl:apply-templates select="model[@templateId]"/>
 				    </div>
 				    <!-- /.col-lg-12 -->
 				</div>
@@ -49,6 +48,8 @@
 </html>		
 </xsl:template>
 
+
+<!--************* Javascript files ******************** -->
 <xsl:template name="initJS">
 	<!-- bootstrap resolution-->
 	<div id="users-device-size">
@@ -65,7 +66,7 @@
 	</div>
 	
 	<!--ALL js modules -->
-	<xsl:apply-templates select="/document/model[@id='ModelJavaScript']/row"/>
+	<xsl:apply-templates select="model[@id='ModelJavaScript']/row"/>
 	
 	<script>
 		var dv = document.getElementById("waiting");
@@ -76,27 +77,36 @@
 </xsl:template>
 
 
+<!--************* Application instance ******************** -->
 <xsl:template name="initApp">
 	var application = new AppCRM({
-		host:'<xsl:value-of select="/document/model[@id='ModelVars']/row/basePath"/>',
+		host:'<xsl:value-of select="$BASE_PATH"/>',
 		servVars:{
-			"version":'<xsl:value-of select="/document/model[@id='ModelVars']/row/scriptId"/>',
-			"roleId":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_id"/>',
-			"roleDescr":'<xsl:value-of select="/document/model[@id='ModelVars']/row/role_descr"/>',
-			"userId":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_id"/>',
-			"userName":'<xsl:value-of select="/document/model[@id='ModelVars']/row/user_name"/>'				
+			"version":'<xsl:value-of select="$VERSION"/>',
+			"roleId":'<xsl:value-of select="model[@id='ModelVars']/row/role_id"/>',
+			"roleDescr":'<xsl:value-of select="model[@id='ModelVars']/row/role_descr"/>',
+			"userId":'<xsl:value-of select="model[@id='ModelVars']/row/user_id"/>',
+			"userName":'<xsl:value-of select="model[@id='ModelVars']/row/user_name"/>',
+			"bsCol":("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"),
+			"constantXMLString":CommonHelper.longString(function () {/*
+					<xsl:copy-of select="model[@id='ConstantValueList_Model']"/>
+			*/})
 		}				
 	});
 </xsl:template>
 
+<!--************* Page head ******************** -->
 <xsl:template name="initHead">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-	<xsl:apply-templates select="/document/model[@id='ModelVars']"/>
-	<xsl:apply-templates select="/document/model[@id='ModelStyleSheet']/row"/>
+	<xsl:apply-templates select="model[@id='ModelVars']"/>
+	<xsl:apply-templates select="model[@id='ModelStyleSheet']/row"/>
 	<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 </xsl:template>
 
+
+<!-- ************** Main Menu ******************** -->
 <xsl:template name="initMenu">
+	<xsl:if test="model[@id='MainMenu_Model']">
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 	    <div class="navbar-header">
@@ -149,10 +159,11 @@
 	    </div>
 	    <!-- /.navbar-static-side -->
 	</nav>
-
+	</xsl:if>
 </xsl:template>
 
 
+<!--************* Menu item ******************-->
 <xsl:template match="menuItem">
 	<xsl:choose>
 		<xsl:when test="menuItem">			
@@ -167,10 +178,60 @@
 		<xsl:otherwise>
 			<!-- one level-->
 			<li>
-			    <a href="index.php?c={@c}&amp;f={@f}&amp;v={@v}"><i class="fa fa-fw"></i> <xsl:value-of select="@descr"/> </a>
+			    <a href="index.php?c={@c}&amp;f={@f}&amp;t={@t}"><i class="fa fa-fw"></i> <xsl:value-of select="@descr"/> </a>
 			</li>			
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+<!--*************** templates ********************* -->
+<xsl:template match="model[@templateId]">
+<xsl:copy-of select="*"/>
+</xsl:template>
+
+<xsl:template name="modelFromTemplate">
+	<xsl:for-each select="model[@templateId]">
+	<xsl:variable name="templateId" select="@templateId"/>
+	var v_<xsl:value-of select="$templateId"/> = new <xsl:value-of select="$templateId"/>_View("<xsl:value-of select="$templateId"/>",{
+		"app":application,
+		"modelDataStr":CommonHelper.longString(function () {/*
+		<xsl:copy-of select="/document/model[@id=concat($templateId,'_Model')]"/>
+		*/})					
+		});
+	v_<xsl:value-of select="$templateId"/>.toDOM();				
+	</xsl:for-each>
+</xsl:template>
+
+
+<!--System variables -->
+<xsl:template match="model[@id='ModelVars']/row">
+	<xsl:if test="author">
+		<meta name="Author" content="{author}"></meta>
+	</xsl:if>
+	<xsl:if test="keywords">
+		<meta name="Keywords" content="{keywords}"></meta>
+	</xsl:if>
+	<xsl:if test="description">
+		<meta name="Description" content="{description}"></meta>
+	</xsl:if>
+	
+</xsl:template>
+
+<!-- CSS -->
+<xsl:template match="model[@id='ModelStyleSheet']/row">
+	<link rel="stylesheet" href="{concat($BASE_PATH,href,'?',$VERSION)}" type="text/css"/>
+</xsl:template>
+
+<!-- Javascript -->
+<xsl:template match="model[@id='ModelJavaScript']/row">
+	<script src="{concat($BASE_PATH,href,'?',$VERSION)}"></script>
+</xsl:template>
+
+<!-- Error -->
+<xsl:template match="model[@id='ModelServResponse']/row">
+	<xsl:if test="result/node()='1'">
+	<div class="error"><xsl:value-of select="descr"/></div>
+	</xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

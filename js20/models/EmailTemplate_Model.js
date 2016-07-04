@@ -101,8 +101,6 @@ function EmailTemplate_Model(options){
 
 	options.fields.fields = field;
 			
-			
-				
 						
 		EmailTemplate_Model.superclass.constructor.call(this,id,options);
 }

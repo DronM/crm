@@ -70,8 +70,6 @@ function ConfigType_Model(options){
 
 	options.fields.full_descr = field;
 
-			
-				
 									
 		ConfigType_Model.superclass.constructor.call(this,id,options);
 }

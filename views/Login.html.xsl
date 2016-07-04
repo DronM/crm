@@ -4,27 +4,26 @@
 
 <xsl:import href="ViewBase.html.xsl"/>
 
-<xsl:template match="/">
+<xsl:template match="/document">
 <html>
 	<head>
 		<xsl:call-template name="initHead"/>		
+		
 		<title>Катрэн+ CRM,авторизация</title>
 		
-		<script>
-		
-			var application;
-			
+		<script>		
 			function pageLoad(){
 			
 				<xsl:call-template name="initApp"/>
-				var view = new Login("Login",{app:application});				
+				
+				var view = new Login_View("Login",{app:application});				
 				view.toDOM();
 			}
 		</script>		
 		
 	</head>
 	<body onload="pageLoad();">
-		<xsl:apply-templates select="/document/model[@id='ModelServResponse']/row"/>		
+		<xsl:apply-templates select="model[@id='ModelServResponse']/row"/>		
 
 		    <div id ="Login" class="container">
 			<div class="row">

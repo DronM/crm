@@ -4,12 +4,12 @@
 
 <xsl:import href="ViewBase.html.xsl"/>
 
-<xsl:template match="/">
+<xsl:template match="/document">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-		<xsl:apply-templates select="/document/model[@id='ModelVars']"/>
-		<xsl:apply-templates select="/document/model[@id='ModelStyleSheet']/row"/>
+		<xsl:apply-templates select="model[@id='ModelVars']"/>
+		<xsl:apply-templates select="model[@id='ModelStyleSheet']/row"/>
 		<link rel="icon" type="image/png" href="{$BASE_PATH}img/favicon.png"/>
 		<script>
 		
@@ -26,7 +26,7 @@
 		<title>Прототипы контролов</title>
 	</head>
 	<body onload="pageLoad();">
-		<xsl:apply-templates select="/document/model[@id='ModelServResponse']/row"/>		
+		<xsl:apply-templates select="model[@id='ModelServResponse']/row"/>		
 
 		    <div id="unique-id" class="container">
 		    	<div class="panel col-lg-4">

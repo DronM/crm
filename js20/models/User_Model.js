@@ -111,8 +111,6 @@ function User_Model(options){
 	options.fields.email = field;
 
 			
-			
-				lower(name)
 						
 		User_Model.superclass.constructor.call(this,id,options);
 }

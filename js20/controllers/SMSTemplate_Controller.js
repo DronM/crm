@@ -36,28 +36,35 @@ extend(SMSTemplate_Controller,ControllerDb);
 	SMSTemplate_Controller.superclass.addInsert.call(this);
 	var field;
 	var options;
+	
 	var pm = this.getInsert();
 	options = {};
-	options.alias = "Тип SMS";
+	options.primaryKey = true;options.autoInc = true;
+	var field = new FieldInt("id",options);
+	
+	pm.addField(field);
+	
+	options = {};
+	options.alias = "Тип SMS";options.required = true;
 	field = new FieldEnum("sms_type",options);
 	options.enumValues = 'reset_pwd';
 	
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Шаблон";
+	options.alias = "Шаблон";options.required = true;
 	var field = new FieldText("template",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Комментарий";
+	options.alias = "Комментарий";options.required = true;
 	var field = new FieldText("comment_text",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Поля";
+	options.alias = "Поля";options.required = true;
 	var field = new FieldText("fields",options);
 	
 	pm.addField(field);
@@ -73,7 +80,7 @@ extend(SMSTemplate_Controller,ControllerDb);
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
-	
+	options.primaryKey = true;options.autoInc = true;
 	var field = new FieldInt("id",options);
 	
 	pm.addField(field);
@@ -83,7 +90,7 @@ extend(SMSTemplate_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Тип SMS";
+	options.alias = "Тип SMS";options.required = true;
 	field = new FieldEnum("sms_type",options);
 	options.enumValues = 'reset_pwd';
 	
@@ -91,21 +98,21 @@ extend(SMSTemplate_Controller,ControllerDb);
 	
 	
 	options = {};
-	options.alias = "Шаблон";
+	options.alias = "Шаблон";options.required = true;
 	var field = new FieldText("template",options);
 	
 	pm.addField(field);
 	
 	
 	options = {};
-	options.alias = "Комментарий";
+	options.alias = "Комментарий";options.required = true;
 	var field = new FieldText("comment_text",options);
 	
 	pm.addField(field);
 	
 	
 	options = {};
-	options.alias = "Поля";
+	options.alias = "Поля";options.required = true;
 	var field = new FieldText("fields",options);
 	
 	pm.addField(field);

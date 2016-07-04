@@ -88,8 +88,6 @@ function SMSTemplate_Model(options){
 
 	options.fields.fields = field;
 
-			
-				
 						
 		SMSTemplate_Model.superclass.constructor.call(this,id,options);
 }

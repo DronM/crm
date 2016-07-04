@@ -9,8 +9,36 @@
 require_once(FRAME_WORK_PATH.'basic_classes/ViewHTMLXSLT.php');
 require_once(FRAME_WORK_PATH.'basic_classes/ModelStyleSheet.php');
 require_once(FRAME_WORK_PATH.'basic_classes/ModelJavaScript.php');
+
+require_once(FRAME_WORK_PATH.'basic_classes/ModelTemplate.php');
+require_once(USER_CONTROLLERS_PATH.'Constant_Controller.php');
+
 <xsl:apply-templates select="metadata/enums/enum[@id='role_types']"/>
 class ViewBase extends ViewHTMLXSLT {	
+
+	protected function addMenu(&amp;$models){
+		if (isset($_SESSION['role_id'])){
+			$menu_class = 'MainMenu_Model_'.$_SESSION['role_id'];
+			$models['mainMenu'] = new $menu_class();
+		}	
+	}
+	
+	protected function addConstants(&amp;$models){
+		if (isset($_SESSION['role_id'])){
+			$dbLink = new DB_Sql();
+			$dbLink->persistent=true;
+			$dbLink->appname = APP_NAME;
+			$dbLink->technicalemail = TECH_EMAIL;
+			$dbLink->reporterror = DEBUG;
+			$dbLink->database= DB_NAME;			
+			$dbLink->connect(DB_SERVER,DB_USER,DB_PASSWORD,(defined('DB_PORT'))? DB_PORT:NULL);
+		
+			$contr = new Constant_Controller($dbLink);
+			$list = array(<xsl:apply-templates select="/metadata/constants/constant[@autoload='TRUE']"/>);
+			$models['ConstantValueList_Model'] = $contr->getConstantValueModel($list);
+		}	
+	}
+
 	public function __construct($name){
 		parent::__construct($name);
 				
@@ -60,18 +88,34 @@ class ViewBase extends ViewHTMLXSLT {
 			$this->setVarValue('<xsl:value-of select="@id"/>',$val);
 		}
 		</xsl:for-each>		
-		-->
+		-->				
 	}
+		
+	
 	public function write(ArrayObject &amp;$models){
-		if (isset($_SESSION['role_id'])){
-			$menu_class = 'MainMenu_Model_'.$_SESSION['role_id'];
-			$models['mainMenu'] = new $menu_class();
-		}
+		$this->addMenu($models);
+		
+		<!-- constant autoload -->
+		<xsl:if test="count(/metadata/constants/constant[@autoload='TRUE'])">
+		$this->addConstants($models);
+		</xsl:if>
+		
+		//template
+		if (isset($_REQUEST['t'])){
+			$tmpl = $_REQUEST['t']; 
+			if (file_exists($file = USER_VIEWS_PATH. $tmpl. '.html') ){
+				$text = $this->convToUtf8(file_get_contents($file));
+				$models[$tmpl] = new ModelTemplate($tmpl,$text);
+			}
+		}		
 		parent::write($models);
 	}	
 }	
 <![CDATA[?>]]>
 </xsl:template>
+
+<xsl:template match="constants/constant[@autoload='TRUE']">
+<xsl:if test="position() &gt; 1">,</xsl:if>'<xsl:value-of select="@id"/>'</xsl:template>
 			
 <xsl:template match="enum/value">require_once('models/MainMenu_Model_<xsl:value-of select="@id"/>.php');</xsl:template>
 

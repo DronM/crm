@@ -127,12 +127,7 @@ function SMSForSending_Model(options){
 
 	options.fields.sms_id = field;
 
-			
-				
-				
 																
-			
-				
 																			
 		SMSForSending_Model.superclass.constructor.call(this,id,options);
 }
