@@ -12,13 +12,16 @@
 		
 		<title>Катрэн+, личный кабинет</title>
 		
-		<script>
+		<script>		
+			//function pageUnLoad(){
+			//}
 			function pageLoad(){				
 				<xsl:call-template name="initApp"/>
 				<xsl:call-template name="modelFromTemplate"/>
 			}
 		</script>
 	</head>
+	
 	<body onload="pageLoad();">
 	    <div class="container-fluid">
 		<div class="row">

@@ -86,12 +86,12 @@
 			"roleId":'<xsl:value-of select="model[@id='ModelVars']/row/role_id"/>',
 			"roleDescr":'<xsl:value-of select="model[@id='ModelVars']/row/role_descr"/>',
 			"userId":'<xsl:value-of select="model[@id='ModelVars']/row/user_id"/>',
-			"userName":'<xsl:value-of select="model[@id='ModelVars']/row/user_name"/>',
-			"bsCol":("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"),
-			"constantXMLString":CommonHelper.longString(function () {/*
-					<xsl:copy-of select="model[@id='ConstantValueList_Model']"/>
-			*/})
-		}				
+			"userName":'<xsl:value-of select="model[@id='ModelVars']/row/user_name"/>'
+		},
+		"bsCol":("col-"+$('#users-device-size').find('div:visible').first().attr('id')+"-"),
+		"constantXMLString":CommonHelper.longString(function () {/*
+				<xsl:copy-of select="model[@id='ConstantValueList_Model']"/>
+		*/})		
 	});
 </xsl:template>
 

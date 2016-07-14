@@ -7,8 +7,10 @@ require_once(FRAME_WORK_PATH.'basic_classes/FieldExtString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtFloat.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtEnum.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtText.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDateTime.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDate.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtPassword.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtBool.php');
 
 class Client_Controller extends ControllerSQL{
 	public function __construct($dbLinkMaster=NULL){
@@ -18,9 +20,6 @@ class Client_Controller extends ControllerSQL{
 		$pm = new PublicMethod('insert');
 		$param = new FieldExtString('name'
 				,array('required'=>TRUE));
-		$pm->addParam($param);
-		$param = new FieldExtInt('user_id'
-				,array());
 		$pm->addParam($param);
 		$param = new FieldExtString('inn'
 				,array());
@@ -50,10 +49,6 @@ class Client_Controller extends ControllerSQL{
 			));
 			$pm->addParam($param);
 		$param = new FieldExtString('name'
-				,array(
-			));
-			$pm->addParam($param);
-		$param = new FieldExtInt('user_id'
 				,array(
 			));
 			$pm->addParam($param);

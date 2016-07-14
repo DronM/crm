@@ -79,7 +79,7 @@ function UserService_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("closed",filed_options);
+	var field = new FieldBool("closed",filed_options);
 	
 
 	options.fields.closed = field;
@@ -89,7 +89,7 @@ function UserService_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("auto_prolongate",filed_options);
+	var field = new FieldBool("auto_prolongate",filed_options);
 	
 
 	options.fields.auto_prolongate = field;

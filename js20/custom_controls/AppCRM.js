@@ -26,4 +26,7 @@ extend(AppCRM,App);
 
 
 /* public methods */
+AppCRM.prototype.formatError = function(erCode,erStr){
+	return (erStr +( (erCode)? (", код:"+erCode):"" ) );
+}
 

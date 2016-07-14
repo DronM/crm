@@ -20,8 +20,7 @@
 /* constructor */
 <xsl:variable name="enum_id" select="concat('Enum_',@id)"/>
 function <xsl:value-of select="$enum_id"/>(id,options){
-	options = {};
-	options.labelCaption = options.labelCaption || "<xsl:value-of select="@descr"/>:";
+	options = options || {};
 	options.addNotSelected = (options.addNotSelected!=undefined)? options.addNotSelected:true;
 	options.options = [<xsl:apply-templates select="value"/>];
 	

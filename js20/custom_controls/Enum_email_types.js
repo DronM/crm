@@ -12,8 +12,7 @@
 /* constructor */
 
 function Enum_email_types(id,options){
-	options = {};
-	options.labelCaption = options.labelCaption || "Типы email сообщений:";
+	options = options || {};
 	options.addNotSelected = (options.addNotSelected!=undefined)? options.addNotSelected:true;
 	options.options = [{"value":"reset_pwd","descr":"Установка пароля",checked:(options.defaultValue&&options.defaultValue=="reset_pwd")}
 ];

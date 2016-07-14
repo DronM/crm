@@ -39,25 +39,25 @@ extend(ConfigType_Controller,ControllerDb);
 	
 	var pm = this.getInsert();
 	options = {};
-	options.primaryKey = true;options.autoInc = true;
+	options.alias = "Код";options.primaryKey = true;options.autoInc = true;
 	var field = new FieldInt("id",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	
+	options.alias = "Платформа";
 	var field = new FieldString("platform_id",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	
+	options.alias = "Наименование";
 	var field = new FieldString("descr",options);
 	
 	pm.addField(field);
 	
 	options = {};
-	
+	options.alias = "Описание";
 	var field = new FieldString("full_descr",options);
 	
 	pm.addField(field);
@@ -73,7 +73,7 @@ extend(ConfigType_Controller,ControllerDb);
 	var options;	
 	var pm = this.getUpdate();
 	options = {};
-	options.primaryKey = true;options.autoInc = true;options.required = true;
+	options.alias = "Код";options.primaryKey = true;options.autoInc = true;options.required = true;
 	var field = new FieldInt("id",options);
 	
 	pm.addField(field);
@@ -83,21 +83,21 @@ extend(ConfigType_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	
+	options.alias = "Платформа";
 	var field = new FieldString("platform_id",options);
 	
 	pm.addField(field);
 	
 	
 	options = {};
-	
+	options.alias = "Наименование";
 	var field = new FieldString("descr",options);
 	
 	pm.addField(field);
 	
 	
 	options = {};
-	
+	options.alias = "Описание";
 	var field = new FieldString("full_descr",options);
 	
 	pm.addField(field);
@@ -123,6 +123,8 @@ extend(ConfigType_Controller,ControllerDb);
 	pm.addField(new FieldString("platform_id",options));
 	pm.addField(new FieldString("descr",options));
 	pm.addField(new FieldString("full_descr",options));
+	pm.getField(this.PARAM_ORD_FIELDS).setValue("platform_id");
+	
 }
 
 			ConfigType_Controller.prototype.addGetObject = function(){

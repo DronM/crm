@@ -18,8 +18,7 @@
 */
 function Client_Form(options){
 	options = options || {};	
-	options.host = app.getHost();
-	options.script = app.getScript();
+	
 	options.URLParams = "c=Client_Controller&f=get_object&t=Client&v=Child";
 	
 	Client_Form.superclass.constructor.call(this,options);

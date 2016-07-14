@@ -12,8 +12,7 @@
 /* constructor */
 
 function Enum_service_periods(id,options){
-	options = {};
-	options.labelCaption = options.labelCaption || "Периоды:";
+	options = options || {};
 	options.addNotSelected = (options.addNotSelected!=undefined)? options.addNotSelected:true;
 	options.options = [{"value":"month","descr":"месяц",checked:(options.defaultValue&&options.defaultValue=="month")}
 ,{"value":"quater","descr":"квартал",checked:(options.defaultValue&&options.defaultValue=="quater")}

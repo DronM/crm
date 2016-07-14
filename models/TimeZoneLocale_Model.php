@@ -18,6 +18,9 @@ class TimeZoneLocale_Model extends ModelSQL{
 		,array(
 		'required'=>TRUE,
 			'primaryKey'=>TRUE,
+			'autoInc'=>TRUE,
+			'alias'=>"Код"
+		,
 			'id'=>"id"
 				
 		
@@ -28,6 +31,8 @@ class TimeZoneLocale_Model extends ModelSQL{
 		,"descr"
 		,array(
 		'required'=>TRUE,
+			'alias'=>"Описание"
+		,
 			'length'=>100,
 			'id'=>"descr"
 				
@@ -39,6 +44,8 @@ class TimeZoneLocale_Model extends ModelSQL{
 		,"name"
 		,array(
 		'required'=>TRUE,
+			'alias'=>"Наименование"
+		,
 			'length'=>50,
 			'id'=>"name"
 				
@@ -50,6 +57,8 @@ class TimeZoneLocale_Model extends ModelSQL{
 		,"hour_dif"
 		,array(
 		'required'=>TRUE,
+			'alias'=>"Смещение в часах"
+		,
 			'id'=>"hour_dif"
 				
 		

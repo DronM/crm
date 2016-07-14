@@ -26,6 +26,7 @@ function TimeZoneLocale_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = true;
 	
+	filed_options.alias = 'Код';
 	
 	var field = new FieldInt("id",filed_options);
 	
@@ -38,6 +39,7 @@ function TimeZoneLocale_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Описание';
 	
 	var field = new FieldString("descr",filed_options);
 	
@@ -52,6 +54,7 @@ function TimeZoneLocale_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Наименование';
 	
 	var field = new FieldString("name",filed_options);
 	
@@ -66,6 +69,7 @@ function TimeZoneLocale_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Смещение в часах';
 	
 	var field = new FieldInt("hour_dif",filed_options);
 	

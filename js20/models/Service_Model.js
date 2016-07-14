@@ -23,9 +23,13 @@ function Service_Model(options){
 	options.fields = {};
 	
 			
+				
+							
+			
 	var filed_options = {};
 	filed_options.primaryKey = true;
 	
+	filed_options.alias = 'Код';
 	
 	var field = new FieldInt("id",filed_options);
 	
@@ -33,15 +37,16 @@ function Service_Model(options){
 	
 
 	options.fields.id = field;
-			
+
 			
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Наименование';
 	
 	var field = new FieldString("descr",filed_options);
 	
-		field.getValidator().setMaxLength('10');
+		field.getValidator().setMaxLength('50');
 	
 
 	options.fields.descr = field;
@@ -50,6 +55,7 @@ function Service_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Описание';
 	
 	var field = new FieldString("full_descr",filed_options);
 	
@@ -63,7 +69,7 @@ function Service_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("deleted",filed_options);
+	var field = new FieldBool("deleted",filed_options);
 	
 
 	options.fields.deleted = field;
@@ -72,6 +78,7 @@ function Service_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Период';
 	
 	var field = new FieldEnum("service_period_id",filed_options);
 	filed_options.enumValues = 'month,quater,year';

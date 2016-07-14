@@ -95,6 +95,8 @@ function User_Model(options){
 	
 	var field = new FieldInt("time_zone_locale_id",filed_options);
 	
+		field.getValidator().setRequired(true);
+	
 
 	options.fields.time_zone_locale_id = field;
 

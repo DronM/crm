@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-07-04 18:48:40</lastBuild>
+		<lastBuild>2016-07-14 16:29:05</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types" descr="Роли">
@@ -34,10 +34,10 @@
 		</model>
 	
 		<model id="TimeZoneLocale" parent="ModelSQL" dataTable="time_zone_locales" virtual="FALSE">
-			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE"/>
-			<field id="descr" dataType="String" required="TRUE" length="100"/>
-			<field id="name" dataType="String" required="TRUE" length="50"/>
-			<field id="hour_dif" dataType="Int" required="TRUE"/>
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="descr" dataType="String" required="TRUE" length="100" alias="Описание"/>
+			<field id="name" dataType="String" required="TRUE" length="50" alias="Наименование"/>
+			<field id="hour_dif" dataType="Int" required="TRUE" alias="Смещение в часах"/>
 		</model>
 	
 		<model id="User" parent="ModelSQL" dataTable="users" virtual="FALSE">
@@ -49,20 +49,26 @@
 			<field id="role_id" dataType="Enum" enumId="role_types" required="TRUE"/>
 			<field id="pwd" dataType="Password" length="32"/>
 			<field id="phone_cel" dataType="String" length="10"/>
-			<field id="time_zone_locale_id" dataType="Int" refTable="time_zone_locales" refField="id"/>
+			<field id="time_zone_locale_id" dataType="Int" refTable="time_zone_locales" refField="id" required="TRUE"/>
 			<field id="email" dataType="String" length="50"/>
 			
 			<index id="users_name_idx">
 				<expression>lower(name)</expression>
 			</index>			
 		</model>
+		<model id="UserList" parent="ModelSQL" dataTable="user_list" virtual="TRUE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="name" dataType="String" required="TRUE" length="50" unique="TRUE" alias="Наименование"/>
+			<field id="email" dataType="String" length="50" alias="Email"/>
+			<field id="phone_cel" dataType="String" length="50" alias="Телефон"/>
+		</model>
+		
 		<model id="Client" parent="ModelSQL" dataTable="clients" virtual="FALSE">
 			<defaultOrder>
 				<field id="name"/>
 			</defaultOrder>
 			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
 			<field id="name" dataType="String" required="TRUE" length="50" unique="TRUE" display="TRUE"/>
-			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
 			<field id="inn" dataType="String" length="12"/>
 			<field id="ext_id" dataType="String" length="36"/>
 			<field id="order_email" dataType="String" length="50"/>
@@ -77,6 +83,17 @@
 			<field id="inn" dataType="String" length="12" alias="ИНН"/>
 			<field id="order_email" dataType="String" length="50" alias="Эл.почта"/>
 		</model>
+
+		<model id="ClientUser" parent="ModelSQL" dataTable="client_users" virtual="FALSE">
+			<field id="client_id" dataType="Int" primaryKey="TRUE" required="TRUE" refTable="clients" refField="id"/>
+			<field id="user_id" dataType="Int" primaryKey="TRUE" required="TRUE" refTable="users" refField="id"/>
+		</model>
+
+		<model id="ClientUserList" parent="ModelSQL" dataTable="client_user_list" virtual="FALSE">
+			<field id="client_id" dataType="Int" primaryKey="TRUE" required="TRUE" refTable="clients" refField="id"/>
+			<field id="user_id" dataType="Int" primaryKey="TRUE" required="TRUE" refTable="users" refField="id"/>
+			<field id="user_descr" dataType="String" alias="Пользователь"/>
+		</model>
 		
 		<model id="Platform" parent="ModelSQL" dataTable="platforms" virtual="FALSE">
 			<defaultOrder>
@@ -86,10 +103,13 @@
 		</model>
 		
 		<model id="ConfigType" parent="ModelSQL" dataTable="config_types" virtual="FALSE">
-			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
-			<field id="platform_id" dataType="String" length="3" refTable="platforms" refField="id"/>
-			<field id="descr" dataType="String" length="10"/>		
-			<field id="full_descr" dataType="String" length="100"/>
+			<defaultOrder>
+				<field id="platform_id"/>
+			</defaultOrder>				
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="platform_id" dataType="String" length="3" refTable="platforms" refField="id" alias="Платформа"/>
+			<field id="descr" dataType="String" length="10" alias="Наименование"/>		
+			<field id="full_descr" dataType="String" length="100" alias="Описание"/>
 			<index id="config_types_platform_id_idx">
 				<field id="platform_id"/>
 			</index>						
@@ -97,7 +117,7 @@
 		
 		<model id="Okei" parent="ModelSQL" dataTable="okeis" virtual="FALSE">
 			<defaultOrder>
-				<field id="name"/>
+				<field id="descr"/>
 			</defaultOrder>		
 			<field id="id" dataType="String" primaryKey="TRUE" autoInc="FALSE" required="TRUE" length="3"/>
 			<field id="descr" dataType="String" length="10"/>		
@@ -106,11 +126,14 @@
 		</model>
 		
 		<model id="Service" parent="ModelSQL" dataTable="services" virtual="FALSE">
-			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>			
-			<field id="descr" dataType="String" length="10"/>		
-			<field id="full_descr" dataType="String" length="100"/>
-			<field id="deleted" dataType="Boolean" defaultValue="FALSE"/>
-			<field id="service_period_id" dataType="Enum" enumId="service_periods"/>
+			<defaultOrder>
+				<field id="descr"/>
+			</defaultOrder>				
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="descr" dataType="String" length="50" alias="Наименование"/>		
+			<field id="full_descr" dataType="String" length="100" alias="Описание"/>
+			<field id="deleted" dataType="Bool" defaultValue="FALSE"/>
+			<field id="service_period_id" dataType="Enum" enumId="service_periods" alias="Период"/>
 			<field id="ext_id" dataType="String" length="36"/>
 		</model>
 		
@@ -120,8 +143,8 @@
 			<field id="service_id" dataType="Int" refTable="services" refField="id"/>
 			<field id="dt_from" dataType="Date"/>
 			<field id="dt_to" dataType="Date"/>
-			<field id="closed" dataType="Boolean"/>
-			<field id="auto_prolongate" dataType="Boolean"/>
+			<field id="closed" dataType="Bool"/>
+			<field id="auto_prolongate" dataType="Bool"/>
 			<field id="quant" dataType="Float" length="19" precision="4"/>
 		</model>
 		
@@ -164,7 +187,7 @@
 			<field id="dt" dataType="Date"/>
 			<field id="release" dataType="String" length="20"/>
 			<field id="comment" dataType="String" length="250"/>
-			<field id="ext_reps" dataType="Boolean" defaultValue="FALSE"/>
+			<field id="ext_reps" dataType="Bool" defaultValue="FALSE"/>
 			<field id="config_type_id" dataType="Int" refTable="config_types" refField="id"/>
 		</model>
 		
@@ -182,11 +205,11 @@
 			<field id="descr" dataType="String" length="80"/>
 			<field id="path" dataType="String" length="250"/>
 			<field id="ar_path" dataType="String" length="250"/>
-			<field id="ext_reps" dataType="Boolean" defaultValue="FALSE"/>
+			<field id="ext_reps" dataType="Bool" defaultValue="FALSE"/>
 			<field id="user_1c" dataType="String" length="50"/>
 			<field id="password_1c" dataType="String" length="50"/>
-			<field id="untyp" dataType="Boolean"/>
-			<field id="sql" dataType="Boolean"/>
+			<field id="untyp" dataType="Bool"/>
+			<field id="sql" dataType="Bool"/>
 			<field id="ar_cnt" dataType="Int"/>
 			<field id="config_type_id" dataType="Int" refTable="config_types" refField="id"/>
 			<field id="user_id" dataType="Int" refTable="users" refField="id"/>
@@ -227,14 +250,62 @@
 			<field id="fields" dataType="Text"/>
 		</model>		
 		
+		<model id="MailForSending" parent="ModelSQL" dataTable="mail_for_sending" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE" autoInc="TRUE"/>
+			<field id="date_time" dataType="DateTime" defaultValue="current_timestamp"/>
+			<field id="from_addr" dataType="String" length="50"/>
+			<field id="from_name" dataType="String" length="255"/>
+			<field id="to_addr" dataType="String" length="50"/>
+			<field id="to_name" dataType="String" length="255"/>
+			<field id="reply_addr" dataType="String" length="50"/>
+			<field id="reply_name" dataType="String" length="255"/>
+			<field id="body" dataType="Text"/>
+			<field id="sender_addr" dataType="String" length="50"/>
+			<field id="subject" dataType="String" length="255"/>
+			<field id="sent" dataType="Bool" defaultValue="false"/>
+			<field id="sent_date_time" dataType="DateTime"/>
+			<field id="email_type" dataType="Enum" enumId="email_types"/>
+			<index id="mail_for_sending_date_time_index" unique="FALSE">
+				<field id="date_time"/>
+			</index>													
+			<index id="mail_for_sending_sent_index" unique="FALSE">
+				<field id="sent"/>
+			</index>																
+		</model>
+		<model id="MailForSendingList" parent="ModelSQL" dataTable="mail_for_sending_list" virtual="TRUE">
+			<field id="id" dataType="Int" primaryKey="TRUE"/>
+			<field id="date_time" dataType="DateTime"/>
+			<field id="from_addr" dataType="String" length="50"/>
+			<field id="from_name" dataType="String" length="255"/>
+			<field id="to_addr" dataType="String" length="50"/>
+			<field id="to_name" dataType="String" length="255"/>
+			<field id="reply_addr" dataType="String" length="50"/>
+			<field id="reply_name" dataType="String" length="255"/>
+			<field id="body" dataType="Text"/>
+			<field id="sender_addr" dataType="String" length="50"/>
+			<field id="subject" dataType="String" length="255"/>
+			<field id="sent" dataType="Bool" defaultValue="false"/>
+			<field id="sent_date_time" dataType="DateTime"/>
+			<field id="email_type" dataType="Enum" enumId="email_types"/>
+		</model>
+		
+		<model id="MailForSendingAttachment" parent="ModelSQL" dataTable="mail_for_sending_attachments" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="mail_for_sending_id" dataType="Int" refTable="mail_for_sending" refField="id"/>
+			<field id="file_name" dataType="String" length="255"/>
+			<index id="mail_for_sending_attachments_id_index" unique="FALSE">
+				<field id="mail_for_sending_id"/>
+			</index>																
+		</model>
+		
 		<model id="SMSForSending" parent="ModelSQL" dataTable="sms_for_sending" virtual="FALSE">
 			<field id="id" dataType="Int" primaryKey="TRUE" required="TRUE" autoInc="TRUE"/>
 			<field id="tel" dataType="String" length="15"/>
 			<field id="body" dataType="Text"/>
 			<field id="date_time" dataType="DateTimeTZ" defaultValue="current_timestamp"/>
-			<field id="sent" dataType="Boolean" defaultValue="false"/>
+			<field id="sent" dataType="Bool" defaultValue="false"/>
 			<field id="sent_date_time" dataType="DateTimeTZ"/>
-			<field id="delivered" dataType="Boolean" defaultValue="false"/>
+			<field id="delivered" dataType="Bool" defaultValue="false"/>
 			<field id="delivered_date_time" dataType="DateTimeTZ"/>
 			<field id="sms_type" dataType="Enum" enumId="sms_types"/>
 			<field id="sms_id" dataType="Text"/>
@@ -252,9 +323,9 @@
 			<field id="tel" dataType="String" length="15"/>
 			<field id="body" dataType="Text"/>
 			<field id="date_time" dataType="DateTimeTZ" defaultValue="current_timestamp"/>
-			<field id="sent" dataType="Boolean" defaultValue="false"/>
+			<field id="sent" dataType="Bool" defaultValue="false"/>
 			<field id="sent_date_time" dataType="DateTimeTZ"/>
-			<field id="delivered" dataType="Boolean" defaultValue="false"/>
+			<field id="delivered" dataType="Bool" defaultValue="false"/>
 			<field id="delivered_date_time" dataType="DateTimeTZ"/>
 			<field id="sms_type" dataType="Enum" enumId="sms_types"/>
 			<field id="sms_id" dataType="Text"/>
@@ -333,12 +404,27 @@
 			<publicMethod id="get_list" modelId="ConfigType"/>
 			<publicMethod id="get_object" modelId="ConfigType"/>
 		</controller>												
+
+		<controller id="Service" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="Service"/>
+			<publicMethod id="update" modelId="Service"/>
+			<publicMethod id="delete" modelId="Service"/>
+			<publicMethod id="get_list" modelId="Service"/>
+			<publicMethod id="get_object" modelId="Service"/>
+		</controller>												
+
+		<controller id="ClientUser" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="ClientUser"/>
+			<publicMethod id="delete" modelId="ClientUser"/>
+			<publicMethod id="get_list" modelId="ClientUserList"/>
+			<publicMethod id="get_object" modelId="ClientUser"/>
+		</controller>												
 	
 		<controller id="User" parentId="ControllerSQL" state="TRUE" noState="FALSE">
 			<publicMethod id="insert" modelId="User"/>
 			<publicMethod id="update" modelId="User"/>
 			<publicMethod id="delete" modelId="User"/>
-			<publicMethod id="get_list" modelId="User"/>
+			<publicMethod id="get_list" modelId="UserList"/>
 			<publicMethod id="get_object" modelId="User"/>
 			<publicMethod id="reset_pwd">
 				<field id="user_id" dataType="Int" required="TRUE"/>
@@ -353,6 +439,12 @@
 			<publicMethod id="logout"/>
 			<publicMethod id="logout_html"/>
 		</controller>		
+		<controller id="MailForSending" parentId="ControllerSQL" state="TRUE">
+			<publicMethod id="get_list" modelId="MailForSendingList"/>
+		</controller>				
+		<controller id="TimeZoneLocale" parentId="ControllerSQL" state="TRUE">
+			<publicMethod id="get_list" modelId="TimeZoneLocale"/>
+		</controller>				
 		
 	</controllers>
 	
@@ -364,13 +456,16 @@
 	</permissions>
 	
 	<mainMenu roleId="admin">
-		<menuItem descr="Контрагенты">
+		<menuItem descr="Справочники">
 			<menuItem c="Client_Controller" t="ClientList" f="get_list" descr="Контрагенты" default="FALSE"/>
+			<menuItem c="User_Controller" t="UserList" f="get_list" descr="Пользователи" default="FALSE"/>
+			<menuItem c="TimeZoneLocale_Controller" t="TimeZoneLocale" f="get_list" descr="Временные зоны" default="FALSE"/>
+			<menuItem c="Service_Controller" t="Service" f="get_list" descr="Услуги" default="FALSE"/>
 		</menuItem>
 	
 		<menuItem descr="Обновления">
 			<menuItem c="Platform_Controller" t="Platform" f="get_list" descr="Платформы" default="FALSE"/>
-			<menuItem c="ConfigType_Controller" t="ConfigTypeList" f="get_list" descr="Типы конфигураций" default="FALSE"/>
+			<menuItem c="ConfigType_Controller" t="ConfigType" f="get_list" descr="Типы конфигураций" default="FALSE"/>
 		</menuItem>
 	</mainMenu>
 
@@ -422,7 +517,8 @@
 		<jsScript file="core/ValidatorDateTime.js"/>
 		<jsScript file="core/ValidatorTime.js"/>
 		<jsScript file="core/ValidatorInt.js"/>
-		<jsScript file="core/ValidatorFloat.js"/>				
+		<jsScript file="core/ValidatorFloat.js"/>
+		<jsScript file="core/ValidatorEnum.js"/>				
 		
 		<jsScript file="core/Field.js"/>		
 		<jsScript file="core/FieldString.js"/>
@@ -466,12 +562,14 @@
 		<jsScript file="controls/rs/ButtonExpToPDF.rs_rus.js"/>		
 		<jsScript file="controls/ButtonOpen.js"/>
 		<jsScript file="controls/rs/ButtonOpen.rs_rus.js"/>				
+		<jsScript file="controls/ButtonInsert.js"/>
+		<jsScript file="controls/rs/ButtonInsert.rs.js"/>				
 		<jsScript file="controls/ButtonOpenRef.js"/>
 		<jsScript file="controls/rs/ButtonOpenRef.rs_rus.js"/>				
 		<jsScript file="controls/ButtonPrint.js"/>
 		<jsScript file="controls/rs/ButtonPrint.rs_rus.js"/>		
 		<jsScript file="controls/ButtonSelect.js"/>
-		<jsScript file="controls/rs/ButtonSelect.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonSelect.rs.js"/>
 		<jsScript file="controls/ButtonSelectRef.js"/>
 		<jsScript file="controls/rs/ButtonSelectRef.rs_rus.js"/>
 		
@@ -491,13 +589,16 @@
 		<jsScript file="controls/EditTime.js"/>		
 		<jsScript file="controls/EditPassword.js"/>
 		<jsScript file="controls/EditCheckBox.js"/>
-		<jsScript file="controls/EditContainer.js"/>
+		<jsScript file="controls/EditContainer.js"/>		
 		<jsScript file="controls/rs/EditContainer.rs_rus.js"/>
 		<jsScript file="controls/EditRadioGroup.js"/>
 		<jsScript file="controls/EditRadio.js"/>		
 		<jsScript file="controls/EditSelect.js"/>
 		<jsScript file="controls/EditSelectOption.js"/>
 		<jsScript file="controls/rs/EditSelect.rs_rus.js"/>
+		<jsScript file="controls/EditSelectRef.js"/>
+		<jsScript file="controls/rs/EditSelectRef.rs.js"/>
+		<jsScript file="controls/EditRef.js"/>
 		
 		<jsScript file="controls/GridColumn.js"/>
 		<jsScript file="controls/GridCell.js"/>
@@ -537,7 +638,8 @@
 		<jsScript file="controls/WindowMessage.js"/>
 
 		<!-- **** Forms *** -->
-		<jsScript file="forms/Client_Form.js"/>		
+		<jsScript file="forms/Client_Form.js"/>
+		<jsScript file="forms/User_Form.js"/>
 
 		<!-- **** Controllers && Models *** -->
 		<jsScript file="controllers/User_Controller.js"/>
@@ -549,7 +651,12 @@
 		<jsScript file="views/Platform_View.js"/>
 		<jsScript file="views/Client_View.js"/>
 		<jsScript file="views/ClientList_View.js"/>
-		<jsScript file="views/ConfigTypeList_View.js"/>
+		<jsScript file="views/User_View.js"/>
+		<jsScript file="views/UserList_View.js"/>		
+		<jsScript file="views/ConfigType_View.js"/>
+		<jsScript file="views/TimeZoneLocale_View.js"/>
+		<jsScript file="views/Service_View.js"/>
+		
 		<jsScript file="views/Prototype_View.js"/>
 		
 		
@@ -558,8 +665,15 @@
 		<jsScript file="custom_controls/Enum_role_types.js"/>
 		<jsScript file="custom_controls/Enum_service_periods.js"/>
 		<jsScript file="custom_controls/Enum_sms_types.js"/>
+		<jsScript file="custom_controls/TimeZoneLocaleSelect.js"/>
+		<jsScript file="custom_controls/PlatformSelect.js"/>
+		<jsScript file="custom_controls/UserEdit.js"/>		
 		
-	<jsScript file="controllers/Client_Controller.js"/><jsScript file="models/ClientList_Model.js"/><jsScript file="models/ConstantList_Model.js"/><jsScript file="controllers/Constant_Controller.js"/></jsScripts>
+		<jsScript file="controllers/TimeZoneLocale_Controller.js"/>
+		<jsScript file="controllers/Service_Controller.js"/>
+		<jsScript file="controllers/ClientUser_Controller.js"/>	
+		<jsScript file="models/ClientUserList_Model.js"/>	
+	<jsScript file="controllers/Client_Controller.js"/><jsScript file="models/UserList_Model.js"/><jsScript file="models/ClientList_Model.js"/><jsScript file="models/ConstantList_Model.js"/><jsScript file="controllers/Constant_Controller.js"/></jsScripts>
 	
 	<cssScripts>
 		<cssScript file="bootstrap.min.css" compressed="TRUE" standalone="TRUE"/>

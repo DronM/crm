@@ -4,6 +4,8 @@ require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLEnum.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLBool.php');
+require_once(FRAME_WORK_PATH.'basic_classes/ModelOrderSQL.php');
 
 class Service_Model extends ModelSQL{
 	
@@ -20,6 +22,8 @@ class Service_Model extends ModelSQL{
 		'required'=>TRUE,
 			'primaryKey'=>TRUE,
 			'autoInc'=>TRUE,
+			'alias'=>"Код"
+		,
 			'id'=>"id"
 				
 		
@@ -30,7 +34,9 @@ class Service_Model extends ModelSQL{
 		,"descr"
 		,array(
 		
-			'length'=>10,
+			'alias'=>"Наименование"
+		,
+			'length'=>50,
 			'id'=>"descr"
 				
 		
@@ -41,6 +47,8 @@ class Service_Model extends ModelSQL{
 		,"full_descr"
 		,array(
 		
+			'alias'=>"Описание"
+		,
 			'length'=>100,
 			'id'=>"full_descr"
 				
@@ -48,7 +56,7 @@ class Service_Model extends ModelSQL{
 		));
 		$this->addField($f_full_descr);
 
-		$f_deleted=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_deleted=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"deleted"
 		,array(
 		
@@ -64,6 +72,8 @@ class Service_Model extends ModelSQL{
 		,"service_period_id"
 		,array(
 		
+			'alias'=>"Период"
+		,
 			'id'=>"service_period_id"
 				
 		
@@ -80,6 +90,11 @@ class Service_Model extends ModelSQL{
 		
 		));
 		$this->addField($f_ext_id);
+
+		$order = new ModelOrderSQL();		
+		$this->setDefaultModelOrder($order);		
+		
+		$order->addField($f_descr);
 
 		
 		

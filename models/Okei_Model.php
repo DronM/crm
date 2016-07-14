@@ -62,7 +62,7 @@ class Okei_Model extends ModelSQL{
 		$order = new ModelOrderSQL();		
 		$this->setDefaultModelOrder($order);		
 		
-		$order->addField($f_name);
+		$order->addField($f_descr);
 
 		
 		

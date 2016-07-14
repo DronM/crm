@@ -56,16 +56,6 @@ function Client_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldInt("user_id",filed_options);
-	
-
-	options.fields.user_id = field;
-
-			
-	var filed_options = {};
-	filed_options.primaryKey = false;
-	
-	
 	var field = new FieldString("inn",filed_options);
 	
 		field.getValidator().setMaxLength('12');

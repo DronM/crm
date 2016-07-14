@@ -19,16 +19,28 @@
 <a href="#Client_Controller">Client_Controller</a>
 </li>
 <li>
+<a href="#ClientUser_Controller">ClientUser_Controller</a>
+</li>
+<li>
 <a href="#ConfigType_Controller">ConfigType_Controller</a>
 </li>
 <li>
 <a href="#Constant_Controller">Constant_Controller</a>
 </li>
 <li>
+<a href="#MailForSending_Controller">MailForSending_Controller</a>
+</li>
+<li>
 <a href="#Platform_Controller">Platform_Controller</a>
 </li>
 <li>
 <a href="#SMSTemplate_Controller">SMSTemplate_Controller</a>
+</li>
+<li>
+<a href="#Service_Controller">Service_Controller</a>
+</li>
+<li>
+<a href="#TimeZoneLocale_Controller">TimeZoneLocale_Controller</a>
 </li>
 <li>
 <a href="#User_Controller">User_Controller</a>
@@ -46,10 +58,19 @@
 <a href="#User_Model">User_Model</a>
 </li>
 <li>
+<a href="#UserList_Model">UserList_Model</a>
+</li>
+<li>
 <a href="#Client_Model">Client_Model</a>
 </li>
 <li>
 <a href="#ClientList_Model">ClientList_Model</a>
+</li>
+<li>
+<a href="#ClientUser_Model">ClientUser_Model</a>
+</li>
+<li>
+<a href="#ClientUserList_Model">ClientUserList_Model</a>
 </li>
 <li>
 <a href="#Platform_Model">Platform_Model</a>
@@ -103,6 +124,15 @@
 <a href="#SMSTemplateList_Model">SMSTemplateList_Model</a>
 </li>
 <li>
+<a href="#MailForSending_Model">MailForSending_Model</a>
+</li>
+<li>
+<a href="#MailForSendingList_Model">MailForSendingList_Model</a>
+</li>
+<li>
+<a href="#MailForSendingAttachment_Model">MailForSendingAttachment_Model</a>
+</li>
+<li>
 <a href="#SMSForSending_Model">SMSForSending_Model</a>
 </li>
 <li>
@@ -147,6 +177,21 @@
 <a href="#ClientList_Model">Модель: ClientList_Model</a>
 <h2>get_object</h2>
 <a href="#Client_Model">Модель: Client_Model</a>
+</div>
+</div>
+<div id="ClientUser_Controller" class="content_box">
+<h1>ClientUser_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>insert</h2>
+<a href="#ClientUser_Model">Модель: ClientUser_Model</a>
+<h2>delete</h2>
+<a href="#ClientUser_Model">Модель: ClientUser_Model</a>
+<h2>get_list</h2>
+<a href="#ClientUserList_Model">Модель: ClientUserList_Model</a>
+<h2>get_object</h2>
+<a href="#ClientUser_Model">Модель: ClientUser_Model</a>
 </div>
 </div>
 <div id="ConfigType_Controller" class="content_box">
@@ -206,6 +251,15 @@
 </div>
 </div>
 </div>
+<div id="MailForSending_Controller" class="content_box">
+<h1>MailForSending_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>get_list</h2>
+<a href="#MailForSendingList_Model">Модель: MailForSendingList_Model</a>
+</div>
+</div>
 <div id="Platform_Controller" class="content_box">
 <h1>Platform_Controller</h1>
 <div class="content_item">
@@ -240,6 +294,32 @@
 <a href="#SMSTemplateList_Model">Модель: SMSTemplateList_Model</a>
 </div>
 </div>
+<div id="Service_Controller" class="content_box">
+<h1>Service_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>insert</h2>
+<a href="#Service_Model">Модель: Service_Model</a>
+<h2>update</h2>
+<a href="#Service_Model">Модель: Service_Model</a>
+<h2>delete</h2>
+<a href="#Service_Model">Модель: Service_Model</a>
+<h2>get_list</h2>
+<a href="#Service_Model">Модель: Service_Model</a>
+<h2>get_object</h2>
+<a href="#Service_Model">Модель: Service_Model</a>
+</div>
+</div>
+<div id="TimeZoneLocale_Controller" class="content_box">
+<h1>TimeZoneLocale_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>get_list</h2>
+<a href="#TimeZoneLocale_Model">Модель: TimeZoneLocale_Model</a>
+</div>
+</div>
 <div id="User_Controller" class="content_box">
 <h1>User_Controller</h1>
 <div class="content_item">
@@ -252,7 +332,7 @@
 <h2>delete</h2>
 <a href="#User_Model">Модель: User_Model</a>
 <h2>get_list</h2>
-<a href="#User_Model">Модель: User_Model</a>
+<a href="#UserList_Model">Модель: UserList_Model</a>
 <h2>get_object</h2>
 <a href="#User_Model">Модель: User_Model</a>
 <h2>reset_pwd</h2>
@@ -322,12 +402,6 @@
 <div>Обязательное:TRUE</div>
 <div>Длина:50</div>
 <div>Точность:</div>
-<h2>user_id</h2>
-<div>Тип:Int</div>
-<div>Первичный ключ:</div>
-<div>Обязательное:</div>
-<div>Длина:</div>
-<div>Точность:</div>
 <h2>inn</h2>
 <div>Тип:String</div>
 <div>Первичный ключ:</div>
@@ -377,7 +451,7 @@
 <div>Длина:250</div>
 <div>Точность:</div>
 <h2>ext_reps</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -395,13 +469,13 @@
 <div>Длина:50</div>
 <div>Точность:</div>
 <h2>untyp</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>sql</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -453,6 +527,48 @@
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:50</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="ClientUser_Model" class="content_box">
+<h1>ClientUser_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>client_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>user_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="ClientUserList_Model" class="content_box">
+<h1>ClientUserList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>client_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>user_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>user_descr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
 <div>Точность:</div>
 </div>
 </div>
@@ -594,6 +710,210 @@
 <div>Точность:</div>
 </div>
 </div>
+<div id="MailForSending_Model" class="content_box">
+<h1>MailForSending_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>date_time</h2>
+<div>Тип:DateTime</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>from_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>from_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>to_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>to_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>reply_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>reply_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>body</h2>
+<div>Тип:Text</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>sender_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>subject</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>sent</h2>
+<div>Тип:Bool</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>sent_date_time</h2>
+<div>Тип:DateTime</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>email_type</h2>
+<div>Тип:Enum</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="MailForSendingAttachment_Model" class="content_box">
+<h1>MailForSendingAttachment_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>mail_for_sending_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>file_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="MailForSendingList_Model" class="content_box">
+<h1>MailForSendingList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>date_time</h2>
+<div>Тип:DateTime</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>from_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>from_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>to_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>to_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>reply_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>reply_name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>body</h2>
+<div>Тип:Text</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>sender_addr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>subject</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:255</div>
+<div>Точность:</div>
+<h2>sent</h2>
+<div>Тип:Bool</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>sent_date_time</h2>
+<div>Тип:DateTime</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>email_type</h2>
+<div>Тип:Enum</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+</div>
+</div>
 <div id="Okei_Model" class="content_box">
 <h1>Okei_Model</h1>
 <div class="content_item">
@@ -665,7 +985,7 @@
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>sent</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -677,7 +997,7 @@
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>delivered</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -731,7 +1051,7 @@
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>sent</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -743,7 +1063,7 @@
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>delivered</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -854,7 +1174,7 @@
 <div>Тип:String</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
-<div>Длина:10</div>
+<div>Длина:50</div>
 <div>Точность:</div>
 <h2>full_descr</h2>
 <div>Тип:String</div>
@@ -863,7 +1183,7 @@
 <div>Длина:100</div>
 <div>Точность:</div>
 <h2>deleted</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -1013,7 +1333,7 @@
 <div>Длина:250</div>
 <div>Точность:</div>
 <h2>ext_reps</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
@@ -1219,10 +1539,40 @@
 <h2>time_zone_locale_id</h2>
 <div>Тип:Int</div>
 <div>Первичный ключ:</div>
-<div>Обязательное:</div>
+<div>Обязательное:TRUE</div>
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>email</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="UserList_Model" class="content_box">
+<h1>UserList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>name</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>email</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:50</div>
+<div>Точность:</div>
+<h2>phone_cel</h2>
 <div>Тип:String</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
@@ -1289,13 +1639,13 @@
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>closed</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>auto_prolongate</h2>
-<div>Тип:Boolean</div>
+<div>Тип:Bool</div>
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>

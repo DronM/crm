@@ -7,7 +7,7 @@ class MainMenu_Model_admin extends Model{
 		
 <menuItem
 
-descr="Контрагенты"
+descr="Справочники"
 
 >
 <menuItem
@@ -21,6 +21,48 @@ c="Client_Controller"
 f="get_list"
 
 t="ClientList"
+
+></menuItem>
+
+<menuItem
+
+descr="Пользователи"
+
+default="FALSE"
+
+c="User_Controller"
+
+f="get_list"
+
+t="UserList"
+
+></menuItem>
+
+<menuItem
+
+descr="Временные зоны"
+
+default="FALSE"
+
+c="TimeZoneLocale_Controller"
+
+f="get_list"
+
+t="TimeZoneLocale"
+
+></menuItem>
+
+<menuItem
+
+descr="Услуги"
+
+default="FALSE"
+
+c="Service_Controller"
+
+f="get_list"
+
+t="Service"
 
 ></menuItem>
 </menuItem>
@@ -54,7 +96,7 @@ c="ConfigType_Controller"
 
 f="get_list"
 
-t="ConfigTypeList"
+t="ConfigType"
 
 ></menuItem>
 </menuItem>

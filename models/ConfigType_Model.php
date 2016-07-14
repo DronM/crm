@@ -3,6 +3,7 @@
 require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
+require_once(FRAME_WORK_PATH.'basic_classes/ModelOrderSQL.php');
 
 class ConfigType_Model extends ModelSQL{
 	
@@ -19,6 +20,8 @@ class ConfigType_Model extends ModelSQL{
 		'required'=>TRUE,
 			'primaryKey'=>TRUE,
 			'autoInc'=>TRUE,
+			'alias'=>"Код"
+		,
 			'id'=>"id"
 				
 		
@@ -29,6 +32,8 @@ class ConfigType_Model extends ModelSQL{
 		,"platform_id"
 		,array(
 		
+			'alias'=>"Платформа"
+		,
 			'length'=>3,
 			'id'=>"platform_id"
 				
@@ -40,6 +45,8 @@ class ConfigType_Model extends ModelSQL{
 		,"descr"
 		,array(
 		
+			'alias'=>"Наименование"
+		,
 			'length'=>10,
 			'id'=>"descr"
 				
@@ -51,12 +58,19 @@ class ConfigType_Model extends ModelSQL{
 		,"full_descr"
 		,array(
 		
+			'alias'=>"Описание"
+		,
 			'length'=>100,
 			'id'=>"full_descr"
 				
 		
 		));
 		$this->addField($f_full_descr);
+
+		$order = new ModelOrderSQL();		
+		$this->setDefaultModelOrder($order);		
+		
+		$order->addField($f_platform_id);
 
 		
 		

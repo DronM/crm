@@ -12,8 +12,7 @@
 /* constructor */
 
 function Enum_role_types(id,options){
-	options = {};
-	options.labelCaption = options.labelCaption || "Роли:";
+	options = options || {};
 	options.addNotSelected = (options.addNotSelected!=undefined)? options.addNotSelected:true;
 	options.options = [{"value":"admin","descr":"Администратор",checked:(options.defaultValue&&options.defaultValue=="admin")}
 ,{"value":"manager","descr":"Менеджер",checked:(options.defaultValue&&options.defaultValue=="manager")}

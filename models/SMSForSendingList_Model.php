@@ -5,6 +5,7 @@ require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLText.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLEnum.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLBool.php');
 
 class SMSForSendingList_Model extends ModelSQL{
 	
@@ -60,7 +61,7 @@ class SMSForSendingList_Model extends ModelSQL{
 		));
 		$this->addField($f_date_time);
 
-		$f_sent=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_sent=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"sent"
 		,array(
 		
@@ -82,7 +83,7 @@ class SMSForSendingList_Model extends ModelSQL{
 		));
 		$this->addField($f_sent_date_time);
 
-		$f_delivered=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_delivered=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"delivered"
 		,array(
 		

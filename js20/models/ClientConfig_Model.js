@@ -75,7 +75,7 @@ function ClientConfig_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("ext_reps",filed_options);
+	var field = new FieldBool("ext_reps",filed_options);
 	
 
 	options.fields.ext_reps = field;
@@ -109,7 +109,7 @@ function ClientConfig_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("untyp",filed_options);
+	var field = new FieldBool("untyp",filed_options);
 	
 
 	options.fields.untyp = field;
@@ -119,7 +119,7 @@ function ClientConfig_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("sql",filed_options);
+	var field = new FieldBool("sql",filed_options);
 	
 
 	options.fields.sql = field;

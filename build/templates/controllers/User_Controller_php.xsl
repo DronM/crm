@@ -33,6 +33,7 @@ class <xsl:value-of select="@id"/>_Controller extends ControllerSQL{
 
 	const PWD_LEN = 6;
 	const ER_USER_NOT_DEFIND = "Пользователь не определен!@1000";
+	const ER_NO_EMAIL_TEL = "Не задан ни адрес электронный почты ни мобильный телефон!@1001";
 
 	public function __construct($dbLinkMaster=NULL){
 		parent::__construct($dbLinkMaster);<xsl:apply-templates/>
@@ -46,10 +47,10 @@ class <xsl:value-of select="@id"/>_Controller extends ControllerSQL{
 <xsl:template name="extra_methods">
 	public function insert($pm){
 		$params = new ParamsSQL($pm,$this->getDbLink());
-		$params->set('pwd',DT_STRING);
+		$params->addAll();
 	
 		$email = $params->getVal('email');
-		$tel = $params->getVal('tel');
+		$tel = $params->getVal('phone_cel');
 	
 		if (!strlen($email)&amp;&amp;!strlen($tel)){
 			throw new Exception(User_Controller::ER_NO_EMAIL_TEL);

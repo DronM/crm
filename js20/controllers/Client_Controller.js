@@ -52,12 +52,6 @@ extend(Client_Controller,ControllerDb);
 	
 	options = {};
 	
-	var field = new FieldInt("user_id",options);
-	
-	pm.addField(field);
-	
-	options = {};
-	
 	var field = new FieldString("inn",options);
 	
 	pm.addField(field);
@@ -97,13 +91,6 @@ extend(Client_Controller,ControllerDb);
 	options = {};
 	options.required = true;
 	var field = new FieldString("name",options);
-	
-	pm.addField(field);
-	
-	
-	options = {};
-	
-	var field = new FieldInt("user_id",options);
 	
 	pm.addField(field);
 	

@@ -4,6 +4,7 @@ require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLDate.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLBool.php');
 
 class Update_Model extends ModelSQL{
 	
@@ -58,7 +59,7 @@ class Update_Model extends ModelSQL{
 		));
 		$this->addField($f_comment);
 
-		$f_ext_reps=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_ext_reps=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"ext_reps"
 		,array(
 		

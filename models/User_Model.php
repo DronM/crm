@@ -74,7 +74,7 @@ class User_Model extends ModelSQL{
 		$f_time_zone_locale_id=new FieldSQlInt($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"time_zone_locale_id"
 		,array(
-		
+		'required'=>TRUE,
 			'id'=>"time_zone_locale_id"
 				
 		

@@ -18,7 +18,7 @@
 
 function User_Controller(app,options){
 	options = options || {};
-	options.listModelId = "User_Model";
+	options.listModelId = "UserList_Model";
 	options.objModelId = "User_Model";
 	User_Controller.superclass.constructor.call(this,app,options);	
 	
@@ -56,9 +56,9 @@ extend(User_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	options.required = true;
-	field = new FieldEnum("role_id",options);
+	options.required = true;	
 	options.enumValues = 'admin,manager,client';
+	field = new FieldEnum("role_id",options);
 	
 	pm.addField(field);
 	
@@ -75,7 +75,7 @@ extend(User_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	
+	options.required = true;
 	var field = new FieldInt("time_zone_locale_id",options);
 	
 	pm.addField(field);
@@ -114,9 +114,12 @@ extend(User_Controller,ControllerDb);
 	
 	
 	options = {};
-	options.required = true;
-	field = new FieldEnum("role_id",options);
+	options.required = true;	
 	options.enumValues = 'admin,manager,client';
+	options.enumValues+= (options.enumValues!='')? '':',';
+	options.enumValues+= 'null';
+	
+	field = new FieldEnum("role_id",options);
 	
 	pm.addField(field);
 	
@@ -136,7 +139,7 @@ extend(User_Controller,ControllerDb);
 	
 	
 	options = {};
-	
+	options.required = true;
 	var field = new FieldInt("time_zone_locale_id",options);
 	
 	pm.addField(field);
@@ -167,13 +170,8 @@ extend(User_Controller,ControllerDb);
 	var pm = this.getGetList();
 	pm.addField(new FieldInt("id",options));
 	pm.addField(new FieldString("name",options));
-	pm.addField(new FieldEnum("role_id",options));
-	pm.addField(new FieldPassword("pwd",options));
-	pm.addField(new FieldString("phone_cel",options));
-	pm.addField(new FieldInt("time_zone_locale_id",options));
 	pm.addField(new FieldString("email",options));
-	pm.getField(this.PARAM_ORD_FIELDS).setValue("name");
-	
+	pm.addField(new FieldString("phone_cel",options));
 }
 
 			User_Controller.prototype.addGetObject = function(){

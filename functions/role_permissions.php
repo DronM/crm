@@ -73,6 +73,33 @@ $permissions['Constant_Controller_set_value_admin']=TRUE;
 					$permissions['ConfigType_Controller_delete_store_manager']=TRUE;
 					$permissions['ConfigType_Controller_get_list_store_manager']=TRUE;
 					$permissions['ConfigType_Controller_get_object_store_manager']=TRUE;
+					$permissions['Service_Controller_insert_admin']=TRUE;
+					$permissions['Service_Controller_update_admin']=TRUE;
+					$permissions['Service_Controller_delete_admin']=TRUE;
+					$permissions['Service_Controller_get_list_admin']=TRUE;
+					$permissions['Service_Controller_get_object_admin']=TRUE;
+					$permissions['Service_Controller_insert_cashier']=TRUE;
+					$permissions['Service_Controller_update_cashier']=TRUE;
+					$permissions['Service_Controller_delete_cashier']=TRUE;
+					$permissions['Service_Controller_get_list_cashier']=TRUE;
+					$permissions['Service_Controller_get_object_cashier']=TRUE;
+					$permissions['Service_Controller_insert_store_manager']=TRUE;
+					$permissions['Service_Controller_update_store_manager']=TRUE;
+					$permissions['Service_Controller_delete_store_manager']=TRUE;
+					$permissions['Service_Controller_get_list_store_manager']=TRUE;
+					$permissions['Service_Controller_get_object_store_manager']=TRUE;
+					$permissions['ClientUser_Controller_insert_admin']=TRUE;
+					$permissions['ClientUser_Controller_delete_admin']=TRUE;
+					$permissions['ClientUser_Controller_get_list_admin']=TRUE;
+					$permissions['ClientUser_Controller_get_object_admin']=TRUE;
+					$permissions['ClientUser_Controller_insert_cashier']=TRUE;
+					$permissions['ClientUser_Controller_delete_cashier']=TRUE;
+					$permissions['ClientUser_Controller_get_list_cashier']=TRUE;
+					$permissions['ClientUser_Controller_get_object_cashier']=TRUE;
+					$permissions['ClientUser_Controller_insert_store_manager']=TRUE;
+					$permissions['ClientUser_Controller_delete_store_manager']=TRUE;
+					$permissions['ClientUser_Controller_get_list_store_manager']=TRUE;
+					$permissions['ClientUser_Controller_get_object_store_manager']=TRUE;
 					$permissions['User_Controller_insert_admin']=TRUE;
 					$permissions['User_Controller_update_admin']=TRUE;
 					$permissions['User_Controller_delete_admin']=TRUE;
@@ -104,7 +131,13 @@ $permissions['Constant_Controller_set_value_admin']=TRUE;
 					$permissions['User_Controller_logout_store_manager']=TRUE;
 					$permissions['User_Controller_logout_html_store_manager']=TRUE;
 					$permissions['User_Controller_login_guest']=TRUE;
-				
+				$permissions['MailForSending_Controller_get_list_admin']=TRUE;
+					$permissions['MailForSending_Controller_get_list_cashier']=TRUE;
+					$permissions['MailForSending_Controller_get_list_store_manager']=TRUE;
+					$permissions['TimeZoneLocale_Controller_get_list_admin']=TRUE;
+					$permissions['TimeZoneLocale_Controller_get_list_cashier']=TRUE;
+					$permissions['TimeZoneLocale_Controller_get_list_store_manager']=TRUE;
+					
 return array_key_exists($contrId.'_'.$methId.'_'.$roleId,$permissions);
 }
 ?>

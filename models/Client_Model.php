@@ -37,16 +37,6 @@ class Client_Model extends ModelSQL{
 		));
 		$this->addField($f_name);
 
-		$f_user_id=new FieldSQlInt($this->getDbLink(),$this->getDbName(),$this->getTableName()
-		,"user_id"
-		,array(
-		
-			'id'=>"user_id"
-				
-		
-		));
-		$this->addField($f_user_id);
-
 		$f_inn=new FieldSQlString($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"inn"
 		,array(

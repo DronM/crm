@@ -4,6 +4,7 @@ require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLFloat.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLDate.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLBool.php');
 
 class UserService_Model extends ModelSQL{
 	
@@ -66,7 +67,7 @@ class UserService_Model extends ModelSQL{
 		));
 		$this->addField($f_dt_to);
 
-		$f_closed=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_closed=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"closed"
 		,array(
 		
@@ -76,7 +77,7 @@ class UserService_Model extends ModelSQL{
 		));
 		$this->addField($f_closed);
 
-		$f_auto_prolongate=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_auto_prolongate=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"auto_prolongate"
 		,array(
 		

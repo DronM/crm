@@ -7,8 +7,10 @@ require_once(FRAME_WORK_PATH.'basic_classes/FieldExtString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtFloat.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtEnum.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtText.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDateTime.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDate.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtPassword.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtBool.php');
 
 class ConfigType_Controller extends ControllerSQL{
 	public function __construct($dbLinkMaster=NULL){
@@ -17,13 +19,19 @@ class ConfigType_Controller extends ControllerSQL{
 		/* insert */
 		$pm = new PublicMethod('insert');
 		$param = new FieldExtString('platform_id'
-				,array());
+				,array(
+				'alias'=>'Платформа'
+			));
 		$pm->addParam($param);
 		$param = new FieldExtString('descr'
-				,array());
+				,array(
+				'alias'=>'Наименование'
+			));
 		$pm->addParam($param);
 		$param = new FieldExtString('full_descr'
-				,array());
+				,array(
+				'alias'=>'Описание'
+			));
 		$pm->addParam($param);
 		
 		$pm->addParam(new FieldExtInt('ret_id'));
@@ -41,22 +49,32 @@ class ConfigType_Controller extends ControllerSQL{
 		$pm->addParam(new FieldExtInt('obj_mode'));
 		$param = new FieldExtInt('id'
 				,array(
+			
+				'alias'=>'Код'
 			));
 			$pm->addParam($param);
 		$param = new FieldExtString('platform_id'
 				,array(
+			
+				'alias'=>'Платформа'
 			));
 			$pm->addParam($param);
 		$param = new FieldExtString('descr'
 				,array(
+			
+				'alias'=>'Наименование'
 			));
 			$pm->addParam($param);
 		$param = new FieldExtString('full_descr'
 				,array(
+			
+				'alias'=>'Описание'
 			));
 			$pm->addParam($param);
 		
 			$param = new FieldExtInt('id',array(
+			
+				'alias'=>'Код'
 			));
 			$pm->addParam($param);
 		

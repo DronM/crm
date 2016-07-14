@@ -3,6 +3,7 @@
 require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLBool.php');
 
 class ClientConfig_Model extends ModelSQL{
 	
@@ -58,7 +59,7 @@ class ClientConfig_Model extends ModelSQL{
 		));
 		$this->addField($f_ar_path);
 
-		$f_ext_reps=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_ext_reps=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"ext_reps"
 		,array(
 		
@@ -92,7 +93,7 @@ class ClientConfig_Model extends ModelSQL{
 		));
 		$this->addField($f_password_1c);
 
-		$f_untyp=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_untyp=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"untyp"
 		,array(
 		
@@ -102,7 +103,7 @@ class ClientConfig_Model extends ModelSQL{
 		));
 		$this->addField($f_untyp);
 
-		$f_sql=new FieldSQlBoolean($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		$f_sql=new FieldSQlBool($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"sql"
 		,array(
 		

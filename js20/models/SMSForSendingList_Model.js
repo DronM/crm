@@ -71,7 +71,7 @@ function SMSForSendingList_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("sent",filed_options);
+	var field = new FieldBool("sent",filed_options);
 	
 
 	options.fields.sent = field;
@@ -91,7 +91,7 @@ function SMSForSendingList_Model(options){
 	filed_options.primaryKey = false;
 	
 	
-	var field = new FieldBoolean("delivered",filed_options);
+	var field = new FieldBool("delivered",filed_options);
 	
 
 	options.fields.delivered = field;

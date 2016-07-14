@@ -45,9 +45,9 @@ extend(SMSTemplate_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Тип SMS";options.required = true;
-	field = new FieldEnum("sms_type",options);
+	options.alias = "Тип SMS";options.required = true;	
 	options.enumValues = 'reset_pwd';
+	field = new FieldEnum("sms_type",options);
 	
 	pm.addField(field);
 	
@@ -90,9 +90,12 @@ extend(SMSTemplate_Controller,ControllerDb);
 	pm.addField(field);
 	
 	options = {};
-	options.alias = "Тип SMS";options.required = true;
-	field = new FieldEnum("sms_type",options);
+	options.alias = "Тип SMS";options.required = true;	
 	options.enumValues = 'reset_pwd';
+	options.enumValues+= (options.enumValues!='')? '':',';
+	options.enumValues+= 'null';
+	
+	field = new FieldEnum("sms_type",options);
 	
 	pm.addField(field);
 	

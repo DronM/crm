@@ -7,8 +7,10 @@ require_once(FRAME_WORK_PATH.'basic_classes/FieldExtString.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtFloat.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtEnum.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtText.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDateTime.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtDate.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldExtPassword.php');
+require_once(FRAME_WORK_PATH.'basic_classes/FieldExtBool.php');
 
 //require_once('functions/res_rus.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
@@ -25,6 +27,7 @@ class User_Controller extends ControllerSQL{
 
 	const PWD_LEN = 6;
 	const ER_USER_NOT_DEFIND = "Пользователь не определен!@1000";
+	const ER_NO_EMAIL_TEL = "Не задан ни адрес электронный почты ни мобильный телефон!@1001";
 
 	public function __construct($dbLinkMaster=NULL){
 		parent::__construct($dbLinkMaster);
@@ -45,7 +48,7 @@ class User_Controller extends ControllerSQL{
 				,array());
 		$pm->addParam($param);
 		$param = new FieldExtInt('time_zone_locale_id'
-				,array());
+				,array('required'=>TRUE));
 		$pm->addParam($param);
 		$param = new FieldExtString('email'
 				,array());
@@ -131,7 +134,7 @@ class User_Controller extends ControllerSQL{
 		
 		$this->addPublicMethod($pm);
 		
-		$this->setListModelId('User_Model');
+		$this->setListModelId('UserList_Model');
 		
 			
 		/* get_object */
@@ -206,10 +209,10 @@ class User_Controller extends ControllerSQL{
 	
 	public function insert($pm){
 		$params = new ParamsSQL($pm,$this->getDbLink());
-		$params->set('pwd',DT_STRING);
+		$params->addAll();
 	
 		$email = $params->getVal('email');
-		$tel = $params->getVal('tel');
+		$tel = $params->getVal('phone_cel');
 	
 		if (!strlen($email)&&!strlen($tel)){
 			throw new Exception(User_Controller::ER_NO_EMAIL_TEL);

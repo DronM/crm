@@ -8,29 +8,25 @@
 */
 
 /* constructor */
-function ClientList(id,options){	
+function TimeZoneLocale_View(id,options){	
 
-	ClientList.superclass.constructor.call(this,id,options);
+	TimeZoneLocale_View.superclass.constructor.call(this,id,options);
 	
-	var model = new ClientList_Model({"data":options.modelDataStr});
-	var contr = new Client_Controller(options.app);
+	var model = new TimeZoneLocale_Model({"data":options.modelDataStr});
+	var contr = new TimeZoneLocale_Controller(options.app);
 	
 	this.addElement(new GridAjx(id+":grid",{
 		"model":model,
 		"controller":contr,
-		"editInline":false,
-		"editWinClass":Client_Form,
-		"commands":new GridCommandsAjx(),
+		"editInline":true,
+		"editWinClass":null,
+		"commands":new GridCommandsAjx(id+":cmd",{
+			"cmdInsert":false
+		}),
 		"head":new GridHead(id+"-grid:head",{
 			"elements":[
 				new GridRow(id+":grid:head:row0",{
 					"elements":[
-						new GridCellHead(id+":grid:head:id",{
-							"columns":[
-								new GridColumn({"field":model.getField("id")})
-							],
-							"sortable":true
-						}),
 						new GridCellHead(id+":grid:head:name",{
 							"columns":[
 								new GridColumn({"field":model.getField("name")})
@@ -38,14 +34,15 @@ function ClientList(id,options){
 							"sortable":true,
 							"sort":"asc"							
 						}),
-						new GridCellHead(id+":grid:head:inn",{
+						new GridCellHead(id+":grid:head:descr",{
 							"columns":[
-								new GridColumn({"field":model.getField("inn")})
-							]
+								new GridColumn({"field":model.getField("descr")})
+							],
+							"sortable":true
 						}),											
-						new GridCellHead(id+":grid:head:order_email",{
+						new GridCellHead(id+":grid:head:hour_dif",{
 							"columns":[
-								new GridColumn({"field":model.getField("order_email")})
+								new GridColumn({"field":model.getField("hour_dif")})
 							],
 							"sortable":true
 						})						
@@ -61,4 +58,4 @@ function ClientList(id,options){
 
 
 }
-extend(ClientList,ViewAjx);
+extend(TimeZoneLocale_View,ViewAjx);
