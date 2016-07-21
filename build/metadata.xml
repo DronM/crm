@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-07-14 16:29:05</lastBuild>
+		<lastBuild>2016-07-19 13:44:01</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types" descr="Роли">
@@ -426,6 +426,7 @@
 			<publicMethod id="delete" modelId="User"/>
 			<publicMethod id="get_list" modelId="UserList"/>
 			<publicMethod id="get_object" modelId="User"/>
+			<publicMethod id="complete" modelId="UserList" patternFieldId="name"/>
 			<publicMethod id="reset_pwd">
 				<field id="user_id" dataType="Int" required="TRUE"/>
 			</publicMethod>
@@ -535,6 +536,10 @@
 		<jsScript file="core/rs_rus.js"/>
 		
 		<!-- **** controls *** -->		
+		<jsScript file="controls/DataBinding.js"/>
+		<jsScript file="controls/Command.js"/>
+		<jsScript file="controls/CommandBinding.js"/>
+		
 		<jsScript file="controls/Control.js"/>
 		<jsScript file="controls/rs/Control.rs_rus.js"/>
 		<jsScript file="controls/ControlContainer.js"/>

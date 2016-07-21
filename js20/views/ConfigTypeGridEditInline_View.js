@@ -28,6 +28,7 @@ function ConfigTypeGridEditInline_View(id,options){
 	this.addControls();		
 }
 extend(ConfigTypeGridEditInline_View,ViewGridEditInlineAjx);
-
+/*
 ConfigTypeGridEditInline.prototype.addControls = function(){
 }
+*/

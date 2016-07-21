@@ -57,23 +57,23 @@ function User_View(id,options){
 	this.setReadPublicMethod(contr.getPublicMethod("get_object"));
 	var m = new User_Model({"data":options.modelDataStr});
 	this.setDataBindings([
-		{"control":this.getElement("id"),"field":m.getField("id"),"model":m},
-		{"control":this.getElement("name"),"field":m.getField("name"),"model":m},
-		{"control":this.getElement("role"),"field":m.getField("role_id"),"model":m},
-		{"control":this.getElement("time_zone_locale"),"field":m.getField("time_zone_locale_id"),"model":m},
-		{"control":this.getElement("email"),"field":m.getField("email"),"model":m},
-		{"control":this.getElement("phone_cel"),"field":m.getField("phone_cel"),"model":m}
+		new DataBinding("control":this.getElement("id"),"field":m.getField("id"),"model":m),
+		new DataBinding("control":this.getElement("name"),"field":m.getField("name"),"model":m),
+		new DataBinding("control":this.getElement("role"),"field":m.getField("role_id"),"model":m),
+		new DataBinding("control":this.getElement("time_zone_locale"),"field":m.getField("time_zone_locale_id"),"model":m),
+		new DataBinding("control":this.getElement("email"),"field":m.getField("email"),"model":m),
+		new DataBinding("control":this.getElement("phone_cel"),"field":m.getField("phone_cel"),"model":m)
 	]);
 	
 	//write
 	this.setController(contr);
-	this.setCommandBindings(this.CMD_OK,[
-			{"control":this.getElement("id")},
-			{"control":this.getElement("name")},
-			{"control":this.getElement("email")},
-			{"control":this.getElement("role"),"fieldId":"role_id"},
-			{"control":this.getElement("time_zone_locale"),"fieldId":"time_zone_locale_id"},
-			{"control":this.getElement("phone_cel")}
+	this.getCommand(this.CMD_OK).setBindings([
+			new CommandBinding("control":this.getElement("id")),
+			new CommandBinding("control":this.getElement("name")),
+			new CommandBinding("control":this.getElement("email")),
+			new CommandBinding("control":this.getElement("role"),"fieldId":"role_id"),
+			new CommandBinding("control":this.getElement("time_zone_locale"),"fieldId":"time_zone_locale_id"),
+			new CommandBinding("control":this.getElement("phone_cel"))
 	]);
 }
 extend(User_View,ViewObjectAjx);

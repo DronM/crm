@@ -13,8 +13,10 @@ span.grid-sort{
 tr.for_select{
 	cursor:pointer;
 }
-
 th.sortable{
 	cursor:pointer;
+}
+th[disabled="disabled"]{
+	cursor:not-allowed;
 }
 
