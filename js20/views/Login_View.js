@@ -53,15 +53,16 @@ function Login_View(id,options){
 	//Commands
 	var contr = new User_Controller(options.app);
 	var pm = contr.getPublicMethod("login");
-	this.addCommand("login",{
+	
+	this.addCommand(new Command("login",{
 		"publicMethod":pm,
-		"bindings":[
-			{"field":pm.getField("name"),"control":this.getElement("user")},
-			{"field":pm.getField("pwd"),"control":this.getElement("pwd")}
-		],
 		"control":this.getElement("submit_login"),
-		"async":true
-	});
+		"async":true,
+		"bindings":[
+			new DataBinding({"field":pm.getField("name"),"control":this.getElement("user")}),
+			new DataBinding({"field":pm.getField("pwd"),"control":this.getElement("pwd")})
+		]		
+	}));
 
 }
 extend(Login_View,ViewAjx);

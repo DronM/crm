@@ -148,6 +148,17 @@ class User_Controller extends ControllerSQL{
 		$this->setObjectModelId('User_Model');		
 
 			
+		/* complete  */
+		$pm = new PublicMethod('complete');
+		$pm->addParam(new FieldExtString('pattern'));
+		$pm->addParam(new FieldExtInt('count'));
+		$pm->addParam(new FieldExtInt('ic'));
+		$pm->addParam(new FieldExtInt('mid'));
+		$pm->addParam(new FieldExtString('name'));		
+		$this->addPublicMethod($pm);					
+		$this->setCompleteModelId('UserList_Model');
+
+			
 		$pm = new PublicMethod('reset_pwd');
 		
 				

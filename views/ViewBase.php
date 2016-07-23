@@ -137,6 +137,10 @@ class ViewBase extends ViewHTMLXSLT {
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'core/rs_rus.js'));
 		
 				
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/DataBinding.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Command.js'));
+		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/CommandBinding.js'));
+		
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/Control.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/rs/Control.rs_rus.js'));
 		$this->addJsModel(new ModelJavaScript(USER_JS_PATH.'controls/ControlContainer.js'));

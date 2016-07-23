@@ -23,11 +23,12 @@ function UserEdit(id,options){
 	var contr = new User_Controller(options.app);	
 	
 	//autocomplete
+	options.acMinLengthForQuery = 1;
 	options.acModel = new UserList_Model();
 	options.acPublicMethod = contr.getPublicMethod("complete");
 	options.acPublicMethod.getField("ic").setValue("1");
-	options.acLookupKeyFields = [options.acModel.getFieldId("id")];
-	options.acLookupResFields = [options.acModel.getFieldId("name")];
+	options.acLookupFields = [options.acModel.getField("id")];
+	options.acResultFields = [options.acModel.getField("name")];
 	
 	UserEdit.superclass.constructor.call(this,id,options);
 }

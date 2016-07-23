@@ -62,7 +62,8 @@ function Client_View(id,options){
 						new GridCellHead(id+":user-grid:head:name",{
 							"columns":[
 								new GridColumn({"field":user_model.getField("user_descr"),
-									"ctrlClass":UserEdit
+									"ctrlClass":UserEdit,
+									"ctrlOptions":{"keyFieldIds":["user_id"]}
 									})
 							],
 							"sortable":true,
@@ -84,19 +85,19 @@ function Client_View(id,options){
 	this.setReadPublicMethod(contr.getPublicMethod("get_object"));
 	this.m_model = new Client_Model({"data":options.modelDataStr});
 	this.setDataBindings([
-		new DataBinding("control":this.getElement("id"),"model":this.m_model),
-		new DataBinding("control":this.getElement("name"),"model":this.m_model),
-		new DataBinding("control":this.getElement("inn"),"model":this.m_model),
-		new DataBinding("control":this.getElement("order_email"),"model":this.m_model)
+		new DataBinding({"control":this.getElement("id"),"model":this.m_model}),
+		new DataBinding({"control":this.getElement("name"),"model":this.m_model}),
+		new DataBinding({"control":this.getElement("inn"),"model":this.m_model}),
+		new DataBinding({"control":this.getElement("order_email"),"model":this.m_model})
 	]);
 	
 	//write
 	this.setController(contr);
 	this.getCommand(this.CMD_OK).setBindings([
-			new CommandBinding("control":this.getElement("id")),
-			new CommandBinding("control":this.getElement("name")),
-			new CommandBinding("control":this.getElement("inn")),
-			new CommandBinding("control":this.getElement("order_email"))
+			new CommandBinding({"control":this.getElement("id")}),
+			new CommandBinding({"control":this.getElement("name")}),
+			new CommandBinding({"control":this.getElement("inn")}),
+			new CommandBinding({"control":this.getElement("order_email")})
 	]);
 }
 extend(Client_View,ViewObjectAjx);

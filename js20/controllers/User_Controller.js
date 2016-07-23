@@ -28,6 +28,7 @@ function User_Controller(app,options){
 	this.addDelete();
 	this.addGetList();
 	this.addGetObject();
+	this.addComplete();
 	this.add_reset_pwd();
 	this.add_login();
 	this.add_login_refresh();
@@ -180,6 +181,16 @@ extend(User_Controller,ControllerDb);
 	
 	var pm = this.getGetObject();
 	pm.addField(new FieldInt("id",options));
+}
+
+			User_Controller.prototype.addComplete = function(){
+	User_Controller.superclass.addComplete.call(this);
+	
+	var options = {};
+	
+	var pm = this.getComplete();
+	pm.addField(new FieldString("name",options));
+	pm.getField(this.PARAM_ORD_FIELDS).setValue("name");
 }
 
 			User_Controller.prototype.add_reset_pwd = function(){

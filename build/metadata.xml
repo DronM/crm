@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-07-19 13:44:01</lastBuild>
+		<lastBuild>2016-07-22 19:01:43</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types" descr="Роли">
@@ -641,6 +641,9 @@
 		<jsScript file="controls/WindowFormObject.js"/>
 		<jsScript file="controls/WindowFormModalBS.js"/>
 		<jsScript file="controls/WindowMessage.js"/>
+		
+		<jsScript file="controls/actb.js"/>
+		<jsScript file="controls/rs/actb.rs.js"/>
 
 		<!-- **** Forms *** -->
 		<jsScript file="forms/Client_Form.js"/>
