@@ -512,7 +512,6 @@
 		<jsScript file="core/ModelServRespXML.js"/>
 		
 		<jsScript file="core/Validator.js"/>
-		<jsScript file="core/ValidatorString.js"/>
 		<jsScript file="core/ValidatorBool.js"/>
 		<jsScript file="core/ValidatorDate.js"/>
 		<jsScript file="core/ValidatorDateTime.js"/>
@@ -522,7 +521,6 @@
 		<jsScript file="core/ValidatorEnum.js"/>				
 		
 		<jsScript file="core/Field.js"/>		
-		<jsScript file="core/FieldString.js"/>
 		<jsScript file="core/FieldEnum.js"/>
 		<jsScript file="core/FieldBool.js"/>
 		<jsScript file="core/FieldDate.js"/>
@@ -533,7 +531,7 @@
 		<jsScript file="core/FieldPassword.js"/>
 		<jsScript file="core/FieldText.js"/>
 		
-		<jsScript file="core/rs_rus.js"/>
+		<jsScript file="core/rs.js"/>
 		
 		<!-- **** controls *** -->		
 		<jsScript file="controls/DataBinding.js"/>
@@ -550,29 +548,26 @@
 		<jsScript file="controls/rs/ViewAjx.rs.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
-		<jsScript file="controls/rs/Calculator.rs_rus.js"/>
+		<jsScript file="controls/rs/Calculator.rs.js"/>
 		<jsScript file="controls/Button.js"/>
 		<jsScript file="controls/ButtonCtrl.js"/>
 		<jsScript file="controls/ButtonCalc.js"/>
-		<jsScript file="controls/rs/ButtonCalc.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonCalc.rs.js"/>
 		<jsScript file="controls/ButtonCalendar.js"/>
-		<jsScript file="controls/rs/ButtonCalendar.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonCalendar.rs.js"/>
 		<jsScript file="controls/ButtonClear.js"/>
-		<jsScript file="controls/rs/ButtonClear.rs_rus.js"/>
-		<jsScript file="controls/ButtonClearRef.js"/>
+		<jsScript file="controls/rs/ButtonClear.rs.js"/>
 		<jsScript file="controls/ButtonCmd.js"/>
 		<jsScript file="controls/ButtonExpToExcel.js"/>
-		<jsScript file="controls/rs/ButtonExpToExcel.rs_rus.js"/>
+		<jsScript file="controls/rs/ButtonExpToExcel.rs.js"/>
 		<jsScript file="controls/ButtonExpToPDF.js"/>
-		<jsScript file="controls/rs/ButtonExpToPDF.rs_rus.js"/>		
+		<jsScript file="controls/rs/ButtonExpToPDF.rs.js"/>		
 		<jsScript file="controls/ButtonOpen.js"/>
-		<jsScript file="controls/rs/ButtonOpen.rs_rus.js"/>				
+		<jsScript file="controls/rs/ButtonOpen.rs.js"/>				
 		<jsScript file="controls/ButtonInsert.js"/>
 		<jsScript file="controls/rs/ButtonInsert.rs.js"/>				
-		<jsScript file="controls/ButtonOpenRef.js"/>
-		<jsScript file="controls/rs/ButtonOpenRef.rs_rus.js"/>				
 		<jsScript file="controls/ButtonPrint.js"/>
-		<jsScript file="controls/rs/ButtonPrint.rs_rus.js"/>		
+		<jsScript file="controls/rs/ButtonPrint.rs.js"/>		
 		<jsScript file="controls/ButtonSelect.js"/>
 		<jsScript file="controls/rs/ButtonSelect.rs.js"/>
 		<jsScript file="controls/ButtonSelectRef.js"/>
@@ -583,8 +578,7 @@
 		<jsScript file="controls/Label.js"/>
 		
 		<jsScript file="controls/Edit.js"/>
-		<jsScript file="controls/rs/Edit.rs_rus.js"/>
-		<jsScript file="controls/EditString.js"/>
+		<jsScript file="controls/rs/Edit.rs.js"/>
 		<jsScript file="controls/EditText.js"/>
 		<jsScript file="controls/EditInt.js"/>
 		<jsScript file="controls/EditFloat.js"/>
@@ -595,7 +589,7 @@
 		<jsScript file="controls/EditPassword.js"/>
 		<jsScript file="controls/EditCheckBox.js"/>
 		<jsScript file="controls/EditContainer.js"/>		
-		<jsScript file="controls/rs/EditContainer.rs_rus.js"/>
+		<jsScript file="controls/rs/EditContainer.rs.js"/>
 		<jsScript file="controls/EditRadioGroup.js"/>
 		<jsScript file="controls/EditRadio.js"/>		
 		<jsScript file="controls/EditSelect.js"/>
