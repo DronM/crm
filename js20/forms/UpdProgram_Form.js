@@ -16,16 +16,18 @@
 
 }
 */
-function User_Form(options){
-	options = options || {};		
+function UpdProgram_Form(options){
+	options = options || {};	
 	options.params = options.params || {};
 	
-	options.params.name = "User";
+	options.height = "700";
+	options.width = "600";
+	options.params.name = "UpdProgram";
 	options.params.method = "get_object";
 	
-	User_Form.superclass.constructor.call(this,options);
+	UpdProgram_Form.superclass.constructor.call(this,options);
 }
-extend(User_Form,WindowFormObject);
+extend(UpdProgram_Form,WindowFormObject);
 
 /* Constants */
 

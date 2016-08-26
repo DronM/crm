@@ -26,6 +26,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = true;
 	
+	filed_options.alias = 'Код';
 	
 	var field = new FieldInt("id",filed_options);
 	
@@ -38,8 +39,11 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Код программы';
 	
 	var field = new FieldInt("prog_id",filed_options);
+	
+		field.getValidator().setRequired(true);
 	
 
 	options.fields.prog_id = field;
@@ -48,6 +52,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Релиз';
 	
 	var field = new FieldString("release",filed_options);
 	
@@ -60,6 +65,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Описание';
 	
 	var field = new FieldText("descr",filed_options);
 	
@@ -70,6 +76,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Имя файла';
 	
 	var field = new FieldString("file_name",filed_options);
 	
@@ -82,6 +89,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Хэш файла';
 	
 	var field = new FieldString("file_hash",filed_options);
 	
@@ -94,6 +102,7 @@ function UpdRelease_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
+	filed_options.alias = 'Размер файла';
 	
 	var field = new FieldInt("file_size",filed_options);
 	

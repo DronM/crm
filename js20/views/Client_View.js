@@ -102,8 +102,6 @@ function Client_View(id,options){
 }
 extend(Client_View,ViewObjectAjx);
 
-ViewObjectAjx.prototype.m_model;
-
 /*Установка ключей подчиненной таблицы*/
 Client_View.prototype.setUserKeys = function(){
 	if (this.m_model.getFieldValue("id")){

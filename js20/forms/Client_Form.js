@@ -18,8 +18,10 @@
 */
 function Client_Form(options){
 	options = options || {};	
+	options.params = options.params || {};
 	
-	options.URLParams = "c=Client_Controller&f=get_object&t=Client&v=Child";
+	options.params.name = "Client";
+	options.params.method = "get_object";
 	
 	Client_Form.superclass.constructor.call(this,options);
 }

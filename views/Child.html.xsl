@@ -13,16 +13,21 @@
 		<title>Катрэн+, личный кабинет</title>
 		
 		<script>		
-			//function pageUnLoad(){
-			//}
+			function beforeUnload(){
+				if (window.opener &amp;&amp; window.opener.onChildClose){
+					window.opener.onChildClose(0);
+				}
+			}
 			function pageLoad(){				
-				<xsl:call-template name="initApp"/>
+				<!--<xsl:call-template name="initApp"/>-->
+				var application = window.opener.getApp();
 				<xsl:call-template name="modelFromTemplate"/>
+				
 			}
 		</script>
 	</head>
 	
-	<body onload="pageLoad();">
+	<body onload="pageLoad();" onbeforeunload="beforeUnload()">
 	    <div class="container-fluid">
 		<div class="row">
 		    <div class="col-lg-12">

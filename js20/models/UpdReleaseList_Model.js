@@ -16,8 +16,8 @@
 }
 */
 
-function UpdProgram_Model(options){
-	var id = 'UpdProgram_Model';
+function UpdReleaseList_Model(options){
+	var id = 'UpdReleaseList_Model';
 	options = options || {};
 	
 	options.fields = {};
@@ -39,27 +39,26 @@ function UpdProgram_Model(options){
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
-	filed_options.alias = 'Наименование';
 	
-	var field = new FieldString("descr",filed_options);
-	
-		field.getValidator().setMaxLength('20');
+	var field = new FieldInt("prog_id",filed_options);
 	
 
-	options.fields.descr = field;
+	options.fields.prog_id = field;
 
 			
 	var filed_options = {};
 	filed_options.primaryKey = false;
 	
-	filed_options.alias = 'Описание';
+	filed_options.alias = 'Релиз';
 	
-	var field = new FieldText("descr_full",filed_options);
+	var field = new FieldString("release",filed_options);
+	
+		field.getValidator().setMaxLength('20');
 	
 
-	options.fields.descr_full = field;
+	options.fields.release = field;
 
-		UpdProgram_Model.superclass.constructor.call(this,id,options);
+		UpdReleaseList_Model.superclass.constructor.call(this,id,options);
 }
-extend(UpdProgram_Model,ModelXML);
+extend(UpdReleaseList_Model,ModelXML);
 

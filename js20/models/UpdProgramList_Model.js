@@ -16,8 +16,8 @@
 }
 */
 
-function UpdProgram_Model(options){
-	var id = 'UpdProgram_Model';
+function UpdProgramList_Model(options){
+	var id = 'UpdProgramList_Model';
 	options = options || {};
 	
 	options.fields = {};
@@ -48,18 +48,7 @@ function UpdProgram_Model(options){
 
 	options.fields.descr = field;
 
-			
-	var filed_options = {};
-	filed_options.primaryKey = false;
-	
-	filed_options.alias = 'Описание';
-	
-	var field = new FieldText("descr_full",filed_options);
-	
-
-	options.fields.descr_full = field;
-
-		UpdProgram_Model.superclass.constructor.call(this,id,options);
+		UpdProgramList_Model.superclass.constructor.call(this,id,options);
 }
-extend(UpdProgram_Model,ModelXML);
+extend(UpdProgramList_Model,ModelXML);
 

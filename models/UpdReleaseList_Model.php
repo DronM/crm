@@ -3,16 +3,15 @@
 require_once(FRAME_WORK_PATH.'basic_classes/ModelSQL.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLInt.php');
 require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLString.php');
-require_once(FRAME_WORK_PATH.'basic_classes/FieldSQLText.php');
 
-class UpdProgram_Model extends ModelSQL{
+class UpdReleaseList_Model extends ModelSQL{
 	
 	public function __construct($dbLink){
 		parent::__construct($dbLink);
 		
 		$this->setDbName("public");
 		
-		$this->setTableName("upd_programs");
+		$this->setTableName("upd_releases_list");
 		
 		$f_id=new FieldSQlInt($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"id"
@@ -28,30 +27,28 @@ class UpdProgram_Model extends ModelSQL{
 		));
 		$this->addField($f_id);
 
-		$f_descr=new FieldSQlString($this->getDbLink(),$this->getDbName(),$this->getTableName()
-		,"descr"
+		$f_prog_id=new FieldSQlInt($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		,"prog_id"
 		,array(
 		
-			'alias'=>"Наименование"
+			'id'=>"prog_id"
+				
+		
+		));
+		$this->addField($f_prog_id);
+
+		$f_release=new FieldSQlString($this->getDbLink(),$this->getDbName(),$this->getTableName()
+		,"release"
+		,array(
+		
+			'alias'=>"Релиз"
 		,
 			'length'=>20,
-			'id'=>"descr"
+			'id'=>"release"
 				
 		
 		));
-		$this->addField($f_descr);
-
-		$f_descr_full=new FieldSQlText($this->getDbLink(),$this->getDbName(),$this->getTableName()
-		,"descr_full"
-		,array(
-		
-			'alias'=>"Описание"
-		,
-			'id'=>"descr_full"
-				
-		
-		));
-		$this->addField($f_descr_full);
+		$this->addField($f_release);
 
 		
 		

@@ -65,6 +65,20 @@ f="get_list"
 t="Service"
 
 ></menuItem>
+
+<menuItem
+
+descr="Программы"
+
+default="FALSE"
+
+c="UpdProgram_Controller"
+
+f="get_list"
+
+t="UpdProgramList"
+
+></menuItem>
 </menuItem>
 
 <menuItem

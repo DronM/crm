@@ -43,6 +43,12 @@
 <a href="#TimeZoneLocale_Controller">TimeZoneLocale_Controller</a>
 </li>
 <li>
+<a href="#UpdProgram_Controller">UpdProgram_Controller</a>
+</li>
+<li>
+<a href="#UpdRelease_Controller">UpdRelease_Controller</a>
+</li>
+<li>
 <a href="#User_Controller">User_Controller</a>
 </li>
 </ul>
@@ -94,7 +100,13 @@
 <a href="#UpdProgram_Model">UpdProgram_Model</a>
 </li>
 <li>
+<a href="#UpdProgramList_Model">UpdProgramList_Model</a>
+</li>
+<li>
 <a href="#UpdRelease_Model">UpdRelease_Model</a>
+</li>
+<li>
+<a href="#UpdReleaseList_Model">UpdReleaseList_Model</a>
 </li>
 <li>
 <a href="#UpdateCommand_Model">UpdateCommand_Model</a>
@@ -318,6 +330,40 @@
 <p>Методы:</p>
 <h2>get_list</h2>
 <a href="#TimeZoneLocale_Model">Модель: TimeZoneLocale_Model</a>
+</div>
+</div>
+<div id="UpdProgram_Controller" class="content_box">
+<h1>UpdProgram_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>insert</h2>
+<a href="#UpdProgram_Model">Модель: UpdProgram_Model</a>
+<h2>update</h2>
+<a href="#UpdProgram_Model">Модель: UpdProgram_Model</a>
+<h2>delete</h2>
+<a href="#UpdProgram_Model">Модель: UpdProgram_Model</a>
+<h2>get_list</h2>
+<a href="#UpdProgramList_Model">Модель: UpdProgramList_Model</a>
+<h2>get_object</h2>
+<a href="#UpdProgram_Model">Модель: UpdProgram_Model</a>
+</div>
+</div>
+<div id="UpdRelease_Controller" class="content_box">
+<h1>UpdRelease_Controller</h1>
+<div class="content_item">
+<p class="big"></p>
+<p>Методы:</p>
+<h2>insert</h2>
+<a href="#UpdRelease_Model">Модель: UpdRelease_Model</a>
+<h2>update</h2>
+<a href="#UpdRelease_Model">Модель: UpdRelease_Model</a>
+<h2>delete</h2>
+<a href="#UpdRelease_Model">Модель: UpdRelease_Model</a>
+<h2>get_list</h2>
+<a href="#UpdReleaseList_Model">Модель: UpdReleaseList_Model</a>
+<h2>get_object</h2>
+<a href="#UpdRelease_Model">Модель: UpdRelease_Model</a>
 </div>
 </div>
 <div id="User_Controller" class="content_box">
@@ -1258,6 +1304,24 @@
 <div>Точность:</div>
 </div>
 </div>
+<div id="UpdProgramList_Model" class="content_box">
+<h1>UpdProgramList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>descr</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:20</div>
+<div>Точность:</div>
+</div>
+</div>
 <div id="UpdRelease_Model" class="content_box">
 <h1>UpdRelease_Model</h1>
 <div class="content_item">
@@ -1271,7 +1335,7 @@
 <h2>prog_id</h2>
 <div>Тип:Int</div>
 <div>Первичный ключ:</div>
-<div>Обязательное:</div>
+<div>Обязательное:TRUE</div>
 <div>Длина:</div>
 <div>Точность:</div>
 <h2>release</h2>
@@ -1303,6 +1367,30 @@
 <div>Первичный ключ:</div>
 <div>Обязательное:</div>
 <div>Длина:</div>
+<div>Точность:</div>
+</div>
+</div>
+<div id="UpdReleaseList_Model" class="content_box">
+<h1>UpdReleaseList_Model</h1>
+<div class="content_item">
+<p>Поля:</p>
+<h2>id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:TRUE</div>
+<div>Обязательное:TRUE</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>prog_id</h2>
+<div>Тип:Int</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:</div>
+<div>Точность:</div>
+<h2>release</h2>
+<div>Тип:String</div>
+<div>Первичный ключ:</div>
+<div>Обязательное:</div>
+<div>Длина:20</div>
 <div>Точность:</div>
 </div>
 </div>

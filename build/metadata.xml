@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata debug="TRUE" owner="crm" dataSchema="public">
 	<versions>
-		<lastBuild>2016-07-22 19:01:43</lastBuild>
+		<lastBuild>2016-08-26 14:55:13</lastBuild>
 	<version dateOpen="2016-06-11 08:06:51" dateClose="2016-06-11 08:06:51">1.002</version><version dateOpen="2016-06-11 08:06:53">1.004</version></versions>
 	<enums>
 		<enum id="role_types" descr="Роли">
@@ -155,19 +155,29 @@
 		</model>
 		
 		<model id="UpdProgram" parent="ModelSQL" dataTable="upd_programs" virtual="FALSE">
-			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
-			<field id="descr" dataType="String" length="20"/>
-			<field id="descr_full" dataType="Text"/>
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="descr" dataType="String" length="20" alias="Наименование"/>
+			<field id="descr_full" dataType="Text" alias="Описание"/>
+		</model>
+		<model id="UpdProgramList" parent="ModelSQL" dataTable="upd_programs_list" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="descr" dataType="String" length="20" alias="Наименование"/>
 		</model>
 		
 		<model id="UpdRelease" parent="ModelSQL" dataTable="upd_releases" virtual="FALSE">
-			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE"/>
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
+			<field id="prog_id" dataType="Int" refTable="upd_programs" refField="id" alias="Код программы" required="TRUE"/>
+			<field id="release" dataType="String" length="20" alias="Релиз"/>
+			<field id="descr" dataType="Text" alias="Описание"/>
+			<field id="file_name" dataType="String" length="100" alias="Имя файла"/>
+			<field id="file_hash" dataType="String" length="32" alias="Хэш файла"/>
+			<field id="file_size" dataType="Int" alias="Размер файла"/>
+		</model>
+
+		<model id="UpdReleaseList" parent="ModelSQL" dataTable="upd_releases_list" virtual="FALSE">
+			<field id="id" dataType="Int" primaryKey="TRUE" autoInc="TRUE" required="TRUE" alias="Код"/>
 			<field id="prog_id" dataType="Int" refTable="upd_programs" refField="id"/>
-			<field id="release" dataType="String" length="20"/>
-			<field id="descr" dataType="Text"/>
-			<field id="file_name" dataType="String" length="100"/>
-			<field id="file_hash" dataType="String" length="32"/>
-			<field id="file_size" dataType="Int"/>
+			<field id="release" dataType="String" length="20" alias="Релиз"/>
 		</model>
 		
 		<model id="UpdateCommand" parent="ModelSQL" dataTable="update_commands" virtual="FALSE">
@@ -397,6 +407,21 @@
 			<publicMethod id="get_object" modelId="Client"/>
 		</controller>												
 
+		<controller id="UpdProgram" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="UpdProgram"/>
+			<publicMethod id="update" modelId="UpdProgram"/>
+			<publicMethod id="delete" modelId="UpdProgram"/>
+			<publicMethod id="get_list" modelId="UpdProgramList"/>
+			<publicMethod id="get_object" modelId="UpdProgram"/>
+		</controller>												
+		<controller id="UpdRelease" parentId="ControllerSQL">
+			<publicMethod id="insert" modelId="UpdRelease"/>
+			<publicMethod id="update" modelId="UpdRelease"/>
+			<publicMethod id="delete" modelId="UpdRelease"/>
+			<publicMethod id="get_list" modelId="UpdReleaseList"/>
+			<publicMethod id="get_object" modelId="UpdRelease"/>
+		</controller>												
+
 		<controller id="ConfigType" parentId="ControllerSQL">
 			<publicMethod id="insert" modelId="ConfigType"/>
 			<publicMethod id="update" modelId="ConfigType"/>
@@ -462,6 +487,7 @@
 			<menuItem c="User_Controller" t="UserList" f="get_list" descr="Пользователи" default="FALSE"/>
 			<menuItem c="TimeZoneLocale_Controller" t="TimeZoneLocale" f="get_list" descr="Временные зоны" default="FALSE"/>
 			<menuItem c="Service_Controller" t="Service" f="get_list" descr="Услуги" default="FALSE"/>
+			<menuItem c="UpdProgram_Controller" t="UpdProgramList" f="get_list" descr="Программы" default="FALSE"/>
 		</menuItem>
 	
 		<menuItem descr="Обновления">
@@ -512,6 +538,7 @@
 		<jsScript file="core/ModelServRespXML.js"/>
 		
 		<jsScript file="core/Validator.js"/>
+		<jsScript file="core/ValidatorString.js"/>
 		<jsScript file="core/ValidatorBool.js"/>
 		<jsScript file="core/ValidatorDate.js"/>
 		<jsScript file="core/ValidatorDateTime.js"/>
@@ -520,7 +547,8 @@
 		<jsScript file="core/ValidatorFloat.js"/>
 		<jsScript file="core/ValidatorEnum.js"/>				
 		
-		<jsScript file="core/Field.js"/>		
+		<jsScript file="core/Field.js"/>
+		<jsScript file="core/FieldString.js"/>
 		<jsScript file="core/FieldEnum.js"/>
 		<jsScript file="core/FieldBool.js"/>
 		<jsScript file="core/FieldDate.js"/>
@@ -531,7 +559,7 @@
 		<jsScript file="core/FieldPassword.js"/>
 		<jsScript file="core/FieldText.js"/>
 		
-		<jsScript file="core/rs.js"/>
+		<jsScript file="core/rs_rus.js"/>
 		
 		<!-- **** controls *** -->		
 		<jsScript file="controls/DataBinding.js"/>
@@ -541,35 +569,35 @@
 		<jsScript file="controls/Control.js"/>
 		<jsScript file="controls/rs/Control.rs_rus.js"/>
 		<jsScript file="controls/ControlContainer.js"/>
-		<jsScript file="controls/rs/ControlContainer.rs.js"/>
+		<jsScript file="controls/rs/ControlContainer.rs_rus.js"/>
 		
 		<jsScript file="controls/View.js"/>
 		<jsScript file="controls/ViewAjx.js"/>
-		<jsScript file="controls/rs/ViewAjx.rs.js"/>
+		<jsScript file="controls/rs/ViewAjx.rs_rus.js"/>
 		<jsScript file="controls/ErrorControl.js"/>
 		<jsScript file="controls/Calculator.js"/>
-		<jsScript file="controls/rs/Calculator.rs.js"/>
+		<jsScript file="controls/rs/Calculator.rs_rus.js"/>
 		<jsScript file="controls/Button.js"/>
 		<jsScript file="controls/ButtonCtrl.js"/>
 		<jsScript file="controls/ButtonCalc.js"/>
-		<jsScript file="controls/rs/ButtonCalc.rs.js"/>
+		<jsScript file="controls/rs/ButtonCalc.rs_rus.js"/>
 		<jsScript file="controls/ButtonCalendar.js"/>
-		<jsScript file="controls/rs/ButtonCalendar.rs.js"/>
+		<jsScript file="controls/rs/ButtonCalendar.rs_rus.js"/>
 		<jsScript file="controls/ButtonClear.js"/>
-		<jsScript file="controls/rs/ButtonClear.rs.js"/>
+		<jsScript file="controls/rs/ButtonClear.rs_rus.js"/>
 		<jsScript file="controls/ButtonCmd.js"/>
 		<jsScript file="controls/ButtonExpToExcel.js"/>
-		<jsScript file="controls/rs/ButtonExpToExcel.rs.js"/>
+		<jsScript file="controls/rs/ButtonExpToExcel.rs_rus.js"/>
 		<jsScript file="controls/ButtonExpToPDF.js"/>
-		<jsScript file="controls/rs/ButtonExpToPDF.rs.js"/>		
+		<jsScript file="controls/rs/ButtonExpToPDF.rs_rus.js"/>		
 		<jsScript file="controls/ButtonOpen.js"/>
-		<jsScript file="controls/rs/ButtonOpen.rs.js"/>				
+		<jsScript file="controls/rs/ButtonOpen.rs_rus.js"/>				
 		<jsScript file="controls/ButtonInsert.js"/>
-		<jsScript file="controls/rs/ButtonInsert.rs.js"/>				
+		<jsScript file="controls/rs/ButtonInsert.rs_rus.js"/>				
 		<jsScript file="controls/ButtonPrint.js"/>
-		<jsScript file="controls/rs/ButtonPrint.rs.js"/>		
+		<jsScript file="controls/rs/ButtonPrint.rs_rus.js"/>		
 		<jsScript file="controls/ButtonSelect.js"/>
-		<jsScript file="controls/rs/ButtonSelect.rs.js"/>
+		<jsScript file="controls/rs/ButtonSelect.rs_rus.js"/>
 		<jsScript file="controls/ButtonSelectRef.js"/>
 		<jsScript file="controls/rs/ButtonSelectRef.rs_rus.js"/>
 		
@@ -578,7 +606,9 @@
 		<jsScript file="controls/Label.js"/>
 		
 		<jsScript file="controls/Edit.js"/>
-		<jsScript file="controls/rs/Edit.rs.js"/>
+		<jsScript file="controls/rs/Edit.rs_rus.js"/>
+		<jsScript file="controls/EditRef.js"/>
+		<jsScript file="controls/EditString.js"/>
 		<jsScript file="controls/EditText.js"/>
 		<jsScript file="controls/EditInt.js"/>
 		<jsScript file="controls/EditFloat.js"/>
@@ -589,14 +619,14 @@
 		<jsScript file="controls/EditPassword.js"/>
 		<jsScript file="controls/EditCheckBox.js"/>
 		<jsScript file="controls/EditContainer.js"/>		
-		<jsScript file="controls/rs/EditContainer.rs.js"/>
+		<jsScript file="controls/rs/EditContainer.rs_rus.js"/>
 		<jsScript file="controls/EditRadioGroup.js"/>
 		<jsScript file="controls/EditRadio.js"/>		
 		<jsScript file="controls/EditSelect.js"/>
 		<jsScript file="controls/EditSelectOption.js"/>
 		<jsScript file="controls/rs/EditSelect.rs_rus.js"/>
 		<jsScript file="controls/EditSelectRef.js"/>
-		<jsScript file="controls/rs/EditSelectRef.rs.js"/>
+		<jsScript file="controls/rs/EditSelectRef.rs_rus.js"/>
 		<jsScript file="controls/EditRef.js"/>
 		
 		<jsScript file="controls/GridColumn.js"/>
@@ -608,24 +638,24 @@
 		<jsScript file="controls/GridFoot.js"/>
 		<jsScript file="controls/GridBody.js"/>
 		<jsScript file="controls/Grid.js"/>
-		<jsScript file="controls/rs/Grid.rs.js"/>
+		<jsScript file="controls/rs/Grid.rs_rus.js"/>
 		<jsScript file="controls/GridCommands.js"/>
 		<jsScript file="controls/rs/GridCommands.rs_rus.js"/>
 		<jsScript file="controls/GridAjx.js"/>
-		<jsScript file="controls/rs/GridAjx.rs.js"/>		
+		<jsScript file="controls/rs/GridAjx.rs_rus.js"/>		
 		<jsScript file="controls/GridCommandsAjx.js"/>
 		<jsScript file="controls/rs/GridCommandsAjx.rs_rus.js"/>
 		
 		<jsScript file="controls/ButtonOK.js"/>
-		<jsScript file="controls/rs/ButtonOK.rs.js"/>
+		<jsScript file="controls/rs/ButtonOK.rs_rus.js"/>
 		<jsScript file="controls/ButtonSave.js"/>
-		<jsScript file="controls/rs/ButtonSave.rs.js"/>		
+		<jsScript file="controls/rs/ButtonSave.rs_rus.js"/>		
 		<jsScript file="controls/ButtonCancel.js"/>
-		<jsScript file="controls/rs/ButtonCancel.rs.js"/>
+		<jsScript file="controls/rs/ButtonCancel.rs_rus.js"/>
 		<jsScript file="controls/ViewObjectAjx.js"/>
-		<jsScript file="controls/rs/ViewObjectAjx.rs.js"/>		
+		<jsScript file="controls/rs/ViewObjectAjx.rs_rus.js"/>		
 		<jsScript file="controls/ViewGridEditInlineAjx.js"/>
-		<jsScript file="controls/rs/ViewGridEditInlineAjx.rs.js"/>
+		<jsScript file="controls/rs/ViewGridEditInlineAjx.rs_rus.js"/>
 
 		<jsScript file="controls/WindowPrint.js"/>
 		<jsScript file="controls/rs/WindowPrint.rs_rus.js"/>
@@ -633,15 +663,18 @@
 		<jsScript file="controls/rs/WindowQuestion.rs_rus.js"/>		
 		<jsScript file="controls/WindowForm.js"/>
 		<jsScript file="controls/WindowFormObject.js"/>
+		<jsScript file="controls/rs/WindowFormObject.rs_rus.js"/>		
 		<jsScript file="controls/WindowFormModalBS.js"/>
 		<jsScript file="controls/WindowMessage.js"/>
 		
 		<jsScript file="controls/actb.js"/>
-		<jsScript file="controls/rs/actb.rs.js"/>
+		<jsScript file="controls/rs/actb.rs_rus.js"/>
 
 		<!-- **** Forms *** -->
 		<jsScript file="forms/Client_Form.js"/>
 		<jsScript file="forms/User_Form.js"/>
+		<jsScript file="forms/UpdProgram_Form.js"/>
+		<jsScript file="forms/UpdRelease_Form.js"/>
 
 		<!-- **** Controllers && Models *** -->
 		<jsScript file="controllers/User_Controller.js"/>
@@ -658,6 +691,9 @@
 		<jsScript file="views/ConfigType_View.js"/>
 		<jsScript file="views/TimeZoneLocale_View.js"/>
 		<jsScript file="views/Service_View.js"/>
+		<jsScript file="views/UpdProgram_View.js"/>
+		<jsScript file="views/UpdProgramList_View.js"/>
+		<jsScript file="views/UpdRelease_View.js"/>
 		
 		<jsScript file="views/Prototype_View.js"/>
 		
@@ -674,7 +710,11 @@
 		<jsScript file="controllers/TimeZoneLocale_Controller.js"/>
 		<jsScript file="controllers/Service_Controller.js"/>
 		<jsScript file="controllers/ClientUser_Controller.js"/>	
-		<jsScript file="models/ClientUserList_Model.js"/>	
+		<jsScript file="models/ClientUserList_Model.js"/>
+		<jsScript file="models/UpdProgramList_Model.js"/>		
+		<jsScript file="controllers/UpdProgram_Controller.js"/>
+		<jsScript file="controllers/UpdRelease_Controller.js"/>
+		<jsScript file="models/UpdReleaseList_Model.js"/>		
 	<jsScript file="controllers/Client_Controller.js"/><jsScript file="models/UserList_Model.js"/><jsScript file="models/ClientList_Model.js"/><jsScript file="models/ConstantList_Model.js"/><jsScript file="controllers/Constant_Controller.js"/></jsScripts>
 	
 	<cssScripts>

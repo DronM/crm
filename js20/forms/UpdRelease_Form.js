@@ -16,24 +16,15 @@
 
 }
 */
-function User_Form(options){
-	options = options || {};		
+function UpdRelease_Form(options){
+	options = options || {};	
 	options.params = options.params || {};
 	
-	options.params.name = "User";
+	options.params.name = "UpdRelease";
 	options.params.method = "get_object";
 	
-	User_Form.superclass.constructor.call(this,options);
+	UpdRelease_Form.superclass.constructor.call(this,options);
 }
-extend(User_Form,WindowFormObject);
+extend(UpdRelease_Form,WindowFormObject);
 
-/* Constants */
-
-
-/* private members */
-
-/* protected*/
-
-
-/* public methods */
 

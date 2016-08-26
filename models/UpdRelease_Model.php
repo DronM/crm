@@ -20,6 +20,8 @@ class UpdRelease_Model extends ModelSQL{
 		'required'=>TRUE,
 			'primaryKey'=>TRUE,
 			'autoInc'=>TRUE,
+			'alias'=>"Код"
+		,
 			'id'=>"id"
 				
 		
@@ -29,7 +31,9 @@ class UpdRelease_Model extends ModelSQL{
 		$f_prog_id=new FieldSQlInt($this->getDbLink(),$this->getDbName(),$this->getTableName()
 		,"prog_id"
 		,array(
-		
+		'required'=>TRUE,
+			'alias'=>"Код программы"
+		,
 			'id'=>"prog_id"
 				
 		
@@ -40,6 +44,8 @@ class UpdRelease_Model extends ModelSQL{
 		,"release"
 		,array(
 		
+			'alias'=>"Релиз"
+		,
 			'length'=>20,
 			'id'=>"release"
 				
@@ -51,6 +57,8 @@ class UpdRelease_Model extends ModelSQL{
 		,"descr"
 		,array(
 		
+			'alias'=>"Описание"
+		,
 			'id'=>"descr"
 				
 		
@@ -61,6 +69,8 @@ class UpdRelease_Model extends ModelSQL{
 		,"file_name"
 		,array(
 		
+			'alias'=>"Имя файла"
+		,
 			'length'=>100,
 			'id'=>"file_name"
 				
@@ -72,6 +82,8 @@ class UpdRelease_Model extends ModelSQL{
 		,"file_hash"
 		,array(
 		
+			'alias'=>"Хэш файла"
+		,
 			'length'=>32,
 			'id'=>"file_hash"
 				
@@ -83,6 +95,8 @@ class UpdRelease_Model extends ModelSQL{
 		,"file_size"
 		,array(
 		
+			'alias'=>"Размер файла"
+		,
 			'id'=>"file_size"
 				
 		
